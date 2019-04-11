@@ -30,11 +30,9 @@
     	user_id
     </sql>
     <sql id="Vein_List" >
-       v.vein_feat
+       v.id,v.user_id,v.vein_feat
     </sql>
-    <sql id="Vein_userId_List" >
-       v.vein_feat
-    </sql>
+ 
     <sql id="Emp_Number_Column_List" >
         count(distinct user_id) 
 	   
@@ -89,12 +87,6 @@
        select
        <include refid="Emp_Column_List" />
        from t_employee
-    </select>
-    <select id="selectVein" parameterType="java.lang.String" resultType="java.lang.Integer" >
-       select 
-       <include refid="Vein_List" />
-       from t_veinfeat 
-       where user_id=#{userId}
     </select>
     <select id="selectIdBYGroupId" parameterType="java.lang.String" resultType="java.lang.String" >
        select
@@ -208,6 +200,28 @@
        WHERE 
        		 user_id=#{userId}
     </delete>
+    <select id="selectVeinByUserId" parameterType="java.lang.String" resultType="com.jx.entity.VeinFeat">
+    select
+     <include refid="Vein_List"  /> 
+     from t_veinfeat v
+     where v.user_id=#{userId}
+    </select>
+    <select id="selectVein" parameterType="java.lang.String" resultType="com.jx.entity.VeinFeat">
+    select
+     v.id,v.user_id,v.vein_feat
+     from t_veinfeat v
+    </select>
+    <select id="selectVeinByGroupId" parameterType="java.lang.String" resultType="com.jx.entity.VeinFeat">
+    select
+     <include refid="Vein_List" /> 
+     from t_veinfeat v
+     where v.user_id in
+      <foreach collection="array" open="(" close=")" separator="," item="array">
+            #{array}
+        </foreach>
+     
+    </select>
+    
     
 
 </mapper>

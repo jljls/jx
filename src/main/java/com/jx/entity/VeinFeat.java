@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 public class VeinFeat implements Serializable {
@@ -12,8 +14,10 @@ public class VeinFeat implements Serializable {
 	    
 	    private Integer veinFeatId;
 	    
+	    @JsonProperty("veinFeat")
 	    private String veinFeat;
 	    
+	    @JsonProperty("userId")
 	    private String userId;
 	  
 	    

@@ -4,14 +4,16 @@ import java.io.Serializable;
 
 import javax.validation.constraints.Pattern;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 
 public class Employee implements Serializable {
-
+	
+	@JsonProperty("userId")
 	 private String userId;
-	    @Pattern(regexp="(^[A-Za-z0-9]{6,16}$)|(^[\\u2E80-\\u9FFF]{2,5}$)"
-	    		,message="名字必须是2-5个中文或者6-16位英文数字组合")
 	    
+	   @JsonProperty("groupId") 
 	    private String groupId;
 	    
 	   private VeinFeat VeinFeat;

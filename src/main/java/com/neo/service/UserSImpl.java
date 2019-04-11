@@ -7,6 +7,8 @@ package com.neo.service;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +17,12 @@ import com.neo.mapper.UserMapper;
 
 @Service
 public class UserSImpl  implements UserService{
-	@Autowired
+	@Resource
 	private UserMapper userMapper;
 
 	@Override
-	public void insertEmpBYGroupId(String empId,String groupId) {
-		userMapper.insertEmpBYGroupId(empId,groupId);
+	public void insertEmpBYGroupId(String userId,String groupId) {
+		userMapper.insertEmpBYGroupId(userId,groupId);
 		
 	}
 
@@ -36,14 +38,14 @@ public class UserSImpl  implements UserService{
 	}
 
 	@Override
-	public int selectEmpVeinEum(String empId) {
+	public int selectEmpVeinEum(String userId) {
 		
-		return userMapper.selectEmpVeinEum(empId);
+		return userMapper.selectEmpVeinEum(userId);
 	}
 
 	@Override
-	public void insertEmpVein(String empId, String veinFeat) {
-		 userMapper.insertEmpVein(empId,veinFeat);
+	public void insertEmpVein(String userId, String veinFeat) {
+		 userMapper.insertEmpVein(userId,veinFeat);
 		
 	}
 
@@ -80,15 +82,15 @@ public class UserSImpl  implements UserService{
 	}
 
 	@Override
-	public void deleteById(String empId) {
-		userMapper.deleteById(empId);
-		userMapper.deleteVeinByEmpId(empId);
+	public void deleteById(String userId) {
+		userMapper.deleteById(userId);
+		userMapper.deleteVeinByEmpId(userId);
 		
 	}
 
 	@Override
-	public void deleteVeinById(String empId) {
-		userMapper.deleteVeinById(empId);
+	public void deleteVeinById(String userId) {
+		userMapper.deleteVeinById(userId);
 		
 	}
 
@@ -102,27 +104,23 @@ public class UserSImpl  implements UserService{
 	}
 
 	@Override
-	public void deleteVeinByEmpId(String empId) {
-		userMapper.deleteVeinByEmpId(empId);
+	public void deleteVeinByEmpId(String userId) {
+		userMapper.deleteVeinByEmpId(userId);
+		
+	}
+
+
+
+	@Override
+	public void updateGroupByEmpId(String userId) {
+		userMapper.updateGroupByEmpId(userId);
 		
 	}
 
 	@Override
-	public byte[] selectVein(String empId, String groupId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateGroupByEmpId(String empId) {
-		userMapper.updateGroupByEmpId(empId);
+	public Integer checkEmpId(String userId) {
 		
-	}
-
-	@Override
-	public Integer checkEmpId(String empId) {
-		
-		return userMapper.checkEmpId(empId);
+		return userMapper.checkEmpId(userId);
 	}
 
 	@Override
@@ -142,6 +140,8 @@ public class UserSImpl  implements UserService{
 		String[] array=userMapper.selectIdBYGroupId(groupId);
 		return userMapper.selectVeinByGroupId(array);
 	}
+
+	
 
 
 	

@@ -33,7 +33,6 @@ public interface UserService {
 	void deleteVeinById(String userId);
 	void deleteVeinByGroupId(String groupId);
 	void deleteVeinByEmpId(String userId);
-	byte[] selectVein(String userId, String groupId);
 	
 	void updateGroupByEmpId(String userId);
 	Integer checkEmpId(String userId);

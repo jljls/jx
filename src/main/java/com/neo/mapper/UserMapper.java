@@ -58,7 +58,7 @@ public interface UserMapper {
 
 	Integer checkEmpId(String userId);
 
-	List<VeinFeat> selectVeinByUserId(String userId);
+	List<VeinFeat> selectVeinByUserId(@Param("userId")String userId);
 
 	List<VeinFeat> selectVein();
 
