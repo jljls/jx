@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neo.mapper.UserMapper" >
+    <resultMap id="BaseResultMap" type="com.jx.entity.Employee" >
+        <id column="id" property="empId" jdbcType="BIGINT" />
+        <result column="user_id" property="userId" jdbcType="VARCHAR" />
+        <result column="group_id" property="groupId" jdbcType="VARCHAR" />
+  
+</resultMap>
+    <resultMap id="WithVeinFeatResultMap" type="com.jx.entity.Employee" >
+        <id column="id" property="empId" jdbcType="BIGINT" />
+        <result column="group_id" property="groupId" jdbcType="BIGINT" />
+         <association property="VeinFeat" javaType="com.jx.entity.VeinFeat">
+    	 <id column="id" property="veinFeatId" jdbcType="BIGINT"/>
+    	  <result column="user_id" property="userId" jdbcType="BIGINT"/>
+    	 <result column="vein_feat" property="veinFeat" jdbcType="CHAR" />
+		 </association>   
+</resultMap>
+   
+  
+   
+    
+    <sql id="Base_Column_List" >
+        e.user_id,e.group_id
+    </sql>
+    <sql id="Vein_Column_List" >
+        e.user_id,e.group_id,v.id,v.emp_id,v.vein_feat
+    </sql>
+    <sql id="Id_Column_List" >
+    	user_id
+    </sql>
+    <sql id="Vein_List" >
+       v.vein_feat
+    </sql>
+    <sql id="Vein_userId_List" >
+       v.vein_feat
+    </sql>
+    <sql id="Emp_Number_Column_List" >
+        count(distinct user_id) 
+	   
+    </sql>
+    <sql id="Emp_Column_List" >
+        count(distinct id) 
+	   
+    </sql>
+    <sql id="Finger_Number_Column_List" >
+        cast((count(distinct id)/3) as Integer)    
+    </sql>
+    <sql id="V_Finger_Number_Column_List" >
+        cast((count(distinct v.id)/3) as Integer)    
+    </sql>
+
+    <select id="getAll" resultMap="BaseResultMap"  >
+       SELECT 
+       <include refid="Base_Column_List" />
+	   FROM t_employee e
+	   left join t_group  d on e.group_id =d.id
+    </select>
+    
+    <select id="getVeinFeat" resultMap="WithVeinFeatResultMap"  >
+       SELECT 
+       <include refid="Vein_Column_List" />
+	   FROM t_employee e
+	   left join t_group  d on e.group_id =d.id
+	   left join t_veinFeat v on v.user_id=e.id
+    </select>
+    
+    <select id="getEmpNumber" resultType="java.lang.Integer"  >
+       SELECT 
+       <include refid="Emp_Number_Column_List" />
+	   FROM t_veinFeat
+    </select>
+    
+    <select id="getFingerNumber" resultType="java.lang.Integer"  >
+       SELECT 
+       <include refid="Finger_Number_Column_List" />
+	   FROM t_veinFeat
+    </select>
+    
+
+    <select id="getByEmpName" parameterType="java.lang.String" resultMap="BaseResultMap" >
+        SELECT 
+       <include refid="Base_Column_List" />
+	   FROM t_employee
+	   WHERE name = #{empName}
+    </select>
+	
+	<select id="selectEmp" parameterType="java.lang.String" resultType="java.lang.Integer" >
+       select
+       <include refid="Emp_Column_List" />
+       from t_employee
+    </select>
+    <select id="selectVein" parameterType="java.lang.String" resultType="java.lang.Integer" >
+       select 
+       <include refid="Vein_List" />
+       from t_veinfeat 
+       where user_id=#{userId}
+    </select>
+    <select id="selectIdBYGroupId" parameterType="java.lang.String" resultType="java.lang.String" >
+       select
+       <include refid="Id_Column_List" />
+       from t_employee
+       where group_id=#{groupId}
+    </select>
+    
+    <select id="selectRegisteEmp" parameterType="java.lang.String" resultType="java.lang.Integer" >
+       select
+       <include refid="Emp_Number_Column_List" />
+       from t_veinfeat
+    </select>
+    
+    <select id="selectEmpVeinEum" parameterType="java.lang.String" resultType="java.lang.Integer"  >
+      select
+       <include refid="Finger_Number_Column_List" />
+       from t_veinFeat v
+       where v.user_id=#{userId}
+    </select>
+    
+    <select id="selectEmpByGroupId" parameterType="java.lang.String" resultType="java.lang.Integer"  >
+      select
+       <include refid="Emp_Column_List" />
+       from t_employee
+       where group_id=#{groupId}
+    </select>
+    
+    <select id="selectVeinNum" parameterType="java.lang.Integer" resultType="java.lang.Integer"  >
+      select
+       <include refid="Finger_Number_Column_List" />
+       from t_veinfeat
+    </select>
+    
+    <select id="selectVeinNumByGroupId" parameterType="java.lang.String" resultType="java.lang.Integer"  >
+      select
+       <include refid="V_Finger_Number_Column_List" />
+       from t_employee e
+       left join t_veinfeat v on v.emp_id=e.id  
+       where group_id=#{groupId}
+    </select>
+    <select id="checkEmpId" parameterType="java.lang.String" resultType="java.lang.Integer"  >
+      select
+       <include refid="Emp_Column_List" />
+       from t_employee e
+       where user_id=#{userId}
+    </select>
+    
+   
+    <insert id="insertEmpBYGroupId" parameterType="java.lang.String" >
+       INSERT INTO 
+       		t_employee
+       		(user_id,group_id) 
+       	VALUES
+       		(#{userId},#{groupId})
+    </insert>
+    
+    
+    <insert id="insertEmpVein" parameterType="java.lang.String" >
+       INSERT INTO 
+       		t_veinFeat
+       		(user_id,vein_feat) 
+       	VALUES
+       		(#{userId}, #{veinFeat})
+    </insert>
+    
+    
+    <update id="updateGroupByEmpId" parameterType="java.lang.String" >
+       UPDATE 
+       		t_employee 
+       SET 
+       	group_id = #{groupId}	
+       WHERE 
+       		user_id = #{userId}
+    </update>
+    
+    <delete id="deleteAll" parameterType="java.lang.Long" >
+       DELETE FROM
+       		 t_employee 
+    </delete>
+    <delete id="deleteVeinAll" parameterType="java.lang.Long" >
+       DELETE FROM
+       		 t_veinfeat 
+    </delete>
+    <delete id="deleteById" parameterType="java.lang.String" >
+       DELETE FROM
+       		 t_employee 
+       WHERE 
+       		 user_id =#{user_Id}
+    </delete>
+ 
+    <delete id="deleteGroupId" parameterType="java.lang.String" >
+       DELETE FROM
+       		 t_employee  
+       WHERE 
+       		 group_id=#{groupId}
+    </delete>
+    <delete id="deleteVeinByGroupId"  >
+       DELETE FROM
+       		 t_veinfeat 
+       WHERE 
+       		 user_id in
+       		 <foreach collection="array" open="(" close=")" separator="," item="array">
+            #{array}
+        </foreach> 
+    </delete>
+
+    <delete id="deleteVeinByEmpId" parameterType="java.lang.String" >
+       DELETE FROM
+       		 t_veinfeat 
+       WHERE 
+       		 user_id=#{userId}
+    </delete>
+    
+
+</mapper>
