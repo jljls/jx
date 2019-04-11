@@ -7,17 +7,27 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MessageResult<Employee> {
 	
-
+	/**对应状态的消息*/
 	private String msg;
-	
 
 	private Employee user;
-
+	
+	/**状态码*/
 	private Integer code;
+	
+	/**返回的数字*/
 	private Integer num;
 	
+	/**userId*/
 	private String userId;
 	
+	public MessageResult(){
+		
+	}
+	
+	public MessageResult(String msg){
+		this.msg = msg;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -62,7 +72,6 @@ public class MessageResult<Employee> {
 	public void setNum(Integer num) {
 		this.num = num;
 	}
-
 
 	
 	
