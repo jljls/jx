@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <title>用户登录</title>
+<link rel="stylesheet" href="/static/css/login.css" />
 <script src="./jquery/jquery-1.7.1.js"></script>
 <script src="./js/jxWebSDK.js"></script>
 <script th:inline="javascript">
@@ -114,12 +115,14 @@ function doLogin(){
 </script>
 </head>
 <body>
-<form id="login">
-    用户ID: <input id="userId" name="uname" value=""></input><br/>
-    密码: <input id="txtPwd" type="password" name="upwd" value=""></input><br/>
-    <input class="btn-login" type="button" value="登录" onclick="doLogin()"/>
+ <div class="meddle" style="">
+<form id="login" method="post" style="height:400px;weigth=500px " >
+    用户ID:<br/><input id="userId" name="uname" value="请输入用户ID" ></input><br/>
+    密码: <br/><input id="txtPwd" type="password" name="upwd" value=""></input><br/>
+    <input class="btn-login" type="button" value="静脉登录" onclick="doLogin()"/>
     <input type="reset" value="取消"/>
 </form>
+</div> 
 </body>
 
 </html>

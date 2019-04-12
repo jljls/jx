@@ -18,7 +18,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	public String login1(){
 		//跳转到登录页面
-		return "/login";
+		return "/loginTo";
 	}
 	
 	@RequestMapping("/login1")
