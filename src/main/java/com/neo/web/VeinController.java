@@ -52,25 +52,6 @@ public class VeinController {
 			return MessageResultGenerator.genResult1(-1,"参数错误");
 		}
 		MessageResult<Employee> mr = userService.selectUserIdandVeinFeat(userId, veinFeat);
-		//List<VeinFeat> vein = userService.selectVeinByUserId(userId);
-		//System.out.println(vein);
-		/*
-		 * int ref; String b="";
-		 * 
-		 * logger.info("---1:1验证"); if(userId==null||veinFeat==null){ return
-		 * MessageResultGenerator.genResult1(-1,"参数错误"); }else{ try{
-		 * List<VeinFeat> vein=userService.selectVeinByUserId(userId);
-		 * for(VeinFeat s:vein){ if(s.getVeinFeat()==null){ return
-		 * MessageResultGenerator.genResult1(-7,"该用户未注册"); }else{
-		 * b=s.getVeinFeat(); byte[] a=btb.baseStringToByte(veinFeat); byte[]
-		 * data=btb.baseStringToByte(b);
-		 * ref=jx.jxVericateTwoVeinFeature(a,data); if(ref==1){ return
-		 * MessageResultGenerator.genResult1(2,"静脉指纹通过"); }} } }catch(Exception
-		 * e){ e.printStackTrace(); return
-		 * MessageResultGenerator.genResult1(-100,"未知错误"); }
-		 * return MessageResultGenerator.genResult1(1, "静脉指纹失败");
-		 */
-		// }
 		return mr;
 	}
 
@@ -88,6 +69,7 @@ public class VeinController {
 		} else {
 			try {
 				List<VeinFeat> vein = userService.selectVein();
+				
 				if (vein == null) {
 					return MessageResultGenerator.genResult1(-7, "该用户没有注册");
 
