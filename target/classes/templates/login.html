@@ -1,25 +1,128 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 <head>
-    <meta charset="UTF-8"/>
-    <title th:text="用户信息">User</title>
-    <!--默认拼接前缀路径,开头请勿再添加斜杠,防止部署运行报错！-->
-    <script th:replace="common/head::static"></script>
-  </head>
-<body>
-
-<form id="login">
-    用户名: <input id="txtName" name="uname" value=""/><br>
-    密码: <input id="txtPwd" type="password" name="upwd" value=""/><br>
-    <input type="button" value="登录">
-    <input type="reset" value="取消">
-</form>
-
-
+<meta charset="UTF-8"/>
+<title>用户登录</title>
+<link rel="stylesheet" href="/static/css/login.css" />
+<script src="./jquery/jquery-1.7.1.js"></script>
+<script src="./js/jxWebSDK.js"></script>
 <script th:inline="javascript">
-    //通过内联表达式获取用户信息
-    var userList = [[${userList}]];
-    console.log(userList)
+    //注册点击事件
+/* $(document).ready(function(){
+	$('#login').on("click",
+		".btn-login",doLogin);  
+} */
+var capTimer;
+var capState;
+function capImg()
+{
+	var feat = jxCapFeat;
+	var res = jxCapRes;
+  if(capState == 0)
+	{
+		alert("请放路手指!");
+		jxCapVeinFeat();
+		capState = 1;
+		return;
+	}
+	else if(capState == 1)
+	{
+		if(jxInCapProcess == true)
+			return;
+		if(jxCapRes == 0)
+		{
+			var url = "login1";
+			var userId = $("#userId").val();
+			debugger;
+			var params = {"userId":userId};
+			params.jxCapFeat=jxCapFeat;
+			$.post(url,params,function(result){
+				if(result.code==2){//异步请求成功了
+					 alert(result.msg);//ok
+					 console.log(jxCapFeat);
+				 }else{//请求过程出现异常
+					 alert(result.msg);
+				 }
+			})
+			window.clearInterval(capTimer);
+			return;
+		}
+		else if(res==-2){
+			alert("设备打开出错");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-3){
+			alert("用户30秒内未放置，操作超时");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-5){
+			alert("检测手指出错");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-6){
+			alert("图像采集失败");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-7){
+			alert("手指过早离开，采集失败");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-8){
+			alert("图像质量低");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-101){
+			alert("指静脉服务连接异常");
+			window.clearInterval(capTimer);
+			return;
+		}
+	}
+}
+
+function doLogin(){
+	//检查插件是否启动
+	var exsit = jxIsServerExsit();
+	if(exsit==-101){
+		alert("指静脉插件未启动");
+		return;
+	}
+	
+	//检测设备连接
+	var connected = jxIsFVDConnected();
+	if(connected==0){
+		alert("指静脉设备未连接");
+		return;
+	}
+	if(connected==-101){
+		alert("指静脉服务连接异常");
+		return;
+	}
+	//检测手指
+	
+	//采集指静脉信息
+	capState = 0;
+	capTimer = setInterval("capImg()", 10);
+
+	
+}
+    
 </script>
+</head>
+<body>
+ <div class="meddle" style="">
+<form id="login" method="post" style="height:400px;weigth=500px " >
+    用户ID:<br/><input id="userId" name="uname" value="请输入用户ID" ></input><br/>
+    密码: <br/><input id="txtPwd" type="password" name="upwd" value=""></input><br/>
+    <input class="btn-login" type="button" value="静脉登录" onclick="doLogin()"/>
+    <input type="reset" value="取消"/>
+</form>
+</div> 
 </body>
+
 </html>

@@ -1,0 +1,262 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>login</title>
+<script src="./jquery/jquery-1.7.1.js"></script>
+<script src="./js/jxWebSDK.js"></script>
+<script th:inline="javascript">
+    //注册点击事件
+/* $(document).ready(function(){
+	$('#login').on("click",
+		".btn-login",doLogin);  
+} */
+var capTimer;
+var capState;
+function capImg()
+{
+	var feat = jxCapFeat;
+	var res = jxCapRes;
+  if(capState == 0)
+	{
+		alert("请放路手指!");
+		jxCapVeinFeat();
+		capState = 1;
+		return;
+	}
+	else if(capState == 1)
+	{
+		if(jxInCapProcess == true)
+			return;
+		if(jxCapRes == 0)
+		{
+			var url = "login1";
+			var userId = $("#userId").val();
+			debugger;
+			console.log(jxCapFeat);
+			var params = {"userId":userId};
+			params.jxCapFeat=jxCapFeat;
+			$.post(url,params,function(result){
+				if(result.code==2){//异步请求成功了
+					 alert(result.msg);//ok
+					 console.log(jxCapFeat);
+				 }else{//请求过程出现异常
+					 alert(result.msg);
+				 }
+			})
+			window.clearInterval(capTimer);
+			return;
+		}
+		else if(res==-2){
+			alert("设备打开出错");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-3){
+			alert("用户30秒内未放置，操作超时");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-5){
+			alert("检测手指出错");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-6){
+			alert("图像采集失败");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-7){
+			alert("手指过早离开，采集失败");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-8){
+			alert("图像质量低");
+			window.clearInterval(capTimer);
+			return;
+		}else
+		if(res==-101){
+			alert("指静脉服务连接异常");
+			window.clearInterval(capTimer);
+			return;
+		}
+	}
+}
+
+function doLogin(){
+	//检查插件是否启动
+	var exsit = jxIsServerExsit();
+	if(exsit==-101){
+		alert("指静脉插件未启动");
+		return;
+	}
+	
+	//检测设备连接
+	var connected = jxIsFVDConnected();
+	if(connected==0){
+		alert("指静脉设备未连接");
+		return;
+	}
+	if(connected==-101){
+		alert("指静脉服务连接异常");
+		return;
+	}
+	//检测手指
+	
+	//采集指静脉信息
+	capState = 0;
+	capTimer = setInterval("capImg()", 10);
+
+	
+}
+    
+</script>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#wrap {
+	height: 719px;
+	width: 100;
+	background-color: #66CCCB;
+	background-repeat: no-repeat;
+	background-position: center center;
+	position: relative;
+}
+
+#head {
+	height: 120px;
+	width: 100;
+	background-color: #66CCCC;
+	text-align: center;
+	position: relative;
+}
+
+
+
+#wrap .logGet {
+	height: 408px;
+	width: 368px;
+	position: absolute;
+	background-color: #FFFFFF;
+	top: 10%;
+	right:40%;
+	position: center ;
+}
+
+.logC  button {
+	width: 100%;
+	height: 45px;
+	background-color: #1E90FF;
+	border: none;
+	color: white;
+	font-size: 18px;
+}
+
+.logGet .logD.logDtip .p1 {
+	display: inline-block;
+	font-size: 28px;
+	margin-top: 30px;
+	width: 86%;
+}
+.logGet .logD .p2 {
+	font-family: "宋体";
+	display: inline-block;
+	font-size: 24px;
+	margin-top: 30px;
+	width: 86%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); /* 使用css3的transform来实现 */
+	font-size: 36px;
+	height: 40px;
+}
+
+#wrap .logGet .logD.logDtip {
+	width: 86%;
+	border-bottom: 1px solid #ee7700;
+	margin-bottom: 60px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.logGet .lgD img {
+	position: absolute;
+	top: 12px;
+	left: 8px;
+}
+.logGet .lgD p {
+	width: 100%;
+	height: 10px;
+	text-indent: center;
+}
+
+.logGet .lgD input {
+	width: 100%;
+	height: 42px;
+	text-indent: center;
+}
+
+#wrap .logGet .lgD {
+	width: 86%;
+	position: relative;
+	margin-bottom: 30px;
+	margin-top: 30px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#wrap .logGet .logC {
+	width: 86%;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+
+.title {
+	font-family: "宋体";
+	color: #FFFFFF;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%); /* 使用css3的transform来实现 */
+	font-size: 36px;
+	height: 40px;
+	width: 30%;
+}
+
+
+
+
+</style>
+</head>
+<body>
+	<div class="header" id="head">
+		<div class="title">静脉特征登陆</div>
+	</div>
+	<div class="wrap" id="wrap">
+		<div class="logGet">
+			<!-- 头部提示信息 -->
+			<div class="logD logDtip">
+				<p class="p1">登录</p>
+			</div>
+			<!-- 输入框 -->
+			<div class="lgD">
+				<p class="p2" >用户id</p>
+			</div>
+			<div class="lgD">
+				<input id="userId" name="uname" value="请输入用户ID" />
+			</div>
+			<div class="logC">
+				<button onclick="doLogin()">静脉登陆</button>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
