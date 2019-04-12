@@ -17,11 +17,18 @@ public class LoginController {
 	
 	@RequestMapping("/login")
 	public String login1(){
+		//跳转到登录页面
 		return "/login";
 	}
 	
 	@RequestMapping("/login1")
 	@ResponseBody
+	/**
+	 * 
+	 * @param userId 用户id
+	 * @param jxCapFeat 指静脉特征
+	 * @return 登录是否成功的消息
+	 */
 	public MessageResult login(String userId,String jxCapFeat){
 		String msg = login.login(userId,jxCapFeat);
 		return new MessageResult<>(msg);
