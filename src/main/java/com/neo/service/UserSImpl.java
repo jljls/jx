@@ -13,14 +13,21 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.jx.entity.Base64ToByte;
+import com.jx.entity.Employee;
+import com.jx.entity.MessageResult;
+import com.jx.entity.MessageResultGenerator;
 import com.jx.entity.VeinFeat;
 import com.neo.mapper.UserMapper;
+
+import jx.vein.javajar.JXVeinJavaSDK_T910;
 
 @Service
 public class UserSImpl  implements UserService{
 	@Resource
 	private UserMapper userMapper;
-
+	private Base64ToByte btb = new Base64ToByte();
+	private JXVeinJavaSDK_T910 jx = new JXVeinJavaSDK_T910();
 	@Override
 	public void insertEmpBYGroupId(String userId,String groupId) {
 		userMapper.insertEmpBYGroupId(userId,groupId);
@@ -146,6 +153,36 @@ public class UserSImpl  implements UserService{
 	public List<VeinFeat> selectVeinByGroupId(String groupId) {
 		String[] array=userMapper.selectIdBYGroupId(groupId);
 		return userMapper.selectVeinByGroupId(array);
+	}
+
+	@Override
+	public MessageResult<Employee> selectUserIdandVeinFeat(String userId, String veinFeat) {
+		String feat;
+		int ref;
+		try{
+			//获得userId下的所有指静脉特征
+			List<VeinFeat> vein = userMapper.selectVeinByUserId(userId);
+			for(VeinFeat s:vein){ 
+				if(s.getVeinFeat()==null){
+					return MessageResultGenerator.genResult1(-7,"该用户未注册");
+				}else {
+					feat = s.getVeinFeat();
+					//将当前的指静脉特征转为byte
+					byte[] a=btb.baseStringToByte(veinFeat);
+					//将用户已有的指静脉特征转为byte
+					byte[] data=btb.baseStringToByte(feat);
+					//对比指静脉特征
+					ref= jx.jxVericateTwoVeinFeature(a,data);
+					if(ref==1){
+						return MessageResultGenerator.genResult1(2,"静脉指纹通过");
+					}
+				}
+			}
+		} catch(Exception e){
+			e.printStackTrace(); 
+			return MessageResultGenerator.genResult1(-100,"未知错误");
+		}
+		return MessageResultGenerator.genResult1(1, "静脉指纹失败");
 	}
 
 	

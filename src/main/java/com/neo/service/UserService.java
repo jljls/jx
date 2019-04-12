@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.jx.entity.Employee;
+import com.jx.entity.MessageResult;
 import com.jx.entity.VeinFeat;
 
 @Service
@@ -39,4 +40,5 @@ public interface UserService {
 	List<VeinFeat> selectVeinByUserId(String userId);
 	List<VeinFeat> selectVein();
 	List<VeinFeat> selectVeinByGroupId(String groupId);
+	MessageResult<Employee> selectUserIdandVeinFeat(String userId,String veinFeat);
 }
