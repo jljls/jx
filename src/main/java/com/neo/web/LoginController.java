@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jx.entity.Json;
 import com.jx.entity.MessageResult;
 import com.neo.service.LoginServic;
+import com.neo.service.UserService;
 
 @Controller
 public class LoginController {
 	@Resource
 	private LoginServic login;
+	@Resource UserService userService;
 	
 	@RequestMapping("/login")
 	public String login1(){
@@ -30,7 +32,6 @@ public class LoginController {
 	 * @return 登录是否成功的消息
 	 */
 	public MessageResult login(String userId,String jxCapFeat){
-		String msg = login.login(userId,jxCapFeat);
-		return new MessageResult<>(msg);
+		return userService.selectUserIdandVeinFeat(userId,jxCapFeat);
 	}
 }
