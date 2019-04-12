@@ -26,23 +26,7 @@ public class UserMapperTest {
 		
 	}
 
-	@Test
-	public void testQuery() throws Exception {
-		List<Employee> users = UserMapper.getAll();
-		if(users==null || users.size()==0){
-			System.out.println("is null");
-		}else{
-			System.out.println(users.toString());
-		}
-	}
 	
 	
-	@Test
-	public void testUpdate() throws Exception {
-		Employee user = UserMapper.getOne(6l);
-		System.out.println(user.toString());
-		UserMapper.update(user);
-		
-	}
 
 }

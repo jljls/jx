@@ -18,6 +18,7 @@ import com.jx.entity.Employee;
 import com.jx.entity.MessageResult;
 import com.jx.entity.MessageResultGenerator;
 import com.jx.entity.VeinFeat;
+import com.neo.mapper.LoginMapper;
 import com.neo.mapper.UserMapper;
 
 import jx.vein.javajar.JXVeinJavaSDK_T910;
@@ -26,6 +27,8 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 public class UserSImpl  implements UserService{
 	@Resource
 	private UserMapper userMapper;
+	@Resource
+	private LoginMapper loginMapper;
 	private Base64ToByte btb = new Base64ToByte();
 	private JXVeinJavaSDK_T910 jx = new JXVeinJavaSDK_T910();
 	@Override
@@ -161,8 +164,7 @@ public class UserSImpl  implements UserService{
 		int ref;
 		try{
 			//获得userId下的所有指静脉特征
-			System.out.println(userMapper.selectVeinByUserId(userId).toString());
-			List<VeinFeat> vein = userMapper.selectVeinByUserId(userId);
+			List<VeinFeat> vein = loginMapper.selectVeinByUserId(userId);
 			for(VeinFeat s:vein){ 
 				System.out.println(s);
 				if(s.getVeinFeat()==null){
