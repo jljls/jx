@@ -2,19 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neo.mapper.UserMapper" >
     <resultMap id="BaseResultMap" type="com.jx.entity.Employee" >
-        <id column="id" property="empId" jdbcType="BIGINT" />
+        <id column="id" property="id" jdbcType="BIGINT" />
         <result column="user_id" property="userId" jdbcType="VARCHAR" />
         <result column="group_id" property="groupId" jdbcType="VARCHAR" />
-  
 </resultMap>
-    <resultMap id="WithVeinFeatResultMap" type="com.jx.entity.Employee" >
-        <id column="id" property="empId" jdbcType="BIGINT" />
+<resultMap id="WithVeinFeatResultMap" type="com.jx.entity.Employee" >
+        <id column="id" property="id" jdbcType="BIGINT" />
         <result column="group_id" property="groupId" jdbcType="BIGINT" />
-         <association property="VeinFeat" javaType="com.jx.entity.VeinFeat">
-    	 <id column="id" property="veinFeatId" jdbcType="BIGINT"/>
-    	  <result column="user_id" property="userId" jdbcType="BIGINT"/>
-    	 <result column="vein_feat" property="veinFeat" jdbcType="CHAR" />
-		 </association>   
+        <association property="VeinFeat" javaType="com.jx.entity.VeinFeat">
+    	<id column="id" property="veinFeatId" jdbcType="BIGINT"/>
+    	<result column="user_id" property="userId" jdbcType="BIGINT"/>
+    	<result column="vein_feat" property="veinFeat" jdbcType="CHAR" />
+		</association>   
 </resultMap>
    
   
@@ -48,21 +47,6 @@
         cast((count(distinct v.id)/3) as Integer)    
     </sql>
 
-    <select id="getAll" resultMap="BaseResultMap"  >
-       SELECT 
-       <include refid="Base_Column_List" />
-	   FROM t_employee e
-	   left join t_group  d on e.group_id =d.id
-    </select>
-    
-    <select id="getVeinFeat" resultMap="WithVeinFeatResultMap"  >
-       SELECT 
-       <include refid="Vein_Column_List" />
-	   FROM t_employee e
-	   left join t_group  d on e.group_id =d.id
-	   left join t_veinFeat v on v.user_id=e.id
-    </select>
-    
     <select id="getEmpNumber" resultType="java.lang.Integer"  >
        SELECT 
        <include refid="Emp_Number_Column_List" />
