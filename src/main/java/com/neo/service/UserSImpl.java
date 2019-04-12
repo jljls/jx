@@ -5,6 +5,7 @@ package com.neo.service;
 
 
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -97,8 +98,14 @@ public class UserSImpl  implements UserService{
 	@Override
 	public void deleteVeinByGroupId(String groupId) {
 		String[] array=userMapper.selectIdBYGroupId(groupId);
+		System.out.println(Arrays.toString(array));
+		if(!(array.length==0)){
+			System.out.println(Arrays.toString(array));
+			
+			userMapper.deleteVeinByGroupId(array);
+			
+		}
 		userMapper.deleteGroupId(groupId);
-		userMapper.deleteVeinByGroupId(array);
 		
 		
 	}

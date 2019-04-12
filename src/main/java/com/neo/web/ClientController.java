@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +25,7 @@ import com.jx.entity.MessageResultGenerator;
 import com.neo.service.UserService;
 
 import jx.vein.javajar.JXVeinJavaSDK_T910;
+import net.sf.json.JSONObject;
 
 
 
@@ -52,16 +54,11 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 	}
 		@RequestMapping(value="insertEmp",method=RequestMethod.POST)
 		@ResponseBody
-		public MessageResult insertEmp(String userId,String groupId) throws Exception{
-			/*String data = "";
-			String userId="";
-			String groupId="";
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				userId=map.get("userId").toString();
-				groupId=map.get("groupId").toString();
-			}*/
+		public MessageResult insertEmp(@RequestBody String  jsonString) throws Exception{
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String groupId=(String) object.get("groupId");
+			 String userId=(String) object.get("userId");
+				
 			logger.info("---添加员工");
 			
 			try{
@@ -97,17 +94,12 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 		
 	}
 		
-		@RequestMapping(value="selectEmpByGroupId",method=RequestMethod.GET)
+		@RequestMapping(value="selectEmpByGroupId",method=RequestMethod.POST)
 		@ResponseBody
-		public MessageResult selectEmpByGroupId() throws UnsupportedEncodingException, IOException, Exception{
-			String data = "";
-			String groupId="";
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				
-				groupId=map.get("groupId").toString();
-			}
+		public MessageResult selectEmpByGroupId(@RequestBody String  jsonString) throws UnsupportedEncodingException, IOException, Exception{
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String groupId=(String) object.get("groupId");
+			 
 			logger.info("---查询分组用户数");
 			
 			Integer num = null;
@@ -144,16 +136,12 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 			return MessageResultGenerator.genResult2(0,"操作成功",num) ;
 		
 	}
-		@RequestMapping(value="selectVeinNumByGroupId",method=RequestMethod.GET)
+		@RequestMapping(value="selectVeinNumByGroupId",method=RequestMethod.POST)
 		@ResponseBody
-		public MessageResult selectVeinNumByGroupId(Model model,HttpSession session) throws UnsupportedEncodingException, IOException, Exception{
-			String data = "";
-			String groupId="";
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				groupId=map.get("groupId").toString();
-			}
+		public MessageResult selectVeinNumByGroupId(
+				@RequestBody String  jsonString) throws UnsupportedEncodingException, IOException, Exception{
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String groupId=(String) object.get("groupId");
 			logger.info("---查询分组手指数");
 			
 			Integer num = null;
@@ -191,14 +179,10 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 		
 		@RequestMapping(value="deleteById",method=RequestMethod.DELETE)
 		@ResponseBody
-		public MessageResult deleteById() throws UnsupportedEncodingException, IOException, Exception{
-			String data = "";
-			String userId="";
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				userId=map.get("userId").toString();
-			}
+		public MessageResult deleteById(@RequestBody String jsonString) throws UnsupportedEncodingException, IOException, Exception{
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String userId=(String) object.get("userId");
+			
 			logger.info("---删除某一用户及相关静脉");
 			
 		try{
@@ -221,14 +205,9 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 
 		@RequestMapping(value="deleteVeinByGroupId",method=RequestMethod.DELETE)
 		@ResponseBody
-		public MessageResult deleteVeinByGroupId(String groupId) throws UnsupportedEncodingException, IOException, Exception{
-			/*String data = "";
-			String groupId="";
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				groupId=map.get("groupId").toString();
-			}*/
+		public MessageResult deleteVeinByGroupId(@RequestBody String jsonString) throws UnsupportedEncodingException, IOException, Exception{
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String groupId=(String) object.get("groupId");
 
 			
 			logger.info("---删除用户分组及相关静脉");
@@ -249,17 +228,12 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 	}
 		@RequestMapping(value="deleteVeinByEmpId",method=RequestMethod.DELETE)
 		@ResponseBody
-		public MessageResult deleteVeinByEmpId(Model model,HttpSession session,Integer empId) throws UnsupportedEncodingException, IOException, Exception{
-			String data = "";
-			String userId="";
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				userId=map.get("userId").toString();
-			}
+		public MessageResult deleteVeinByEmpId( @RequestBody String jsonString) throws UnsupportedEncodingException, IOException, Exception{
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String userId=(String) object.get("userId");
 			logger.info("---删除某用户的所有静脉特征");
 			try{
-				if(empId==null){
+				if(userId==null){
 					return MessageResultGenerator.genResult1(-1,"参数错误");
 				}else{
 					userService.deleteVeinByEmpId(userId);
@@ -279,23 +253,12 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 		
 		@RequestMapping(value="insertVeinFeat",method=RequestMethod.POST)
 		@ResponseBody
-		public MessageResult insertVeinFeat(Model model,HttpSession session
+		public MessageResult insertVeinFeat(@RequestBody String jsonString
 				) throws UnsupportedEncodingException, IOException, Exception{
-			String data = "";
-			String userId="";
-			String groupId="";
-			String veinFeat1 = null;
-			String veinFeat2=null;
-			String veinFeat3=null;
-			
-			data = new String(Json.readInputStream(request.getInputStream()), "UTF-8");
-			List<Map<String,Object>> list=Json.jsonToList(data);
-			for(Map<String,Object> map :list){
-				userId=map.get("userId").toString();
-				veinFeat1=map.get("veinfeat1").toString();
-				veinFeat2=map.get("veinfeat2").toString();
-				veinFeat3=map.get("veinfeat3").toString();
-			}
+			JSONObject object =JSONObject.fromObject(jsonString);
+			 String groupId=(String) object.get("groupId");
+			 String userId=(String) object.get("userId");
+			 String[] veinFeat=object.get("veinFeat").toString().split(",");
 			logger.info("---存静脉特征");
 			
 			try{
@@ -312,10 +275,10 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 				if(!(groupId==null)){	
 					userService.updateGroupByEmpId(userId);
 				}
+				for(String veinFeats:veinFeat){
+					userService.insertEmpVein(userId, veinFeats);
 				
-				userService.insertEmpVein(userId, veinFeat1);
-				userService.insertEmpVein(userId, veinFeat2);
-				userService.insertEmpVein(userId, veinFeat3);
+				}
 			}
 			}catch(Exception e){
 				e.printStackTrace();
