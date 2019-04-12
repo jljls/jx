@@ -13,8 +13,15 @@ public class LoginServiceImpl implements LoginServic{
 	private LoginMapper loginMapper;
 	
 	@Override
+	/**
+	 * 
+	 * @param userId 用户id
+	 * @param jxCapFeat 指静脉特征
+	 * @return 登录消息
+	 */
 	public String login(String userId,String jxCapFeat) {
-		Integer status = loginMapper.login(userId);
+		//根据查询返回的记录数判断是否存在
+		Integer status = loginMapper.login(userId,jxCapFeat);
 		if(status==0){
 			return "登录失败";
 		}
