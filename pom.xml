@@ -99,6 +99,11 @@
 		<version>2.8.2</version>
 		<type>pom</type>
 	</dependency>
+	<dependency>
+		<groupId>commons-codec</groupId>
+		<artifactId>commons-codec</artifactId>
+		<version>1.8</version>
+	</dependency>
 	</dependencies>
 	
 	<build>

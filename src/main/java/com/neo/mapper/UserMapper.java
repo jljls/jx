@@ -28,7 +28,6 @@ public interface UserMapper {
 
 	void delete(Long id);
 
-	Employee getByEmpName(String empName);
 
 	Integer selectVeinNum();
 
@@ -53,21 +52,5 @@ public interface UserMapper {
 	void deleteGroupId(String groupId);
 
 	Integer checkEmpId(String userId);
-
-	List<VeinFeat> selectVeinByUserId(@Param("userId")String userId);
-
-	List<VeinFeat> selectVein();
-
-	List<VeinFeat> selectVeinByGroupId(String[] array);
-
-	
-
-	
-
-	
-
-	
-
-	
 
 }

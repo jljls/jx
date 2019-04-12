@@ -143,19 +143,19 @@ public class UserSImpl  implements UserService{
 	@Override
 	public List<VeinFeat> selectVeinByUserId(String userId) {
 		
-		return userMapper.selectVeinByUserId(userId);
+		return loginMapper.selectVeinByUserId(userId);
 	}
 
 	@Override
 	public List<VeinFeat> selectVein() {
 		
-		return userMapper.selectVein();
+		return loginMapper.selectVein();
 	}
 
 	@Override
 	public List<VeinFeat> selectVeinByGroupId(String groupId) {
 		String[] array=userMapper.selectIdBYGroupId(groupId);
-		return userMapper.selectVeinByGroupId(array);
+		return loginMapper.selectVeinByGroupId(array);
 	}
 
 	@Override
