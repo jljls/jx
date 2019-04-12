@@ -161,8 +161,10 @@ public class UserSImpl  implements UserService{
 		int ref;
 		try{
 			//获得userId下的所有指静脉特征
+			System.out.println(userMapper.selectVeinByUserId(userId).toString());
 			List<VeinFeat> vein = userMapper.selectVeinByUserId(userId);
 			for(VeinFeat s:vein){ 
+				System.out.println(s);
 				if(s.getVeinFeat()==null){
 					return MessageResultGenerator.genResult1(-7,"该用户未注册");
 				}else {

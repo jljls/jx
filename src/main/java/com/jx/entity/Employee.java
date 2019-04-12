@@ -17,9 +17,19 @@ public class Employee implements Serializable {
 	    private String groupId;
 	    
 	   private VeinFeat VeinFeat;
-	  
+	   private Integer id;
 	    
-	    public Employee(){
+	    public Integer getId() {
+		return id;
+	}
+
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+
+		public Employee(){
 	    	super();
 	    }
 	    
@@ -65,6 +75,9 @@ public class Employee implements Serializable {
 
 		@Override
 		public String toString() {
-			return "Employee [id=" +userId + ", groupId=" + groupId + "]";
+			return "Employee [userId=" + userId + ", groupId=" + groupId + ", VeinFeat=" + VeinFeat + ", id=" + id
+					+ "]";
 		}
+
+
 }

@@ -13,10 +13,6 @@ import com.jx.entity.VeinFeat;
 
 public interface UserMapper {
 	
-	List<Employee> getAll();
-	
-	Employee getOne(Long id);
-	
 	Integer selectEmp();
 	void insertEmpBYGroupId(@Param("userId")String userId,@Param("groupId")String groupId);
 	void insertEmp();
