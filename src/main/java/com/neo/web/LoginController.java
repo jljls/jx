@@ -4,6 +4,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jx.entity.Json;
@@ -17,13 +18,13 @@ public class LoginController {
 	private LoginServic login;
 	@Resource UserService userService;
 	
-	@RequestMapping("/login")
+	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public String login1(){
 		//跳转到登录页面
 		return "/loginTo";
 	}
 	
-	@RequestMapping("/login1")
+	@RequestMapping(value="/login1",method = RequestMethod.POST)
 	@ResponseBody
 	/**
 	 * 

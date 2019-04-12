@@ -47,7 +47,6 @@ public interface UserMapper {
 	void updateGroupByEmpId(String groupId);
 	void deleteVeinByEmpId(String userId);
 
-	void selectVein(String userId, String groupId);
 
 	void deleteGroupId(String groupId);
 

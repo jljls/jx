@@ -4,7 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.springframework.boot.autoconfigure.web.ServerProperties.Session;
 import org.springframework.stereotype.Service;
 
 import com.jx.entity.Base64ToByte;
@@ -19,6 +21,8 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 
 @Service
 public class UserSImpl  implements UserService{
+	@Resource
+	private HttpSession session;
 	@Resource
 	private UserMapper userMapper;
 	@Resource
@@ -172,6 +176,7 @@ public class UserSImpl  implements UserService{
 					//对比指静脉特征
 					ref= jx.jxVericateTwoVeinFeature(a,data);
 					if(ref==1){
+						session.setAttribute("userId", userId);
 						return MessageResultGenerator.genResult1(2,"静脉指纹通过");
 					}
 				}
@@ -182,13 +187,5 @@ public class UserSImpl  implements UserService{
 		}
 		return MessageResultGenerator.genResult1(1, "静脉指纹失败");
 	}
-
-	
-
-
-	
-	
-	
-	
 
 }

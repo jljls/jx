@@ -11,5 +11,6 @@
 		<typeAlias alias="String" type="java.lang.String" />
 		<typeAlias alias="veinFeat" type="com.jx.entity.VeinFeat" />
 		<typeAlias alias="employee" type="com.jx.entity.Employee" />
+		<typeAlias alias="empLog" type="com.jx.entity.EmpLog" />
 	</typeAliases>
 </configuration>

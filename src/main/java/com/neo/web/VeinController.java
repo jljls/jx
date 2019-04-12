@@ -35,7 +35,6 @@ public class VeinController {
 	private UserService userService;
 
 	private JXVeinJavaSDK_T910 jx = new JXVeinJavaSDK_T910();
-	// private JXVeinJavaSDK_T910 jx1=new JXVeinJavaSDK_T910();
 
 	private Base64ToByte btb = new Base64ToByte();
 
