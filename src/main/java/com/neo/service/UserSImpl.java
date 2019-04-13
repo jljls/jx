@@ -186,10 +186,6 @@ public class UserSImpl  implements UserService{
 		return new MessageResult(1, "静脉指纹失败");
 	}
 
-	@Override
-	public MessageResult registeVein(String userId, String[] feat_list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }
