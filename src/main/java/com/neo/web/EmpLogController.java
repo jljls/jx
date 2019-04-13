@@ -6,10 +6,12 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.couchbase.client.java.document.json.JsonObject;
 import com.jx.entity.EmpLog;
 import com.jx.entity.Json;
 import com.jx.entity.MessageResult;
@@ -37,8 +39,12 @@ public class EmpLogController {
 	
 	@RequestMapping(value="selectLog",method=RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectLog(String startTime,String endTime){
+	public MessageResult selectLog(@RequestBody String jsonString){
+		JsonObject object = JsonObject.fromJson(jsonString);
+		String startTime = (String) object.get("startTime");
+		String endTime = (String) object.get("endTime");
 		List<EmpLog> list = empLogServic.selectLog(startTime, endTime);
+		System.out.println(list.toString());
 		return new MessageResult(0, "操作成功", list);
 	}
 }

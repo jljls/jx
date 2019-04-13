@@ -144,7 +144,6 @@ public class UserServiceImpl  implements UserService{
 
 	@Override
 	public List<VeinFeat> selectVein() {
-		
 		return loginMapper.selectVein();
 	}
 

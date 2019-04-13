@@ -54,6 +54,7 @@ public class EmpLog {
 	public void setCreateBy(String createBy) {
 		this.createBy = createBy;
 	}
+	@JsonSerialize(using = JsonDateTypeConvert.class)
 	public Date getCreateTime() {
 		return createTime;
 	}
@@ -66,6 +67,7 @@ public class EmpLog {
 	public void setUpdateBy(String updateBy) {
 		this.updateBy = updateBy;
 	}
+	@JsonSerialize(using = JsonDateTypeConvert.class)
 	public Date getUpdateTime() {
 		return updateTime;
 	}

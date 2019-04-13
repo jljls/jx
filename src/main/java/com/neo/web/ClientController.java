@@ -37,16 +37,13 @@ public class ClientController {
 
 	@Autowired
 	private UserService userService;
-
-	@RequestMapping(value = "selectVeinByUserId", method = RequestMethod.GET)
-	@ResponseBody
-	public MessageResult selectVeinByUserId(String userId) throws Exception {
-		System.out.println(userService.selectVeinByUserId(userId));
-
-		return new MessageResult(0, "操作成功");
-
-	}
-
+	
+	/**
+	 * 新增用户
+	 * @param jsonString
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "insertEmp", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult insertEmp(@RequestBody String jsonString) throws Exception {
