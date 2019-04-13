@@ -65,19 +65,21 @@ public class VeinController {
 		} else {
 			try {
 				List<VeinFeat> vein = userService.selectVein();
-				
-				if (vein == null) {
-					return new MessageResult(-7, "该用户没有注册");
+				System.out.println(vein);
+				if (vein.isEmpty()) {
+					return new MessageResult(-7, "没有用户注册");
 
-				}
-				for (VeinFeat s : vein) {
-					b = s.getVeinFeat();
-					byte[] a = btb.baseStringToByte(veinFeat);
-					byte[] date = btb.baseStringToByte(b);
-					ref = jx.jxVericateTwoVeinFeature(a, date);
-					if (ref == 1) {
-						return new MessageResult(2, "静脉指纹通过");
+				}else{
+					for (VeinFeat s : vein) {
+						b = s.getVeinFeat();
+						byte[] a = btb.baseStringToByte(veinFeat);
+						byte[] date = btb.baseStringToByte(b);
+						ref = jx.jxVericateTwoVeinFeature(a, date);
+						if (ref == 1) {
+							return new MessageResult(2, "静脉指纹通过");
+						}
 					}
+	
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
