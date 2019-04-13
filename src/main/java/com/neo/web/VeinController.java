@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jx.entity.Base64ToByte;
-import com.jx.entity.Employee;
 import com.jx.entity.MessageResult;
-import com.jx.entity.MessageResultGenerator;
 import com.jx.entity.VeinFeat;
 import com.neo.service.UserService;
 
@@ -48,7 +45,7 @@ public class VeinController {
 		String veinFeat = (String) object.get("veinFeat");
 		System.out.println(userId + " " + veinFeat);
 		if(userId==null||veinFeat==null){ 
-			return MessageResultGenerator.genResult1(-1,"参数错误");
+			return new MessageResult(-1,"参数错误");
 		}
 		MessageResult mr = userService.selectUserIdandVeinFeat(userId, veinFeat);
 		return mr;
@@ -64,13 +61,13 @@ public class VeinController {
 		int ref;
 		logger.info("---全局1:N验证");
 		if (veinFeat == null) {
-			return MessageResultGenerator.genResult1(-1, "参数错误");
+			return new MessageResult(-1, "参数错误");
 		} else {
 			try {
 				List<VeinFeat> vein = userService.selectVein();
 				
 				if (vein == null) {
-					return MessageResultGenerator.genResult1(-7, "该用户没有注册");
+					return new MessageResult(-7, "该用户没有注册");
 
 				}
 				for (VeinFeat s : vein) {
@@ -79,15 +76,15 @@ public class VeinController {
 					byte[] date = btb.baseStringToByte(b);
 					ref = jx.jxVericateTwoVeinFeature(a, date);
 					if (ref == 1) {
-						return MessageResultGenerator.genResult1(2, "静脉指纹通过");
+						return new MessageResult(2, "静脉指纹通过");
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return MessageResultGenerator.genResult1(-100, "未知错误");
+				return new MessageResult(-100, "未知错误");
 			}
 
-			return MessageResultGenerator.genResult1(1, "静脉指纹失败");
+			return new MessageResult(1, "静脉指纹失败");
 		}
 
 	}
@@ -104,12 +101,12 @@ public class VeinController {
 		String b = "";
 		logger.info("---分组1:N验证");
 		if (groupId == null || veinFeat == null) {
-			return MessageResultGenerator.genResult1(-1, "参数错误");
+			return new MessageResult(-1, "参数错误");
 		} else {
 			try {
 				List<VeinFeat> vein = userService.selectVeinByGroupId(groupId);
 				if (vein == null) {
-					return MessageResultGenerator.genResult1(-7, "该用户没有注册");
+					return new MessageResult(-7, "该用户没有注册");
 				}
 				for (VeinFeat s : vein) {
 					System.out.println(s);
@@ -118,15 +115,15 @@ public class VeinController {
 					byte[] date = btb.baseStringToByte(b);
 					ref = jx.jxVericateTwoVeinFeature(a, date);
 					if (ref == 1) {
-						return MessageResultGenerator.genResult1(2, "静脉指纹通过");
+						return new MessageResult(2, "静脉指纹通过");
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return MessageResultGenerator.genResult1(-100, "未知错误");
+				return new MessageResult(-100, "未知错误");
 			}
 
-			return MessageResultGenerator.genResult1(1, "静脉指纹失败");
+			return new MessageResult(1, "静脉指纹失败");
 		}
 
 	}

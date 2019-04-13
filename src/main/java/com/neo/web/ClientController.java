@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
-import com.jx.entity.MessageResultGenerator;
 import com.neo.mapper.EmpLogMapper;
 import com.neo.service.UserService;
 
@@ -44,7 +43,7 @@ public class ClientController {
 	public MessageResult selectVeinByUserId(String userId) throws Exception {
 		System.out.println(userService.selectVeinByUserId(userId));
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 
 	}
 
@@ -59,7 +58,7 @@ public class ClientController {
 
 		try {
 			if (userService.selectEmp() >= 10000) {
-				return MessageResultGenerator.genResult1(-6, "用户数量已满");
+				return new MessageResult(-6, "用户数量已满");
 			}
 			userService.insertEmpBYGroupId(userId, groupId);
 			//新增一条日志
@@ -68,10 +67,10 @@ public class ClientController {
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 
 	}
 
@@ -87,10 +86,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult2(0, "操作成功", a);
+		return new MessageResult(0, "操作成功", a);
 
 	}
 
@@ -106,16 +105,16 @@ public class ClientController {
 		Integer num = null;
 		try {
 			if (groupId == null) {
-				return MessageResultGenerator.genResult1(-1, "参数错误");
+				return new MessageResult(-1, "参数错误");
 			} else {
 				num = userService.selectEmpByGroupId(groupId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult2(0, "操作成功", num);
+		return new MessageResult(0, "操作成功", num);
 
 	}
 
@@ -131,10 +130,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult2(0, "操作成功", num);
+		return new MessageResult(0, "操作成功", num);
 
 	}
 
@@ -149,16 +148,16 @@ public class ClientController {
 		Integer num = null;
 		try {
 			if (groupId == null) {
-				return MessageResultGenerator.genResult1(-1, "参数错误");
+				return new MessageResult(-1, "参数错误");
 			} else {
 				num = userService.selectVeinNumByGroupId(groupId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult2(0, "操作成功", num);
+		return new MessageResult(0, "操作成功", num);
 
 	}
 
@@ -176,10 +175,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 
 	}
 
@@ -194,7 +193,7 @@ public class ClientController {
 
 		try {
 			if (userId == null) {
-				return MessageResultGenerator.genResult1(-1, "参数错误");
+				return new MessageResult(-1, "参数错误");
 			} else {
 				userService.deleteById(userId);
 				//新增一条日志
@@ -205,10 +204,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 
 	}
 
@@ -223,7 +222,7 @@ public class ClientController {
 
 		try {
 			if (groupId == null) {
-				return MessageResultGenerator.genResult1(-1, "参数错误");
+				return new MessageResult(-1, "参数错误");
 			} else {
 				userService.deleteVeinByGroupId(groupId);
 				//新增一条日志
@@ -233,10 +232,10 @@ public class ClientController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 
 	}
 
@@ -249,7 +248,7 @@ public class ClientController {
 		logger.info("---删除某用户的所有静脉特征");
 		try {
 			if (userId == null) {
-				return MessageResultGenerator.genResult1(-1, "参数错误");
+				return new MessageResult(-1, "参数错误");
 			} else {
 				userService.deleteVeinByEmpId(userId);
 				//新增一条日志
@@ -260,10 +259,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 
 	}
 
@@ -279,13 +278,13 @@ public class ClientController {
 
 		try {
 			if (userId == null) {
-				return MessageResultGenerator.genResult1(-1, "参数错误");
+				return new MessageResult(-1, "参数错误");
 			}
 			if (userService.checkEmpId(userId) == 0) {
-				return MessageResultGenerator.genResult1(-4, "用户不存在");
+				return new MessageResult(-4, "用户不存在");
 			}
 			if (userService.selectEmpVeinEum(userId) >= 8) {
-				return MessageResultGenerator.genResult1(-5, "用户静脉特征已满");
+				return new MessageResult(-5, "用户静脉特征已满");
 			} else {
 				if (!(groupId == null)) {
 					userService.updateGroupByEmpId(userId);
@@ -300,10 +299,10 @@ public class ClientController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResultGenerator.genResult1(-100, "未知错误");
+			return new MessageResult(-100, "未知错误");
 		}
 
-		return MessageResultGenerator.genResult1(0, "操作成功");
+		return new MessageResult(0, "操作成功");
 	}
 
 }
