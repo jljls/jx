@@ -5,7 +5,7 @@ import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
-public class MessageResult<Employee> {
+public class MessageResult {
 	
 	/**对应状态的消息*/
 	private String msg;
@@ -24,7 +24,14 @@ public class MessageResult<Employee> {
 	public MessageResult(){
 		
 	}
-	
+	public MessageResult(Integer code,String msg){
+		this.code=code;//1
+		this.msg="msg";
+	}
+	/**出现异常以后要调用此方法封装异常信息*/
+	public MessageResult(Throwable t){
+		this.msg=t.getMessage();
+	}
 	public MessageResult(String msg){
 		this.msg = msg;
 	}
@@ -73,7 +80,5 @@ public class MessageResult<Employee> {
 		this.num = num;
 	}
 
-	
-	
 
 }

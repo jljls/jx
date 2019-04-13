@@ -157,7 +157,7 @@ public class UserSImpl  implements UserService{
 	}
 
 	@Override
-	public MessageResult<Employee> selectUserIdandVeinFeat(String userId, String veinFeat) {
+	public MessageResult selectUserIdandVeinFeat(String userId, String veinFeat) {
 		String feat;
 		int ref;
 		try{
@@ -189,7 +189,7 @@ public class UserSImpl  implements UserService{
 	}
 
 	@Override
-	public MessageResult<Employee> registeVein(String userId, String[] feat_list) {
+	public MessageResult registeVein(String userId, String[] feat_list) {
 		// TODO Auto-generated method stub
 		return null;
 	}

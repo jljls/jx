@@ -50,7 +50,7 @@ public class VeinController {
 		if(userId==null||veinFeat==null){ 
 			return MessageResultGenerator.genResult1(-1,"参数错误");
 		}
-		MessageResult<Employee> mr = userService.selectUserIdandVeinFeat(userId, veinFeat);
+		MessageResult mr = userService.selectUserIdandVeinFeat(userId, veinFeat);
 		return mr;
 	}
 

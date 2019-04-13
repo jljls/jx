@@ -40,6 +40,6 @@ public interface UserService {
 	List<VeinFeat> selectVeinByUserId(String userId);
 	List<VeinFeat> selectVein();
 	List<VeinFeat> selectVeinByGroupId(String groupId);
-	MessageResult<Employee> selectUserIdandVeinFeat(String userId,String veinFeat);
-	MessageResult<Employee> registeVein(String userId, String[] feat_list);
+	MessageResult selectUserIdandVeinFeat(String userId,String veinFeat);
+	MessageResult registeVein(String userId, String[] feat_list);
 }

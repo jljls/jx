@@ -4,33 +4,33 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 
 
 public class MessageResultGenerator {
-	public static <Employee> MessageResult<Employee> genResult(
+	public static MessageResult genResult(
 			Employee user,Integer code,String message){
-		MessageResult<Employee> result = new MessageResult<Employee>();
+		MessageResult result = new MessageResult();
 		result.setUser(user);
 		result.setCode(code);
 		result.setMsg(message);
 		
 		return result;
 	}
-	public static <Employee> MessageResult<Employee> genResult1(
+	public static MessageResult genResult1(
 		Integer code,String message){
-		MessageResult<Employee> result = new MessageResult<Employee>();
+		MessageResult result = new MessageResult();
 		result.setCode(code);
 		result.setMsg(message);	
 		return result;
 	}
-	public static <Employee> MessageResult<Employee> genResult2(
+	public static  MessageResult genResult2(
 			Integer code,String message,Integer num){
-		MessageResult<Employee> result = new MessageResult<Employee>();
+		MessageResult result = new MessageResult();
 		result.setCode(code);
 		result.setMsg(message);	
 		result.setNum(num);
 		return result;
 	}
-	public static <Employee> MessageResult<Employee> genResult3(
+	public static MessageResult genResult3(
 			Integer code,String message,Integer num,String userId){
-		MessageResult<Employee> result = new MessageResult<Employee>();
+		MessageResult result = new MessageResult();
 		result.setCode(code);
 		result.setMsg(message);	
 		result.setNum(num);
