@@ -17,13 +17,13 @@
    
    <select id="selectVein" parameterType="java.lang.String" resultType="com.jx.entity.VeinFeat">
     select
-     v.id,v.user_id,v.vein_feat
+     v.user_id as userId,v.vein_feat as veinFeat
      from t_veinfeat v
     </select>
 
     <select id="selectVeinByGroupId" parameterType="java.lang.String" resultType="com.jx.entity.VeinFeat">
      select
-     v.id,v.user_id,v.vein_feat
+     v.user_id as userId,v.vein_feat as veinFeat
      from t_veinfeat v
      where v.user_id in
       <foreach collection="array" open="(" close=")" separator="," item="array">

@@ -1,6 +1,7 @@
 package com.neo.service.impl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
@@ -12,6 +13,9 @@ public class LoginServiceImpl implements LoginService{
 
 	@Resource
 	private LoginMapper loginMapper;
+	
+	@Resource
+	private HttpSession session;
 	
 	@Override
 	/**
@@ -26,6 +30,7 @@ public class LoginServiceImpl implements LoginService{
 		if(status==0){
 			return "登录失败";
 		}
+		session.setAttribute("userId", userId);
 		return "登录成功";
 	}
 	
