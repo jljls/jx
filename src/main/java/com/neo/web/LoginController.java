@@ -18,7 +18,7 @@ public class LoginController {
 	private LoginServic login;
 	@Resource UserService userService;
 	
-	@RequestMapping(value="/login",method=RequestMethod.POST)
+	@RequestMapping(value="/login")
 	public String login1(){
 		//跳转到登录页面
 		return "/loginTo";
