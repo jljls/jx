@@ -2,7 +2,9 @@ package com.neo.web;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -27,7 +29,7 @@ import net.sf.json.JSONObject;
 public class VeinController {
 
 	private static Logger logger = LoggerFactory.getLogger(VeinController.class);
-
+	
 	@Resource
 	private UserService userService;
 
@@ -55,6 +57,7 @@ public class VeinController {
 	@ResponseBody
 	public MessageResult checkAllToN(@RequestBody String jsonString)
 			throws UnsupportedEncodingException, IOException, Exception {
+		
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String veinFeat = (String) object.get("veinFeat");
 		String b = "";
@@ -72,11 +75,16 @@ public class VeinController {
 				}else{
 					for (VeinFeat s : vein) {
 						b = s.getVeinFeat();
+						
 						byte[] a = btb.baseStringToByte(veinFeat);
 						byte[] date = btb.baseStringToByte(b);
 						ref = jx.jxVericateTwoVeinFeature(a, date);
 						if (ref == 1) {
-							return new MessageResult(2, "静脉指纹通过");
+						
+							String userId=s.getUserId();
+							 Map<String,String> map =new HashMap<String,String>();
+							map.put("userId", userId);
+							return new MessageResult(2, "静脉指纹通过",map);
 						}
 					}
 	
@@ -108,7 +116,7 @@ public class VeinController {
 			try {
 				List<VeinFeat> vein = userService.selectVeinByGroupId(groupId);
 				if (vein == null) {
-					return new MessageResult(-7, "该用户没有注册");
+					return new MessageResult(-10, "该分组下没有用户没有注册");
 				}
 				for (VeinFeat s : vein) {
 					System.out.println(s);
@@ -117,7 +125,11 @@ public class VeinController {
 					byte[] date = btb.baseStringToByte(b);
 					ref = jx.jxVericateTwoVeinFeature(a, date);
 					if (ref == 1) {
-						return new MessageResult(2, "静脉指纹通过");
+					String	userId=s.getUserId();
+						Map<String,String> map =new HashMap<String,String>();
+						map.put("userId", userId);
+			
+						return new MessageResult(2, "静脉指纹通过",map);
 					}
 				}
 			} catch (Exception e) {
