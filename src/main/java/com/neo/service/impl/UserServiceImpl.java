@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
@@ -20,7 +21,7 @@ import jx.vein.javajar.JXVeinJavaSDK_T910;
 @Service
 public class UserServiceImpl  implements UserService{
 	@Resource
-	private HttpSession session;
+	private HttpServletRequest request;
 	@Resource
 	private UserMapper userMapper;
 	@Resource
@@ -161,7 +162,6 @@ public class UserServiceImpl  implements UserService{
 			//获得userId下的所有指静脉特征
 			List<VeinFeat> vein = loginMapper.selectVeinByUserId(userId);
 			for(VeinFeat s:vein){ 
-				System.out.println(s);
 				if(s.getVeinFeat()==null){
 					return new MessageResult(-7,"该用户未注册");
 				}else {
@@ -173,7 +173,9 @@ public class UserServiceImpl  implements UserService{
 					//对比指静脉特征
 					ref= jx.jxVericateTwoVeinFeature(a,data);
 					if(ref==1){
+						HttpSession session = request.getSession();
 						session.setAttribute("userId", userId);
+						System.out.println(session.getAttribute("userId").toString());
 						return new MessageResult(2,"静脉指纹通过");
 					}
 				}

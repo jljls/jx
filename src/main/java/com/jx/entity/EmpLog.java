@@ -3,13 +3,14 @@ package com.jx.entity;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.web.context.request.RequestContextHolder;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 public class EmpLog {
-	@Resource
-	private HttpSession session;
 	private Integer id;
 	private String userId;
 	private String type;
@@ -21,10 +22,12 @@ public class EmpLog {
 	public EmpLog() {
 		// TODO Auto-generated constructor stub
 	}
-	public EmpLog(String type,String logContent){
-		this.userId = (String) session.getAttribute("userId");
-		this.createBy = (String) session.getAttribute("userId");
-		this.updateBy = (String) session.getAttribute("userId");
+	public EmpLog(String userId,String type,String logContent){
+		this.userId = userId;
+		this.type = type;
+		this.logContent = logContent;
+		this.createBy = userId;
+		this.updateBy = userId;
 	}
 	public Integer getId() {
 		return id;
