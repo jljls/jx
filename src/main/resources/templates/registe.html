@@ -9,38 +9,46 @@
 <script type="text/javascript">
 var capTimer;
 var capState;
-var regState;
+
+
+
 function regVein()
 {
 	var feat = jxCapFeat;
 	var res = jxCapRes;
+	var regState=0;
+	var regNum=0;
+	var jxInCapProcess=false;
+	var feat_list=[];
+	
 	if(regState == 0)
 	{
-		document.getElementById("regVein").innerHTML = "第" + (regNum + 1) + "次采集，请放入手指";
+		debugger;
+		document.getElementById("msg").innerHTML = "第" + (regNum + 1) + "次采集，请放入手指";
 		jxCapVeinFeat();
+		feat_list.push(feat);
 		regState = 1;
 		return;
 	}
 
 	else if(regState == 1)
-	{
+	{	
+	
 		if(jxInCapProcess == true)
 			return;
 		if(jxCapRes == 0){
-			document.getElementById("regVein").innerHTML = "第" + (regNum + 1) + "次采集完成，请移开手指";
+			
+			document.getElementById("msg").innerHTML = "第" + (regNum + 1) + "次采集完成，请移开手指";
 			feat_list.push(jxCapFeat);
 			regNum = regNum + 1;
 			if(regNum == 3)
 				regState = 3;
-			else
+			else 
 				regState = 2;
 			return;
-		}else{
-			document.getElementById("regVein").innerHTML = ERRMSG[-jxCapRes];
-			regError(jxCapRes);
-			return;
 		}
-		else if(regState == 2)
+	}	
+	else if(regState == 2)
 		{
 			res = jxIsFingerDetected();
 			if(res == 1)
@@ -51,13 +59,9 @@ function regVein()
 			{
 				regState = 0;
 				return;
-			}else
-			{
-				document.getElementById("regVein").innerHTML = ERRMSG[-res];
-				regError(res);
-				return;
 			}
-			else if(regState == 3)
+		}
+	else if(regState == 3)
 			{
 				/*
 				if(jxVerifyVeinFeat(feat_list[0], feat_list[1]) == 1)
@@ -82,9 +86,7 @@ function regVein()
 				window.clearInterval(capTimer);
 					
 			}
-		  }
-		
-		else if(res==-2){
+	else if(res==-2){
 			alert("设备打开出错");
 			window.clearInterval(capTimer);
 			return;
@@ -119,25 +121,26 @@ function regVein()
 			window.clearInterval(capTimer);
 			return;
 		}
-	}
+	
 }
 
 function doRegVein(){
+	//debugger;
 	//检查插件是否启动
 	var exsit = jxIsServerExsit();
 	if(exsit==-101){
-		document.getElementById("regVein").innerHTML ="指静脉插件未启动";
+		document.getElementById("msg").innerHTML ="指静脉插件未启动";
 		return;
 	}
 	
 	//检测设备连接
 	var connected = jxIsFVDConnected();
 	if(connected==0){
-		document.getElementById("regVein").innerHTML = "指静脉设备未连接";
+		document.getElementById("msg").innerHTML = "指静脉设备未连接";
 		return;
 	}
 	if(connected==-101){
-		document.getElementById("regVein").innerHTML ="指静脉服务连接异常";
+		document.getElementById("msg").innerHTML ="指静脉服务连接异常";
 		return;
 	}
 	//检测手指
@@ -165,10 +168,14 @@ function doRegVein(){
 				<p class="p2" >用户id</p>
 			</div>
 			<div class="lgD">
-				<input id="userId" name="uname" value="请输入用户ID" />
+				<input id="userId" name="userId" value="请输入用户ID" />
 			</div>
-			<div class="logC" id="regVein">
+			<div class="logC" >
 				<button onclick="doRegVein()">静脉注册</button>
+				
+			</div>
+			<div class="lgD" >
+				<p class="p2" id="msg"></p>
 			</div>
 		</div>
 	</div>
