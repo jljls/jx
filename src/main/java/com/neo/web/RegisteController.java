@@ -3,18 +3,21 @@ package com.neo.web;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jx.entity.Json;
 import com.jx.entity.MessageResult;
-import com.neo.service.LoginServic;
+import com.neo.service.LoginService;
+import com.neo.service.RegisteService;
 import com.neo.service.UserService;
 
 @Controller
 public class RegisteController {
 	@Resource
-	private UserService userService;
+	private RegisteService registeService;
 	
 	@RequestMapping("/registe")
 	public String login1(){
@@ -22,7 +25,7 @@ public class RegisteController {
 		return "registe";
 	}
 	
-	@RequestMapping("/registe1")
+	@RequestMapping(value="/registe1")
 	@ResponseBody
 	/**
 	 * 
@@ -30,9 +33,12 @@ public class RegisteController {
 	 * @param F 指静脉特征
 	 * @return 注册是否成功的消息
 	 */
-	public MessageResult registe(String userId,String[] feat_list){
+	public MessageResult registe(String userId,String groupId,String[] veinFeats){
+		//根据查询返回的记录
 		
-		return userService.registeVein(userId,feat_list);
+			return	registeService.registeVein(userId,groupId,veinFeats);
+		
+				
 	}
 
 

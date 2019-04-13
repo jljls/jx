@@ -1,4 +1,4 @@
-package com.neo.service;
+package com.neo.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -6,21 +6,19 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.boot.autoconfigure.web.ServerProperties.Session;
 import org.springframework.stereotype.Service;
 
 import com.jx.entity.Base64ToByte;
-import com.jx.entity.Employee;
 import com.jx.entity.MessageResult;
-import com.jx.entity.MessageResultGenerator;
 import com.jx.entity.VeinFeat;
 import com.neo.mapper.LoginMapper;
 import com.neo.mapper.UserMapper;
+import com.neo.service.UserService;
 
 import jx.vein.javajar.JXVeinJavaSDK_T910;
 
 @Service
-public class UserSImpl  implements UserService{
+public class UserServiceImpl  implements UserService{
 	@Resource
 	private HttpSession session;
 	@Resource
@@ -166,7 +164,7 @@ public class UserSImpl  implements UserService{
 			for(VeinFeat s:vein){ 
 				System.out.println(s);
 				if(s.getVeinFeat()==null){
-					return MessageResultGenerator.genResult1(-7,"该用户未注册");
+					return new MessageResult(-7,"该用户未注册");
 				}else {
 					feat = s.getVeinFeat();
 					//将当前的指静脉特征转为byte
@@ -177,21 +175,18 @@ public class UserSImpl  implements UserService{
 					ref= jx.jxVericateTwoVeinFeature(a,data);
 					if(ref==1){
 						session.setAttribute("userId", userId);
-						return MessageResultGenerator.genResult1(2,"静脉指纹通过");
+						return new MessageResult(2,"静脉指纹通过");
 					}
 				}
 			}
 		} catch(Exception e){
 			e.printStackTrace(); 
-			return MessageResultGenerator.genResult1(-100,"未知错误");
+			//捕获异常
+			return new MessageResult(-100,"未知错误");
 		}
-		return MessageResultGenerator.genResult1(1, "静脉指纹失败");
+		return new MessageResult(1, "静脉指纹失败");
 	}
 
-	@Override
-	public MessageResult registeVein(String userId, String[] feat_list) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+
 
 }

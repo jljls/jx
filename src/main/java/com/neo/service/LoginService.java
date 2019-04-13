@@ -1,6 +1,6 @@
 package com.neo.service;
 
-public interface LoginServic {
+public interface LoginService {
 	/**
 	 * 
 	 * @param userId 用户id

@@ -41,5 +41,4 @@ public interface UserService {
 	List<VeinFeat> selectVein();
 	List<VeinFeat> selectVeinByGroupId(String groupId);
 	MessageResult selectUserIdandVeinFeat(String userId,String veinFeat);
-	MessageResult registeVein(String userId, String[] feat_list);
-}
+	}

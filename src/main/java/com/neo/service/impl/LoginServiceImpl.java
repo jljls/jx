@@ -1,13 +1,14 @@
-package com.neo.service;
+package com.neo.service.impl;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.neo.mapper.LoginMapper;
+import com.neo.service.LoginService;
 
 @Service
-public class LoginServiceImpl implements LoginServic{
+public class LoginServiceImpl implements LoginService{
 
 	@Resource
 	private LoginMapper loginMapper;
