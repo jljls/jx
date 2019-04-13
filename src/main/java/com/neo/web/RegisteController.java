@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.jx.entity.Json;
 import com.jx.entity.MessageResult;
-import com.neo.service.LoginServic;
+import com.neo.service.LoginService;
 import com.neo.service.RegisteService;
 import com.neo.service.UserService;
 

@@ -1,4 +1,4 @@
-package com.neo.service;
+package com.neo.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,11 +13,12 @@ import com.jx.entity.MessageResult;
 import com.jx.entity.VeinFeat;
 import com.neo.mapper.LoginMapper;
 import com.neo.mapper.UserMapper;
+import com.neo.service.UserService;
 
 import jx.vein.javajar.JXVeinJavaSDK_T910;
 
 @Service
-public class UserSImpl  implements UserService{
+public class UserServiceImpl  implements UserService{
 	@Resource
 	private HttpSession session;
 	@Resource

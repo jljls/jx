@@ -34,6 +34,8 @@ public class MessageResult {
 		this.msg = msg;
 	}
 
+	
+
 	public String getMsg() {
 		return msg;
 	}

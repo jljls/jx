@@ -1,4 +1,4 @@
-package com.neo.service;
+package com.neo.service.impl;
 
 import javax.annotation.Resource;
 
@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
 import com.neo.mapper.RegisteMapper;
+import com.neo.service.RegisteService;
 import com.neo.web.ClientController;
 
 

@@ -1,4 +1,4 @@
-package com.neo.service;
+package com.neo.service.impl;
 
 import java.util.List;
 
@@ -8,13 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.jx.entity.EmpLog;
 import com.neo.mapper.EmpLogMapper;
+import com.neo.service.EmpLogService;
 
 
 @Service
-public class EmpLogServiceImpl implements EmpLogServic{
+public class EmpLogServiceImpl implements EmpLogService{
 	@Resource
 	private EmpLogMapper empLogMapper;
-
+	
 	@Override
 	public void insertEmpLog(EmpLog empLog) {
 		empLogMapper.insertLog(empLog);
