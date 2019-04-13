@@ -36,7 +36,15 @@ public class VeinController {
 	private JXVeinJavaSDK_T910 jx = new JXVeinJavaSDK_T910();
 
 	private Base64ToByte btb = new Base64ToByte();
-
+	
+	/**
+	 * 指静脉1：1验证
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "check", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult check(@RequestBody String jsonString)
@@ -52,7 +60,15 @@ public class VeinController {
 		MessageResult mr = userService.selectUserIdandVeinFeat(userId, veinFeat);
 		return mr;
 	}
-
+	
+	/**
+	 * 全局进行指静脉1：N验证
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "checkAllToN", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult checkAllToN(@RequestBody String jsonString)
@@ -98,7 +114,15 @@ public class VeinController {
 		}
 
 	}
-
+	
+	/**
+	 * 在分组内进行1：N验证
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "checkToNByGroupId", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult checkToNByGroupId(@RequestBody String jsonString)

@@ -50,7 +50,9 @@ public class ClientController {
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 		String userId = (String) object.get("userId");
-
+		if(groupId==null||userId==null){
+			return new MessageResult(-1, "参数错误");
+		}
 		logger.info("---添加用户");
 
 		try {
@@ -70,13 +72,20 @@ public class ClientController {
 		return new MessageResult(0, "操作成功");
 
 	}
-
+	
+	/**
+	 * 查询已注册的用户数
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "selectRegisteEmp", method = RequestMethod.GET)
 	@ResponseBody
 	public MessageResult selectRegisteEmp() throws UnsupportedEncodingException, IOException, Exception {
 
 		logger.info("---查询已经注册的用户");
-
+		//已注册的用户数
 		Integer a;
 		try {
 			a = userService.selectRegisteEmp();
@@ -89,7 +98,15 @@ public class ClientController {
 		return new MessageResult(0, "操作成功", a);
 
 	}
-
+	
+	/**
+	 * 查询某一分组下已经注册的用户数
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "selectEmpByGroupId", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult selectEmpByGroupId(@RequestBody String jsonString)
@@ -110,21 +127,22 @@ public class ClientController {
 			e.printStackTrace();
 			return new MessageResult(-100, "未知错误");
 		}
-
 		return new MessageResult(0, "操作成功", num);
-
 	}
-
+	
+	/**
+	 * 查询已经注册的手指数
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping(value = "selectVeinNum", method = RequestMethod.GET)
 	@ResponseBody
 	public MessageResult selectVeinNum(Model model, HttpSession session) {
 		logger.info("---查询手指数");
 		Integer num;
-
 		try {
-
 			num = userService.selectVeinNum();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			return new MessageResult(-100, "未知错误");
@@ -133,7 +151,15 @@ public class ClientController {
 		return new MessageResult(0, "操作成功", num);
 
 	}
-
+	
+	/**
+	 * 查询某一分组下已经注册的手指数
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "selectVeinNumByGroupId", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult selectVeinNumByGroupId(@RequestBody String jsonString)
@@ -141,7 +167,6 @@ public class ClientController {
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 		logger.info("---查询分组手指数");
-
 		Integer num = null;
 		try {
 			if (groupId == null) {
@@ -157,7 +182,11 @@ public class ClientController {
 		return new MessageResult(0, "操作成功", num);
 
 	}
-
+	
+	/**
+	 * 删除所有用户及相关的指静脉
+	 * @return
+	 */
 	@RequestMapping(value = "deleteAll", method = RequestMethod.DELETE)
 	@ResponseBody
 	public MessageResult deleteAll() {
@@ -178,7 +207,15 @@ public class ClientController {
 		return new MessageResult(0, "操作成功");
 
 	}
-
+	
+	/**
+	 * 删除某一用户及相关的指静脉
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "deleteById", method = RequestMethod.DELETE)
 	@ResponseBody
 	public MessageResult deleteById(@RequestBody String jsonString)
@@ -207,7 +244,15 @@ public class ClientController {
 		return new MessageResult(0, "操作成功");
 
 	}
-
+	
+	/**
+	 * 删除某一分组下所有的用户及相关指静脉
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "deleteVeinByGroupId", method = RequestMethod.DELETE)
 	@ResponseBody
 	public MessageResult deleteVeinByGroupId(@RequestBody String jsonString)
@@ -235,7 +280,15 @@ public class ClientController {
 		return new MessageResult(0, "操作成功");
 
 	}
-
+	
+	/**
+	 * 删除某用户所有指静脉特征
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "deleteVeinByEmpId", method = RequestMethod.DELETE)
 	@ResponseBody
 	public MessageResult deleteVeinByEmpId(@RequestBody String jsonString)
@@ -262,7 +315,15 @@ public class ClientController {
 		return new MessageResult(0, "操作成功");
 
 	}
-
+	
+	/**
+	 * 向数据库某用户添加一根手指的静脉特征
+	 * @param jsonString
+	 * @return
+	 * @throws UnsupportedEncodingException
+	 * @throws IOException
+	 * @throws Exception
+	 */
 	@RequestMapping(value = "insertVeinFeat", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult insertVeinFeat(@RequestBody String jsonString)
