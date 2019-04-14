@@ -3,6 +3,7 @@ package com.neo.web;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.neo.service.UserService;
 import net.sf.json.JSONObject;
 
 @Controller
+@Async
 public class LoginController {
 	@Resource
 	private LoginService login;

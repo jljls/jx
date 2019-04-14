@@ -59,6 +59,9 @@ public class ClientController {
 			if (userService.selectEmp() >= 10000) {
 				return new MessageResult(-6, "用户数量已满");
 			}
+			if (userService.checkEmpId(userId) == 1) {
+				return new MessageResult(-3, "用户已存在");
+			}
 			userService.insertEmpBYGroupId(userId, groupId);
 			String uid = request.getSession().getAttribute("userId").toString();
 			//新增一条日志
@@ -367,5 +370,15 @@ public class ClientController {
 
 		return new MessageResult(0, "操作成功");
 	}
+	/**
+	 * 查询所有用户 返回所有用户
+	 *
+	 */
+	@RequestMapping(value = "selectUser", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult selectUser() {
+		return userService.selectUser();
+		
 
+	}
 }

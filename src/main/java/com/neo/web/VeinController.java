@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,7 @@ import net.sf.json.JSONObject;
 
 @Controller
 @RequestMapping("/")
+@Async
 public class VeinController {
 
 	private static Logger logger = LoggerFactory.getLogger(VeinController.class);

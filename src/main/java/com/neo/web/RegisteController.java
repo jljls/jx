@@ -2,6 +2,7 @@ package com.neo.web;
 
 import javax.annotation.Resource;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,6 +16,7 @@ import com.neo.service.RegisteService;
 import com.neo.service.UserService;
 
 @Controller
+@Async
 public class RegisteController {
 	@Resource
 	private RegisteService registeService;

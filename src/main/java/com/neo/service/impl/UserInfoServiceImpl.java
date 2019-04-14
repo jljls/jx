@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.jx.entity.EmpLog;
@@ -15,6 +16,7 @@ import com.neo.mapper.UserInfoMapper;
 import com.neo.service.UserInfoService;
 
 @Service
+@Async
 public class UserInfoServiceImpl implements UserInfoService{
 	@Resource
 	private UserInfoMapper  userInfoMapper;

@@ -2,10 +2,12 @@ package com.neo.web;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 @Configuration
+@Async
 public class Htmlcontroller extends WebMvcConfigurerAdapter{
 	@Override
 	   public void addViewControllers( ViewControllerRegistry registry ) {

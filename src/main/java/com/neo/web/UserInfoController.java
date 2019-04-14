@@ -3,6 +3,7 @@
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,7 @@ import com.neo.service.UserInfoService;
 
 @Controller
 @RequestMapping("/userInfo")
+@Async
 public class UserInfoController {
 	@Resource
 	private HttpServletRequest request ;

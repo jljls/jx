@@ -5,6 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import com.jx.entity.MessageResult;
 import com.neo.service.EmpLogService;
 
 @Controller
+@Async
 public class EmpLogController {
 	@Resource
 	private HttpServletRequest request;
