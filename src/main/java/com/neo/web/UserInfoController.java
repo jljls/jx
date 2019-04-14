@@ -1,25 +1,15 @@
 ﻿package com.neo.web;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.couchbase.client.java.document.json.JsonObject;
-import com.jx.entity.EmpLog;
-import com.jx.entity.Json;
 import com.jx.entity.MessageResult;
-import com.neo.service.EmpLogService;
-import com.neo.service.LoginService;
 import com.neo.service.UserInfoService;
-import com.neo.service.UserService;
 
 @Controller
 @RequestMapping("/userInfo")
@@ -38,7 +28,9 @@ public class UserInfoController {
 		if(userId==null||name==null||password==null){
 			return new MessageResult(-1,"参数错误");
 		}
-		
+		if(!"admin".equals(userId)){
+			return new  MessageResult(-100,"权限不足");
+		}
 		return userInfoService.insertUserInfo(userId, name, password);
 	}
 	/*
@@ -60,7 +52,9 @@ public class UserInfoController {
 		if(userId==null){
 			return new MessageResult(-1,"参数错误");
 		}
-		
+		if("admin".equals(userId)){
+			return new MessageResult(-100,"权限不足");
+		}
 		return userInfoService.deleteUInfoById(userId);
 	}
 	
