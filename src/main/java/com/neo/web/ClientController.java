@@ -381,4 +381,31 @@ public class ClientController {
 		
 
 	}
+	
+	/**
+	 * 删除指定用户
+	 *
+	 */
+	@RequestMapping(value = "deleteUsers", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult selectUser(String[] ids) {
+		if(ids.length==0){
+			return new MessageResult(-1, "参数异常");
+		}
+		try{
+			for(String userId:ids){
+				userService.deleteById(userId);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
+		//新增一条日志
+		String uid = request.getSession().getAttribute("userId").toString();
+		String logContent = uid+"删除了"+ids.toString()+"用户";
+		EmpLog empLog = new EmpLog(uid,"delete",logContent);
+		empLogMapper.insertLog(empLog);
+		return new MessageResult(0, "操作成功"); 
+	}
+	
 }
