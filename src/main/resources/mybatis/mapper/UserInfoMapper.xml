@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.neo.mapper.UserInfoMapper" >
+
+   
+  
+   <!-- 人员管理 模块-->
+   <insert id="insertUserInfo" parameterType="java.lang.String" >
+       INSERT INTO 
+       	user_info
+       		(user_id,name,password) 
+       	VALUES
+       		(#{userId},#{name},#{password})
+    </insert>
+  	<select id="selectUInfoAll" parameterType="java.lang.String" resultType="com.jx.entity.UserInfo" >
+       select
+       user_id as userId,name as name, password as password
+       from user_info 
+    </select>
+  	
+    <delete id="deleteUInfoById" parameterType="java.lang.String" >
+       DELETE FROM
+       		 user_info 
+       WHERE 
+       		 user_id =#{user_Id}
+    </delete>
+    <delete id="deleteUInfoByIds" parameterType="java.lang.String" >
+       DELETE FROM
+       		 user_info 
+       WHERE 
+       		 user_id in
+       	<foreach collection="array" open="(" close=")" separator="," item="ids">
+            #{ids}
+        </foreach>
+    </delete>
+      
+    
+
+	   
+    
+    
+
+</mapper>
