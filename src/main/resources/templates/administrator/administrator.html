@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+    td{
+        text-align: center;
+    }
+    </style>
+</head>
+<body>
+    <div style="text-align: center;font-size: 26px;margin: 20px;">管理员列表</div>
+    <div class="information" style="margin: 30px 50px 0px;">
+        <button onclick="refresh()"
+                style="margin: 15px 20px 15px 0px;padding: 10px 25px;border-radius: 10px;background-color: lightgray;border: none;">
+            刷新
+        </button>
+        <button onclick="qx()"
+                style="margin: 15px 20px;padding: 10px 25px;border-radius: 10px;background-color: lightgray;border: none;">
+            全选
+        </button>
+        <button onclick="fx()"
+                style="margin: 15px 20px;padding: 10px 25px;border-radius: 10px;background-color: lightgray;border: none;">
+            反选
+        </button>
+        <button onclick="dellist ()"
+                style="margin: 15px 20px;padding: 10px 25px;border-radius: 10px;background-color: lightgray;border: none;">
+            批量删除
+        </button>
+        <span>管理员人数: 65</span>
+        <table style="padding: 1px;width: 100%;" border="1">
+            <tr style="height: 35px;text-align: center;background-color: #00bbee;">
+                <td>编号</td>
+                <td>管理员姓名</td>
+                <td>管理员账号</td>
+                <td>管理员密码</td>
+                <td>操作</td>
+            </tr>
+            <tr>
+                <td><input type="checkbox" id='qxx'/></td>
+                <td>efv</td>
+                <td>tgbh</td>
+                <td>tgdr</td>
+                <td style="padding: 0px 10px;">
+                    <button style="height: 28px;">删除</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+<script>
+$(document).ready(function () {
+    refresh();
+    })
+
+</script>
+</body>
+</html>

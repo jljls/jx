@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html style="height: 100%;">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>指静脉后台管理系统</title>
+    <script type="text/javascript" src="../../static/jquery/jquery-1.7.1.js"></script>
+    <style>
+        * {
+            margin: 0px;
+            padding: 0px;
+            font-family: "Microsoft YaHei", 微软雅黑, "Microsoft JhengHei", 华文细黑, STHeiti, MingLiu;
+        }
+
+        .click {
+            cursor: pointer;
+        }
+
+        .active {
+            border-left: 4px solid #19aa8d;
+            background-color: #293846;
+            color: #fff;
+        }
+
+        /*左边导航栏*/
+        .navigation {
+            width: 200px;
+            height: 100%;
+            text-align: center;
+            background-color: #2E4251;
+            overflow: hidden;
+        }
+
+        .admin-information {
+            position: relative;
+            height: 120px;
+        }
+
+        .nav-list {
+            font-size: 16px;
+            color: #A3B1BB;
+            font-weight: 600;
+        }
+
+        .nav-list li {
+            padding: 10px;
+        }
+
+        .nav-list li:hover {
+            background-color: #293846;
+            color: #fff;
+        }
+
+        /*右边信息*/
+        .detail {
+            height: 100%;
+            flex-grow: 1;
+            overflow: auto;
+            background-color: #F4F4F5;
+        }
+
+        /*右边信息头部*/
+        .detail .detail-head {
+            height: 50px;
+            background-color: #F4F4F5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 5px 0px;
+            border-bottom: 1px solid #293B47;
+        }
+
+        .detail .detail-head .show-detail {
+            width: 35px;
+            height: 32px;
+            margin: 0px 20px;
+            border: 1px solid #1ab394;
+            border-radius: 5px;
+            background-color: #00D297;
+            line-height: 30px;
+            color: whitesmoke;
+            font-size: 18px;
+            overflow: hidden;
+        }
+
+        /*右边信息主体*/
+        .detail-body {
+            height: 84%;
+            padding: 20px;
+            font-size: 16px;
+            color: #676a6c;
+            background-color: #F4F4F5;
+            overflow: auto;
+        }
+
+        .add-operate {
+            padding: 10px;
+            font-size: 16px;
+            color: #676a6c;
+            background-color: #F4F4F5;
+            text-align: center;
+            background-color: white;
+            border: 1px solid transparent;
+        }
+
+        .add-operate:hover {
+            border: 1px solid #E7EBED;
+            color: black;
+        }
+
+        .body-title {
+            border-width: 4px 0 0;
+            margin-bottom: 0;
+            padding: 14px 15px 7px;
+            min-height: 26px;
+            border-style: solid solid none;
+            border-color: #e7eaec;
+            background-color: white;
+            margin-top: 10px;
+        }
+
+        /*人员管理表格信息 begin*/
+        .body-information {
+            padding: 15px 20px 20px;
+            background-color: #fff;
+            border-top: 1px solid #e7eaec;
+            color: #A3B1BB;
+            /*display: none;*/
+
+        }
+
+        .body-operate {
+            color: #A3B1BB;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0px 0px 20px;
+        }
+
+        .body-operate button {
+            width: 80px;
+            height: 35px;
+            border: none;
+            border-radius: 5px;
+            background-color: gainsboro;
+            cursor: pointer;
+            color: darkolivegreen;
+        }
+
+        .body-operate input {
+            width: 250px;
+            height: 25px;
+        }
+
+        .body-table {
+            width: 100%;
+            border: 1px solid #2E4251;
+            border-collapse: collapse;
+        }
+
+        .body-table th {
+            border: 1px solid #2E4251;
+            padding: 10px 5px;
+            white-space: nowrap;
+            overflow: auto;
+        }
+
+        /*人员管理表格信息 end*/
+    </style>
+</head>
+<body style="height: 100%">
+<div style="height: 100%;display: flex">
+    <div class="navigation">
+        <div class="admin-information">
+            <div style="position: absolute;height: 40px;top: 0;left: 0;right: 0;bottom: 0;margin: auto;">
+                <div style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;">管理员账号</div>
+                <div class="click" style="color: #8095a8;font-size: 14px">退出</div>
+            </div>
+        </div>
+        <ul class="nav-list">
+            <li class="click">人员管理</li>
+            <li class="click">管理员</li>
+            <li class="click">系统日志</li>
+            <li class="click">系统设置</li>
+        </ul>
+    </div>
+    <div class="detail">
+        <!-- 右边信息头部 begin-->
+        <div class="detail-head">
+            <div class="show-detail click" onclick="show()">+/-</div>
+            <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+            <div class="show-detail" style="opacity: 0"></div>
+        </div>
+        <!-- 右边信息头部 end-->
+        <!-- 右边信息主体 begin-->
+        <div class="detail-body">
+            <!-- 右边信息数据添加 begin-->
+            <div class="add-operate">
+                <div style="margin: 10px auto">
+                    <input id="userid" type="text" placeholder="用户ID" style="width: 200px;height: 25px;"/>
+                    <input id="groupid" type="text" placeholder="分组ID" style="width: 200px;height: 25px;"/>
+                    <button class="click"
+                            style="width: 80px;height: 35px;border: none;border-radius: 5px;background-color: gainsboro;cursor: pointer;color: darkolivegreen;">
+                        添加
+                    </button>
+                    <span id="err"></span>
+                </div>
+                <div class="hidden">
+                    <span>点击上拉</span>
+                </div>
+            </div>
+            <!-- 右边信息数据添加 end-->
+            <div class="body-title">人员列表</div>
+            <div class="body-information">
+                <div class="body-operate">
+                    <button onclick="qx()">全选</button>
+                    <button onclick="dellist()">批量删除</button>
+                    <input id="kw" type="text" placeholder="输入用户ID搜索"/>
+                    <button>搜索</button>
+                </div>
+                <table class="body-table">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>用户(userId)</th>
+                        <th>分组(groupId)</th>
+                        <th>删除</th>
+                    </tr>
+
+
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    <tr>
+                        <th>
+                            <input type="checkbox"/>
+                        </th>
+                        <th>rtfgbh</th>
+                        <th>rtfgn</th>
+                        <th class="click" onclick="del(this)">删除</th>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- 右边信息主体 end-->
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".nav-list li").click(function () {
+            $(".nav-list li").siblings().removeClass("active");
+            $(this).addClass("active")
+        })
+        $(".hidden").click(function () {
+                    var dd=$(".add-operate div:first-child");
+                    if ($(".add-operate div:first-child").css("display") == 'none') {
+                        dd.slideDown();
+                        $(".hidden span").html("点击上拉");
+                    } else {
+                        dd.slideUp();
+                        $(".hidden span").html("点击下拉");
+                    }
+                }
+        )
+    })
+    //导航显示信息
+    function show() {
+        if ($(".navigation").width() > 50) {
+            $(".navigation").animate({
+                width: '50px'
+            })
+        } else {
+            $(".navigation").animate({
+                width: '200px'
+            })
+        }
+    }
+
+    //表单验证+添加
+    function save() {
+        //获取值
+        $("#errmsg").html("");
+        var userid = $("#userid").val();
+        var groupid = $("#groupid").val();
+        //表单验证
+        if (!userid) {
+            $("#errmsg").html("*用户ID不能为空");
+            return;
+        }
+        if (!groupid) {
+            $("#errmsg").html("*分组ID不能为空");
+            return;
+        }
+        //添加
+        $(".body-table").append("<tr><th><input type='checkbox'></th><th>" + userid + "</th><th>" + groupid + "</th><th><button class='click' onclick='del(this)'>删除</button></th></tr>");
+    }
+
+    //删除
+    function del(a) {
+        if (confirm("您是否删除本条数据！！！")) {
+            $(a).parent().parent().remove();
+        }
+    }
+
+    //批量删除
+    function dellist() {
+        var ids = $(".body-table :checked");
+        if (ids.length == 0) {
+            alert("请选择一条数据");
+        }
+        ids.each(function () {
+            $(this).parent().parent().remove();
+        })
+    }
+
+    //全选
+    function qx() {
+        var ids = $(".body-table :checkbox");
+        ids.prop("checked", true);
+    }
+
+</script>
+</body>
+</html>
