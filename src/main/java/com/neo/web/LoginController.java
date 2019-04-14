@@ -42,4 +42,15 @@ public class LoginController {
 		String jxCapFeat = (String) object.get("jxCapFeat");
 		return userService.selectUserIdandVeinFeat(userId,jxCapFeat);
 	}
+	
+	/**
+	 * 跳转到主页面
+	 * @return
+	 */
+	@RequestMapping(value="/index",method = RequestMethod.POST)
+	public String index(){
+		return "index";
+	}
+	
+	
 }
