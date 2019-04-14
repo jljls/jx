@@ -15,6 +15,7 @@ import com.jx.entity.MessageResult;
 import com.neo.service.LoginService;
 import com.neo.service.UserService;
 
+import freemarker.cache.StrongCacheStorage;
 import net.sf.json.JSONObject;
 
 @Controller
@@ -38,10 +39,13 @@ public class LoginController {
 	 * @param jxCapFeat 指静脉特征
 	 * @return 登录是否成功的消息
 	 */
-	public MessageResult login(String userId,String jxCapFeat, HttpServletRequest request){
-		//JSONObject object = JSONObject.fromObject(jsonString);
-		//String userId = (String) object.get("userId");
-		//String jxCapFeat = (String) object.get("jxCapFeat");
+	public MessageResult login(@RequestBody String jsonString, HttpServletRequest request){
+		JSONObject object = JSONObject.fromObject(jsonString);
+		String userId = (String) object.get("userId");
+		String jxCapFeat = (String) object.get("jxCapFeat");
+		if(userId==null||jxCapFeat==null){
+			return new MessageResult(-1, "参数错误");
+		}
 		return userService.selectUserIdandVeinFeat(userId,jxCapFeat);
 	}
 	
