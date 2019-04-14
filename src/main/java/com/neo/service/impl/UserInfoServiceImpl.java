@@ -92,6 +92,17 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 
 
+	@Override
+	public MessageResult check(String userId, String password) {
+		List<UserInfo> list = userInfoMapper.check(userId, password);
+		if(list.size()==0){
+			return new MessageResult(-1,"参数错误");
+		}
+		return new MessageResult(0, "登录成功");
+	}
+
+
+
 	
 
 
