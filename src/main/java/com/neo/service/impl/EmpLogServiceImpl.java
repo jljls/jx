@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.jx.entity.EmpLog;
@@ -12,6 +13,7 @@ import com.neo.service.EmpLogService;
 
 
 @Service
+@Async
 public class EmpLogServiceImpl implements EmpLogService{
 	@Resource
 	private EmpLogMapper empLogMapper;

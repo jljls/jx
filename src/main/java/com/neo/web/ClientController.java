@@ -59,9 +59,13 @@ public class ClientController {
 			if (userService.selectEmp() >= 10000) {
 				return new MessageResult(-6, "用户数量已满");
 			}
+			if (userService.checkEmpId(userId) == 1) {
+				return new MessageResult(-3, "用户已存在");
+			}
 			userService.insertEmpBYGroupId(userId, groupId);
+			String uid = request.getSession().getAttribute("userId").toString();
 			//新增一条日志
-			String logContent = "新增一个用户,userId="+userId+",groupId="+groupId;
+			String logContent = uid+"新增了一个用户,userId="+userId+",groupId="+groupId;
 			EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"insert",logContent);
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
@@ -195,7 +199,7 @@ public class ClientController {
 		try {
 			userService.deleteAll();
 			//新增一条日志
-			String logContent = "删除所有用户的相关静脉";
+			String logContent = request.getSession().getAttribute("userId")+"删除了所有用户的相关静脉";
 			EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"delete",logContent);
 			empLogMapper.insertLog(empLog);
 
@@ -231,7 +235,8 @@ public class ClientController {
 			} else {
 				userService.deleteById(userId);
 				//新增一条日志
-				String logContent = "删除用户"+userId+"的相关静脉";
+				String uid = request.getSession().getAttribute("userId").toString();
+				String logContent = uid+"删除了用户"+userId+"的相关静脉";
 				EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"delete",logContent);
 				empLogMapper.insertLog(empLog);
 			}
@@ -268,7 +273,8 @@ public class ClientController {
 			} else {
 				userService.deleteVeinByGroupId(groupId);
 				//新增一条日志
-				String logContent = "删除"+groupId+"分组下所有用户的相关静脉";
+				String uid = request.getSession().getAttribute("userId").toString();
+				String logContent = uid+"删除了"+groupId+"分组下所有用户的相关静脉";
 				EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"delete",logContent);
 				empLogMapper.insertLog(empLog);
 			}
@@ -302,7 +308,8 @@ public class ClientController {
 			} else {
 				userService.deleteVeinByEmpId(userId);
 				//新增一条日志
-				String logContent = "删除"+userId+"用户的相关静脉";
+				String uid = request.getSession().getAttribute("userId").toString();
+				String logContent = uid+"删除了"+userId+"用户的相关静脉";
 				EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"delete",logContent);
 				empLogMapper.insertLog(empLog);
 			}
@@ -350,8 +357,9 @@ public class ClientController {
 				for (String veinFeats : veinFeat) {
 					userService.insertEmpVein(userId, veinFeats);
 					//新增一条日志
-					String logContent = "新增"+userId+"用户的一条静脉信息";
-					EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"insert",logContent);
+					String uid = request.getSession().getAttribute("userId").toString();
+					String logContent = uid+"新增了"+userId+"用户的一条静脉信息";
+					EmpLog empLog = new EmpLog(uid,"insert",logContent);
 					empLogMapper.insertLog(empLog);
 				}
 			}
@@ -362,5 +370,42 @@ public class ClientController {
 
 		return new MessageResult(0, "操作成功");
 	}
+	/**
+	 * 查询所有用户 返回所有用户
+	 *
+	 */
+	@RequestMapping(value = "selectUser", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult selectUser() {
+		return userService.selectUser();
+		
 
+	}
+	
+	/**
+	 * 删除指定用户
+	 *
+	 */
+	@RequestMapping(value = "deleteUsers", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult selectUser(String[] ids) {
+		if(ids.length==0){
+			return new MessageResult(-1, "参数异常");
+		}
+		try{
+			for(String userId:ids){
+				userService.deleteById(userId);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
+		//新增一条日志
+		String uid = request.getSession().getAttribute("userId").toString();
+		String logContent = uid+"删除了"+ids.toString()+"用户";
+		EmpLog empLog = new EmpLog(uid,"delete",logContent);
+		empLogMapper.insertLog(empLog);
+		return new MessageResult(0, "操作成功"); 
+	}
+	
 }

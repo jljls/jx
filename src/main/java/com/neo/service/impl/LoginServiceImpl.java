@@ -3,12 +3,14 @@ package com.neo.service.impl;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.neo.mapper.LoginMapper;
 import com.neo.service.LoginService;
 
 @Service
+@Async
 public class LoginServiceImpl implements LoginService{
 
 	@Resource

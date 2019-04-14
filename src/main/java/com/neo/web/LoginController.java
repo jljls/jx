@@ -3,6 +3,7 @@ package com.neo.web;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,11 @@ import com.jx.entity.MessageResult;
 import com.neo.service.LoginService;
 import com.neo.service.UserService;
 
+import freemarker.cache.StrongCacheStorage;
 import net.sf.json.JSONObject;
 
 @Controller
+@Async
 public class LoginController {
 	@Resource
 	private LoginService login;
@@ -36,10 +39,24 @@ public class LoginController {
 	 * @param jxCapFeat 指静脉特征
 	 * @return 登录是否成功的消息
 	 */
-	public MessageResult login(@RequestBody String jsonString,HttpServletRequest request){
+	public MessageResult login(@RequestBody String jsonString, HttpServletRequest request){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String userId = (String) object.get("userId");
 		String jxCapFeat = (String) object.get("jxCapFeat");
+		if(userId==null||jxCapFeat==null){
+			return new MessageResult(-1, "参数错误");
+		}
 		return userService.selectUserIdandVeinFeat(userId,jxCapFeat);
 	}
+	
+	/**
+	 * 跳转到主页面
+	 * @return
+	 */
+	@RequestMapping("/index")
+	public String index(){
+		return "index";
+	}
+	
+	
 }

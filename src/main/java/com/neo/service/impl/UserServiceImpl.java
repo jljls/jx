@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
 import com.jx.entity.Base64ToByte;
+import com.jx.entity.EmpLog;
+import com.jx.entity.Employee;
 import com.jx.entity.MessageResult;
 import com.jx.entity.VeinFeat;
+import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.LoginMapper;
 import com.neo.mapper.UserMapper;
 import com.neo.service.UserService;
@@ -26,6 +29,8 @@ public class UserServiceImpl  implements UserService{
 	private UserMapper userMapper;
 	@Resource
 	private LoginMapper loginMapper;
+	@Resource
+	private EmpLogMapper empLogMapper;
 	private Base64ToByte btb = new Base64ToByte();
 	private JXVeinJavaSDK_T910 jx = new JXVeinJavaSDK_T910();
 	@Override
@@ -187,6 +192,41 @@ public class UserServiceImpl  implements UserService{
 		}
 		return new MessageResult(1, "静脉指纹失败");
 	}
+
+	
+	@Override
+	public MessageResult selectUser() {
+		List<Employee> list;
+		try{
+			 list=userMapper.selectUser();
+		}catch(Exception e){
+			e.printStackTrace();
+			return new MessageResult(-100,"未知错误"); 
+		}
+	
+		return new MessageResult(0, "操作正常",list);
+	}
+
+	@Override
+	public MessageResult deleteByIds(String[] ids) {
+		try{
+			for(String userId:ids){
+				userMapper.deleteById(userId);
+				//新增一条日志
+				String uid = request.getSession().getAttribute("userId").toString();
+				String logContent = uid+"删除了"+userId+"用户";
+				EmpLog empLog = new EmpLog(uid,"delete",logContent);
+				empLogMapper.insertLog(empLog);
+			}
+			
+				
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return new  MessageResult(0,"操作成功");
+		}
+
+
 
 
 

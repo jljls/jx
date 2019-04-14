@@ -66,6 +66,12 @@
        <include refid="Emp_Column_List" />
        from t_employee
     </select>
+    <!-- 查询user 返回所有user -->
+    <select id="selectUser" parameterType="java.lang.String" resultType="com.jx.entity.Employee" >
+       select
+       user_id as userId,group_id as groupId
+       from t_employee
+    </select>
     <select id="selectIdBYGroupId" parameterType="java.lang.String" resultType="java.lang.String" >
        select
        <include refid="Id_Column_List" />

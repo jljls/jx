@@ -1,150 +1,387 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8"/>
     <title>静脉特征注册</title>
-    <link href="registe.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/registe.css" rel="stylesheet" type="text/css"/>
     <link href="./css/logAndR.css" rel="stylesheet" type="text/css"/>
     <script src="./jquery/jquery-1.7.1.js"></script>
-    <script src="./js/jxWebSDK.js"></script>
-    <script type="text/javascript">
-        var capTimer;
-        var capState;
+    <script type="text/javascript" src="./js/jxWebSDK.js"></script>
+    <meta charset="utf-8"/>
+    <style type="text/css">
 
+    .btn {
+        display: inline-block;
+        padding: 6px 12px;
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: normal;
+        line-height: 1.428571429;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-radius: 4px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+    }
 
-        function regVein() {
-            var feat = jxCapFeat;//静脉特征
-            var res = jxCapRes;//静脉特征错误码
-            var regState = 0;//
-            var regNum = 0;//静脉特征录入记录数
-            var jxInCapProcess = false;//
-            var feat_list = [];//
+    input[type=text]
+    {
+        border: 1px solid #C3CED9;
+        border-radius: 5px 5px 5px 5px;
+        font-size: 14px;
+        height: 31px;
+        line-height: 31px;
+        margin-right: 10px;
+        padding: 0;
+        width: 200px;
+    }
 
-            if (regState == 0) {
-                debugger;
-                document.getElementById("msg").innerHTML = "第" + (regNum + 1) + "次采集，请放入手指";
-                jxCapVeinFeat();
-                feat_list.push(feat);
-                regState = 1;
-                return;
-            }
-
-            else if (regState == 1) {
-
-                if (jxInCapProcess == true)
-                    return;
-                if (jxCapRes == 0) {
-
-                    document.getElementById("msg").innerHTML = "第" + (regNum + 1) + "次采集完成，请移开手指";
-                    feat_list.push(jxCapFeat);
-                    regNum = regNum + 1;
-                    if (regNum == 3)
-                        regState = 3;
-                    else
-                        regState = 2;
-                    return;
-                }
-            }
-            else if (regState == 2) {
-                res = jxIsFingerDetected();
-                if (res == 1) {
-                    return;
-                }
-                else if (res == 0) {
-                    regState = 0;
-                    return;
-                }
-            }
-            else if (regState == 3) {
-                /*
-                 if(jxVerifyVeinFeat(feat_list[0], feat_list[1]) == 1)
-                 document.getElementById("spanRegState").innerHTML = "指静脉注册成功";
-                 else
-                 document.getElementById("spanRegState").innerHTML = "指静脉不一致";
-                 */
-                /* var url = "registe1";
-                 var userId = $("#userId").val();
-                 debugger;
-                 console.log(jxCapFeat);
-                 var params = {"userId":userId};
-                 params.feat_list=feat_list;
-                 $.post(url,params,function(result){
-                 if(result.code==2){//异步请求成功了
-                 alert(result.msg);//ok
-                 console.log(jxCapFeat);
-                 }else{//请求过程出现异常
-                 alert(result.msg);
-                 }
-                 }) */
-                window.clearInterval(capTimer);
-
-            }
-            else if (res == -2) {
-                alert("设备打开出错");
-                window.clearInterval(capTimer);
-                return;
-            } else if (res == -3) {
-                alert("用户30秒内未放置，操作超时");
-                window.clearInterval(capTimer);
-                return;
-            } else if (res == -5) {
-                alert("检测手指出错");
-                window.clearInterval(capTimer);
-                return;
-            } else if (res == -6) {
-                alert("图像采集失败");
-                window.clearInterval(capTimer);
-                return;
-            } else if (res == -7) {
-                alert("手指过早离开，采集失败");
-                window.clearInterval(capTimer);
-                return;
-            } else if (res == -8) {
-                alert("图像质量低");
-                window.clearInterval(capTimer);
-                return;
-            } else if (res == -101) {
-                alert("指静脉服务连接异常");
-                window.clearInterval(capTimer);
-                return;
-            }
-
+        .btn:focus {
+            outline: thin dotted #333;
+            outline: 5px auto -webkit-focus-ring-color;
+            outline-offset: -2px;
         }
 
-        function doRegVein() {
-            //debugger;
-            //检查插件是否启动
-            var exsit = jxIsServerExsit();
-            if (exsit == -101) {
-                document.getElementById("msg").innerHTML = "指静脉插件未启动";
-                return;
-            }
-
-            //检测设备连接
-            var connected = jxIsFVDConnected();
-            if (connected == 0) {
-                document.getElementById("msg").innerHTML = "指静脉设备未连接";
-                return;
-            }
-            if (connected == -101) {
-                document.getElementById("msg").innerHTML = "指静脉服务连接异常";
-                return;
-            }
-            //检测手指
-
-            //注册
-            capState = 0;
-            capTimer = setInterval("regVein()", 30);
-
+        .btn:hover,
+        .btn:focus {
+            color: #333333;
+            text-decoration: none;
         }
 
+        .btn:active,
+        .btn.active {
+            background-image: none;
+            outline: 0;
+            -webkit-box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+        }
+
+    .btn.disabled,
+    .btn[disabled],
+    fieldset[disabled] .btn {
+        pointer-events: none;
+        cursor: not-allowed;
+        opacity: 0.65;
+        filter: alpha(opacity=65);
+        -webkit-box-shadow: none;
+        box-shadow: none;
+    }
+
+    .btn-info {
+        color: #ffffff;
+        background-color: #5bc0de;
+        border-color: #46b8da;
+    }
+
+        .btn-info:hover,
+        .btn-info:focus,
+        .btn-info:active,
+        .btn-info.active,
+        .open .dropdown-toggle.btn-info {
+            color: #ffffff;
+            background-color: #39b3d7;
+            border-color: #269abc;
+        }
+
+        .btn-info:active,
+        .btn-info.active,
+        .open .dropdown-toggle.btn-info {
+            background-image: none;
+        }
+
+        .btn-info.disabled,
+        .btn-info[disabled],
+        fieldset[disabled] .btn-info,
+        .btn-info.disabled:hover,
+        .btn-info[disabled]:hover,
+        fieldset[disabled] .btn-info:hover,
+        .btn-info.disabled:focus,
+        .btn-info[disabled]:focus,
+        fieldset[disabled] .btn-info:focus,
+        .btn-info.disabled:active,
+        .btn-info[disabled]:active,
+        fieldset[disabled] .btn-info:active,
+        .btn-info.disabled.active,
+        .btn-info[disabled].active,
+        fieldset[disabled] .btn-info.active {
+            background-color: #5bc0de;
+            border-color: #46b8da;
+        }
+
+
+    </style>
+    <script>
+
+      function onOpenFVD()
+      {
+		if(jxIsServerExsit() != 0)
+		{
+			alert("服务未启动");
+			return;
+		}
+		
+        var ret = jxIsFVDConnected();
+		if(ret == 1)
+        {
+          alert("检测到指静脉设备");
+          return;
+        }
+		else
+		{
+			alert("未连接设备");
+			return;
+		}
+      }
+
+
+      var fingerDetectTimer;
+      function detectFinger()
+      {
+        var res = jxIsFingerDetected();
+		if(res == 1)
+			document.getElementById("msg").innerHTML = "检测到手指";
+		else if(res == 0)
+			document.getElementById("msg").innerHTML = "";
+		else
+		{
+			alert("发生错误: " + res);
+			window.clearInterval(fingerDetectTimer);
+			document.getElementById("msg").innerHTML = "";
+		}
+      }
+
+      function startDetectFinger()
+      {
+        fingerDetectTimer = self.setInterval("detectFinger()", 100);
+      }
+
+      function stopDetectFinger()
+      {
+        window.clearInterval(fingerDetectTimer);
+        document.getElementById("spanFingerState").innerHTML = "";
+      }
+	  
+	  
+	  var regTimer;
+	  var regNum;
+	  var feat_list;
+	  var regState;
+	  var ERRMSG = new Array("采集成功", "设备未连接", "设备打开出错", "用户操作超时", "输入参数有误", "手指检测出错", "图像采集出错","手指过早移开", "图像质量低", "静脉特征损坏", "其他错误");
+	  
+	  
+	  function regVein()
+	  {
+		if(regState == 0)
+		{
+			document.getElementById("msg").innerHTML = "第" + (regNum + 1) + "次采集，请放入手指";
+			jxCapVeinFeat();
+			regState = 1;
+			return;
+		}
+		else if(regState == 1)
+		{
+			if(jxInCapProcess == true)
+				return;
+			if(jxCapRes == 0)
+			{
+				document.getElementById("msg").innerHTML = "第" + (regNum + 1) + "次采集完成，请移开手指";
+				feat_list.push(jxCapFeat);
+				regNum = regNum + 1;
+				if(regNum == 3)
+					regState = 3;
+				else
+					regState = 2;
+				return;
+			}
+			else if(jxCapRes == -101)
+			{
+				document.getElementById("msg").innerHTML = "指静脉本地服务已断开";
+				regError(jxCapRes);
+				return;
+			}
+			else
+			{
+				document.getElementById("msg").innerHTML = ERRMSG[-jxCapRes];
+				regError(jxCapRes);
+				return;
+			}
+		}
+		else if(regState == 2)
+		{
+			res = jxIsFingerDetected();
+			if(res == 1)
+			{
+				return;
+			}
+			else if(res == 0)
+			{
+				regState = 0;
+				return;
+			}
+			else if(res == -101)
+			{
+				document.getElementById("msg").innerHTML = "指静脉本地服务已断开";
+				regError(res);
+				return;
+			}
+			else
+			{
+				document.getElementById("msg").innerHTML = ERRMSG[-res];
+				regError(res);
+				return;
+			}
+		}
+		else if(regState == 3)
+		{
+			/*
+			if(jxVerifyVeinFeat(feat_list[0], feat_list[1]) == 1)
+				document.getElementById("spanRegState").innerHTML = "指静脉注册成功";
+			else
+				document.getElementById("spanRegState").innerHTML = "指静脉不一致";
+			*/
+			
+			window.clearInterval(regTimer);
+			if(createUser()){
+				document.getElementById("msg").innerHTML = "指静脉注册成功";
+			}else{
+				document.getElementById("msg").innerHTML = "指静脉注册失败";
+			}
+			return;
+		}
+	  }
+	  
+	  //注册人员
+	  var createUser = function(){
+		  debugger;
+		  var flag = false;
+		  var userId = document.getElementById("userId").value;
+		  var param = {
+				  userId:userId,
+				  groupId:null,
+				  veinFeats:feat_list.join(",")
+		  }
+		  var url="registe1";
+		  $.ajax({
+				url : url,
+				data : param,
+				dataType : 'json',
+				contentType: "application/json;charset=utf-8",
+				async : false,
+				success : function(result) {
+					debugger;
+					if(result.code!=0){
+						alert(result.msg);
+						flag = false;
+					}else{
+						alert("注册成功！");
+						flag = true;
+					}
+				}
+				
+			});
+		  return flag;
+		  
+	  }
+	  
+      function regError(val)
+      {
+        window.clearInterval(regTimer);
+      }
+
+      function startReg()
+      {
+		regNum = 0;
+		regState = 0;
+		feat_list = [];
+		regTimer = setInterval("regVein()", 10);
+      }
+
+      function stopReg()
+      {
+		window.clearInterval(regTimer);
+        document.getElementById("spanRegState").innerHTML = "";
+      }
+	  
+	  var capTimer;
+      var capState; // 0: no task  1:wait finger  2:capping 3:wait leave
+      function capImg()
+      {
+        if(capState == 0)
+		{
+			document.getElementById("msg").innerHTML = "请放入手指";
+			jxCapVeinFeat();
+			capState = 1;
+			return;
+		}
+		else if(capState == 1)
+		{
+			if(jxInCapProcess == true){
+				return;
+			}			
+			if(jxCapRes == 0){
+				var res = false;
+				var i=0;
+				while(true){
+					if(i==2){
+						break;
+					}
+					if(jxVerifyVeinFeat(jxCapFeat, feat_list[i]) == 1){
+						res = true;
+					}
+					i++;
+				}
+					
+						
+				
+				
+				if(res == false)
+					document.getElementById("msg").innerHTML = "指静脉验证失败";
+				else
+					document.getElementById("msg").innerHTML = "指静脉验证通过";
+				window.clearInterval(capTimer);
+				return;
+			}
+			else if(jxCapRes == -101)
+			{
+				document.getElementById("msg").innerHTML = "指静脉本地服务已断开";
+				capError(jxCapRes);
+				return;
+			}
+			else
+			{
+				document.getElementById("msg").innerHTML = ERRMSG[-jxCapRes];
+				capError(jxCapRes);
+				return;
+			}
+		}
+      }
+
+      function capError(val)
+      {
+        window.clearInterval(capTimer);
+      }
+
+      function startAuth()
+      {
+        capState = 0;
+        capTimer = setInterval("capImg()", 10);
+      }
+
+      function stopAuth()
+      {
+        window.clearInterval(capTimer);
+        //document.getElementById("spanCapState").innerHTML = "";
+      }
+	  
     </script>
 </head>
-<body>
-<div class="header" id="head">
-    <div class="title">静脉特征注册</div>
-</div>
-<div class="wrap" id="wrap">
+  <body>
+    <div class="wrap" id="wrap">
     <div class="logGet">
         <!-- 头部提示信息 -->
         <div class="logD logDtip">
@@ -156,7 +393,7 @@
             <input id="userId" name="uname" placeholder="请输入用户ID"/>
         </div>
         <div class="logC">
-            <button onclick="doRegVein()">静脉注册</button>
+            <button onclick="startReg();">静脉注册</button>
 
         </div>
         <div class="lgD">
@@ -164,5 +401,9 @@
         </div>
     </div>
 </div>
+    
+	
+	
+
 </body>
 </html>

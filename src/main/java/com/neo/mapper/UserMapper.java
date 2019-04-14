@@ -51,5 +51,6 @@ public interface UserMapper {
 	void deleteGroupId(String groupId);
 
 	Integer checkEmpId(String userId);
+	List<Employee> selectUser();
 
 }

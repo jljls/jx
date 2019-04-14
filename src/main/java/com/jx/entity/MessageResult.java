@@ -15,12 +15,14 @@ public class MessageResult {
 	private int code;
 	
 	public MessageResult(int code,String msg){
+		super();
 		this.code=code;
 		this.msg=msg;
 	}
 	
 	/**有具体业务数据返回时,使用此构造方法*/
 	public MessageResult(int code,String msg,Object data){
+		super();
 		this.code = code;
 		this.msg = msg;
 		this.data = data;
