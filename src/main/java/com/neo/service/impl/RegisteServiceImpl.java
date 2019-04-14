@@ -1,18 +1,25 @@
 package com.neo.service.impl;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
+import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.RegisteMapper;
 import com.neo.service.RegisteService;
 import com.neo.web.ClientController;
 
 @Service
 public class RegisteServiceImpl implements RegisteService {
+	@Resource
+	private HttpServletRequest request;
+	@Resource
+	private EmpLogMapper empLogMapper;
 	/**
 	 * 注册 向数据库插入静脉特征
 	 * 
@@ -52,7 +59,10 @@ public class RegisteServiceImpl implements RegisteService {
 				for (String veinFeat : veinFeats) {
 					registeMapper.insertEmpVein(userId, veinFeat);
 					// 新增一条日志
+					String uid = request.getSession().getAttribute("userId").toString();
 					String logContent = "新增" + userId + "用户的一条静脉信息";
+					EmpLog empLog = new EmpLog(uid,"insert",logContent);
+					empLogMapper.insertLog(empLog);
 				}
 			}
 		} catch (Exception e) {

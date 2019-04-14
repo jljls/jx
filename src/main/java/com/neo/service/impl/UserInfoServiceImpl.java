@@ -3,11 +3,14 @@ package com.neo.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
 
+import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
 import com.jx.entity.UserInfo;
+import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.UserInfoMapper;
 import com.neo.service.UserInfoService;
 
@@ -16,12 +19,18 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Resource
 	private UserInfoMapper  userInfoMapper;
 	
+	@Resource
+	private HttpServletRequest request;
+	
+	@Resource
+	private EmpLogMapper empLogMapper;
 	
 	@Override
 	public MessageResult insertUserInfo(String userId, String name, String password) {
 		
 		 try{
 			 userInfoMapper.insertUserInfo(userId, name, password);
+			 EmpLog empLog = new EmpLog();
 		 }catch(Exception e){
 			 e.printStackTrace();
 			 return new MessageResult(-100,"参数错误");
@@ -50,6 +59,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	public MessageResult deleteUInfoById(String userId) {
 		try{
 			userInfoMapper.deleteUInfoById(userId);
+			
 		}catch(Exception e){
 			e.printStackTrace();
 		}
@@ -64,6 +74,11 @@ public class UserInfoServiceImpl implements UserInfoService{
 		try{
 		for(String userId:ids){
 			userInfoMapper.deleteUInfoById(userId);
+			//新增一条日志
+			String uid = request.getSession().getAttribute("userId").toString();
+			String logContent = uid+"删除了"+userId+"用户";
+			EmpLog empLog = new EmpLog(uid,"insert",logContent);
+			empLogMapper.insertLog(empLog);
 		}
 		
 			
