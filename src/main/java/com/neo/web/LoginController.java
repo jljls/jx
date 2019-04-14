@@ -36,10 +36,10 @@ public class LoginController {
 	 * @param jxCapFeat 指静脉特征
 	 * @return 登录是否成功的消息
 	 */
-	public MessageResult login(@RequestBody String jsonString,HttpServletRequest request){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String userId = (String) object.get("userId");
-		String jxCapFeat = (String) object.get("jxCapFeat");
+	public MessageResult login(String userId,String jxCapFeat, HttpServletRequest request){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String userId = (String) object.get("userId");
+		//String jxCapFeat = (String) object.get("jxCapFeat");
 		return userService.selectUserIdandVeinFeat(userId,jxCapFeat);
 	}
 	
@@ -47,7 +47,7 @@ public class LoginController {
 	 * 跳转到主页面
 	 * @return
 	 */
-	@RequestMapping(value="/index",method = RequestMethod.POST)
+	@RequestMapping("/index")
 	public String index(){
 		return "index";
 	}
