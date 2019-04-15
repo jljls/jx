@@ -82,13 +82,14 @@
             width: 35px;
             height: 32px;
             margin: 0px 20px;
-            border: 1px solid #1ab394;
+            /*border: 1px solid #1ab394;*/
             border-radius: 5px;
-            background-color: #00D297;
-            line-height: 30px;
-            color: whitesmoke;
-            font-size: 18px;
-            overflow: hidden;
+            /*background-color: #00D297;*/
+            background-image: url("./detail.png");
+            background-size:35px auto;
+        }
+        .detail .detail-head .show-detail:hover {
+           background-color: #C5C5C5;
         }
 
         /*右边信息主体*/
@@ -178,17 +179,37 @@
             </div>
         </div>
         <ul class="nav-list">
-            <li class="click">人员管理</li>
-            <li class="click">管理员</li>
-            <li class="click">系统日志</li>
-            <li class="click">人员注册</li>
-            <li class="click">系统设置</li>
+            <li class="click">
+                <img src="./person.png" alt=""
+                     style="width:26px;height: 22px;vertical-align: bottom"/>
+                <span style="margin: 10px;">人员管理</span>
+            </li>
+            <li class="click">
+                <img src="./admin.png" alt=""
+                     style="width:26px;height: 22px;vertical-align: bottom"/>
+                <span style="margin: 10px;">管理员</span>
+            </li>
+            <li class="click">
+                <img src="./data.png" alt=""
+                     style="width:26px;height: 22px;vertical-align: bottom"/>
+                <span style="margin: 10px;">系统日志</span>
+            </li>
+            <li class="click">
+                <img src="./register.png" alt=""
+                     style="width:26px;height: 22px;vertical-align: bottom"/>
+                <span style="margin: 10px;">人员注册</span>
+            </li>
+            <li class="click">
+                <img src="./setting.png" alt=""
+                     style="width:26px;height: 22px;vertical-align: bottom"/>
+                <span style="margin: 10px;">系统设置</span>
+            </li>
         </ul>
     </div>
     <div class="detail">
         <!-- 右边信息头部 begin-->
         <div class="detail-head">
-            <div class="show-detail click" onclick="show()">+/-</div>
+            <div class="show-detail click" onclick="show()"></div>
             <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
             <div class="show-detail" style="opacity: 0"></div>
         </div>
@@ -210,7 +231,10 @@
                     <div class="body-operate">
                         <button onclick="qx()">全选</button>
                         <button onclick="dellist()">批量删除</button>
-                        <input id="kw" type="text" placeholder="输入用户ID搜索"/>
+                        <div>
+                            <input id="kw" type="text" placeholder="输入用户ID搜索"/>
+                        </div>
+                        
                         <button>搜索</button>
                     </div>
                     <table class="body-table">
@@ -432,7 +456,10 @@
             </div>
             <!-- 系统日志页面-->
             <div class="detail-body detail-body-3">
-                <div class="body-title">系统日志</div>
+                <div class="body-title">
+                    系统日志
+                    <div style="float: right">日志数量:3596</div>
+                </div>
                 <div class="body-information">
                     <div class="body-operate">
                         <!--<button onclick="qx()">全选</button>-->
@@ -461,6 +488,7 @@
                             <th>用户</th>
                             <th>影响对象</th>
                             <th>用户IP</th>
+                            <th>删除</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -469,68 +497,77 @@
                             <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
-                            <th>
-                                <input type="checkbox"/>
-                            </th>
+                            <th>yhbgui</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
+                            <th>删除</th>
                         </tr>
                         </tbody>
                     </table>
@@ -552,6 +589,26 @@
                         <input id="new-gu" type="text" placeholder="管理员账号"/>
                         <input id="new-gg" type="text" placeholder="管理员密码"/>
                         <button>添加</button>
+                    </div>
+                </div>
+                <div class="body-title">指静脉注册</div>
+                <div class="body-information">
+                    <div class="body-operate" style="padding:0px">
+                        <input id="uid" type="text" placeholder="用户ID"/>
+
+                        <div>df</div>
+                    </div>
+                </div>
+                <div class="body-information" style="border: none">
+                    <div class="body-operate" style="padding:0px">
+                        <button>检索</button>
+                        <button>添加指静脉</button>
+                        <button>清空指静脉</button>
+                    </div>
+                </div>
+                <div class="body-information" style="border: none">
+                    <div class="body-operate" style="padding:0px">
+                        <div>fvyihgviu</div>
                     </div>
                 </div>
             </div>
@@ -585,8 +642,9 @@
 </div>
 <script>
     $(document).ready(function () {
-        //表单隔行变色
+        //删除操作下划线
         $(".body-table tbody th:last-child").css("text-decoration", "underline");
+        //表单隔行变色
         $(".body-table tbody th").hover(function () {
             $(this).parent().addClass("hover");
         }, function () {
@@ -595,19 +653,19 @@
         //导航栏点击事件
         $(".nav-list li").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
-            if ($(this).html() == "人员管理") {
+            if ($.trim($(this).text()) == "人员管理") {
                 $(".detail-body-1").slideDown().siblings().css("display", "none");
             }
-            if ($(this).html() == "管理员") {
+            if ($.trim($(this).text()) == "管理员") {
                 $(".detail-body-2").slideDown().siblings().css("display", "none");
             }
-            if ($(this).html() == "系统日志") {
+            if ($.trim($(this).text()) == "系统日志") {
                 $(".detail-body-3").slideDown().siblings().css("display", "none");
             }
-            if ($(this).html() == "人员注册") {
+            if ($.trim($(this).text()) == "人员注册") {
                 $(".detail-body-4").slideDown().siblings().css("display", "none");
             }
-            if ($(this).html() == "系统设置") {
+            if ($.trim($(this).text()) == "系统设置") {
                 $(".detail-body-5").slideDown().siblings().css("display", "none");
             }
         })
@@ -615,12 +673,20 @@
     //导航显示信息
     function show() {
         if ($(".navigation").width() > 50) {
+            $(".nav-list li span").css("display", "none");
             $(".navigation").animate({
                 width: '50px'
+            });
+            $(".admin-information").animate({
+                opacity: '0'
             })
         } else {
+            $(".nav-list li span").css("display", "inline");
             $(".navigation").animate({
                 width: '200px'
+            });
+            $(".admin-information").animate({
+                opacity: '1'
             })
         }
     }
