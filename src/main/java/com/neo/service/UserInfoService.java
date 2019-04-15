@@ -13,6 +13,6 @@ public interface UserInfoService {
 
 	public MessageResult deleteUInfoByIds(String[] ids);
 
-
+	public MessageResult check(String userId,String password);
 
 }

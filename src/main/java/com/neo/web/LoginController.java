@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jx.entity.Json;
 import com.jx.entity.MessageResult;
 import com.neo.service.LoginService;
+import com.neo.service.UserInfoService;
 import com.neo.service.UserService;
 
 import freemarker.cache.StrongCacheStorage;
@@ -23,22 +24,49 @@ import net.sf.json.JSONObject;
 public class LoginController {
 	@Resource
 	private LoginService login;
-	@Resource UserService userService;
-	
+	@Resource 
+	private UserService userService;
+	@Resource 
+	private UserInfoService userInfoService;
+	/**
+	 * 跳转到管理员登录页面
+	 * @return
+	 */
 	@RequestMapping(value="/login")
+	public String login(){
+		//跳转到管理员登录页面
+		return "/login";
+	}
+	/**
+	 * 校验管理员登录
+	 * @param userId
+	 * @param password
+	 * @return
+	 */
+	@RequestMapping(value="checkUserInfo",method=RequestMethod.POST)
+	@ResponseBody
+	public MessageResult loginIndex(String userId,String password){
+		return userInfoService.check(userId, password);
+	}
+	
+	/**
+	 * 跳转到用户登录演示
+	 * @return
+	 */
+	@RequestMapping(value="/loginDemo")
 	public String login1(){
-		//跳转到登录页面
+		//跳转到用户登录演示
 		return "/loginTo";
 	}
 	
-	@RequestMapping(value="/login1",method = RequestMethod.POST)
-	@ResponseBody
 	/**
 	 * 
 	 * @param userId 用户id
 	 * @param jxCapFeat 指静脉特征
 	 * @return 登录是否成功的消息
 	 */
+	@RequestMapping(value="/login1",method = RequestMethod.POST)
+	@ResponseBody
 	public MessageResult login(@RequestBody String jsonString, HttpServletRequest request){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String userId = (String) object.get("userId");
@@ -55,7 +83,7 @@ public class LoginController {
 	 */
 	@RequestMapping("/index")
 	public String index(){
-		return "index";
+		return "/home/home";
 	}
 	
 	

@@ -33,7 +33,12 @@
             #{ids}
         </foreach>
     </delete>
-       
+	
+	<select id="check" resultType="com.jx.entity.UserInfo">
+		select user_id as userId,name as name,password as password
+		from user_info
+		where user_id = #{userId} and password = #{password}
+	</select>       
 
 	   
     
