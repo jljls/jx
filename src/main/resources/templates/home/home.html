@@ -211,7 +211,7 @@
                         <button onclick="qx()">全选</button>
                         <button onclick="dellist()">批量删除</button>
                         <input id="kw" type="text" placeholder="输入用户ID搜索"></input>
-                        <button>搜索</button>
+                        <button onclick="doFindUserId()">搜索</button>
                     </div>
                     <table class="body-table">
                         <thead>
@@ -222,7 +222,7 @@
                             <th>删除</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="tbodyId">
                         <tr>
                             <th>
                                 <input type="checkbox"></input>
@@ -637,13 +637,22 @@
             return;
         }
         //添加
-        $(".body-table").append("<tr><th><input type='checkbox'/></th><th>" + userid + "</th><th>" + groupid + "</th><th class='click' onclick='del(this)'>删除</th></tr>");
+        doAdd();
     }
 
     //删除
     function del(a) {
         if (confirm("您是否删除本条数据！！！")) {
-            $(a).parent().remove();
+        	var url = "deleteById";
+        	var param={};
+        	$.post(url,param,function(result){
+        		if(result.code==0){
+        			alert("删除成功!");
+        		}else{
+        			alert(result.msg);
+        		}
+        			doFind();
+        	});
         }
     }
 
@@ -653,9 +662,26 @@
         if (ids.length == 0) {
             alert("请选择一条数据");
         }
-        ids.each(function () {
-            $(this).parent().parent().remove();
+        var userIds;
+        $("#tbodyId input[name='checkId']").each(function () {
+        	if($(this).prop("checkId")){//判断此input对象是否被选中
+    			if(userIds==""){
+    				userIds += $(this).val();
+    			}else{
+    				userIds += ","+$(this).val(); 
+    			}
+    		}
         })
+        var url = "deleteUsers";
+        var param = {ids:userIds};
+        $.post(url,param,function(result){
+        	if(result.code==0){
+        		alert(result.msg);
+        	}else{
+        		alert(result.msg);
+        	}
+        	doFind();
+        });
     }
 
     //全选
@@ -663,7 +689,53 @@
         var ids = $(".body-table :checkbox");
         ids.prop("checked", true);
     }
-
+    function doAdd(){
+		var url = "insertEmp";
+		var userId = $("#userid").val();
+		var groupId = $("#groupid").val();
+		var param = {userId:userId,groupId:groupId};
+		$.post(url,param,function(result){
+			if(result.code==0){
+				alert(result.msg);
+				doFind();
+			}else{
+				alert(result.msg);
+			}
+		});
+	}
+	function setTableBodyRows(result){
+		var tBody=$("#tbodyId");
+		tBody.empty();
+		for(var i in result){
+			var tr=$("<tr></tr>");
+			 tr.data("id",result[i].userId);
+			 //2.2构建每行th对象(一行有多个)
+			 //var td0=$("<th></th>");
+			 //....
+			 //2.3在th对象内容填充具体数据
+			 //th0.append(result[id].id);
+			 //....
+			 var tds="<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+			         "<th>"+result[i].userId+"</th>"+
+			         "<th>"+result[i].groupId+"</th>"+
+			         "<th class='lick' onclick='del(this)'>删除</th>";
+			 //2.4将th添加到tr对象中(一行要放多个)
+			 tr.append(tds);
+			 //2.5将tr追加到tbody中
+			 tBody.append(tr);
+			
+		}
+	}
+	function doFindUserId(){
+		var url = "selectUserByuserId";
+		var userId = $("#kw").val();
+		var param = {userId:userId};
+		$.post(url,param,function(result){
+			if(result.code==0){
+				setTableBodyRows(result.data);
+			}
+		});
+	}
 </script>
 </body>
 </html>
