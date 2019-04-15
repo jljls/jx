@@ -343,9 +343,7 @@ public class ClientController {
 			if (userService.selectEmpVeinEum(userId) >= 8) {
 				return new MessageResult(-5, "用户静脉特征已满");
 			} else {
-				if (!(groupId == null)) {
-					userService.updateGroupByEmpId(userId);
-				}
+				
 				for (String veinFeats : veinFeat) {
 					userService.insertEmpVein(userId, veinFeats);
 					//新增一条日志
@@ -412,5 +410,30 @@ public class ClientController {
 		empLogMapper.insertLog(empLog);
 		return new MessageResult(0, "操作成功"); 
 	}
+	/**
+	 * 检索指定用户
+	 *
+	 */
+	@RequestMapping(value = "checkUser", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult checkUser(String userId) {
+		if(userId==null){
+			return new MessageResult(-1, "参数异常");
+		}
+		try{
+			
+				Integer count=userService.checkEmpId(userId);
+				if(count==0){
+					new MessageResult(-9, "检索失败"); 
+				}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
+		
+		return new MessageResult(0, "操作成功"); 
+	}
+	
 	
 }
