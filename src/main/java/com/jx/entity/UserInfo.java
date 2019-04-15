@@ -8,7 +8,6 @@ import java.util.List;
  * @author hongjiangfeng
  *
  */
-@Entity
 public class UserInfo implements Serializable {
 	
 	private String  userId;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -98,6 +99,8 @@ public class UserInfoServiceImpl implements UserInfoService{
 		if(list.size()==0){
 			return new MessageResult(-1,"参数错误");
 		}
+		HttpSession session = request.getSession();
+		session.setAttribute("userId", userId);
 		return new MessageResult(0, "登录成功");
 	}
 

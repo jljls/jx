@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,10 +47,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "insertEmp", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult insertEmp(@RequestBody String jsonString) throws Exception {
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String groupId = (String) object.get("groupId");
-		String userId = (String) object.get("userId");
+	public MessageResult insertEmp(String userId,String groupId) {
 		if(groupId==null||userId==null){
 			return new MessageResult(-1, "参数错误");
 		}
@@ -62,8 +60,8 @@ public class ClientController {
 			if (userService.checkEmpId(userId) == 1) {
 				return new MessageResult(-3, "用户已存在");
 			}
-			userService.insertEmpBYGroupId(userId, groupId);
 			String uid = request.getSession().getAttribute("userId").toString();
+			userService.insertEmpBYGroupId(userId, groupId,uid);
 			//新增一条日志
 			String logContent = uid+"新增了一个用户,userId="+userId+",groupId="+groupId;
 			EmpLog empLog = new EmpLog(request.getSession().getAttribute("userId").toString(),"insert",logContent);
@@ -86,7 +84,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectRegisteEmp", method = RequestMethod.GET)
 	@ResponseBody
-	public MessageResult selectRegisteEmp() throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult selectRegisteEmp(){
 
 		logger.info("---查询已经注册的用户");
 		//已注册的用户数
@@ -113,8 +111,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectEmpByGroupId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectEmpByGroupId(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult selectEmpByGroupId(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 
@@ -166,8 +163,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectVeinNumByGroupId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectVeinNumByGroupId(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult selectVeinNumByGroupId(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 		logger.info("---查询分组手指数");
@@ -222,8 +218,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "deleteById", method = RequestMethod.DELETE)
 	@ResponseBody
-	public MessageResult deleteById(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult deleteById(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String userId = (String) object.get("userId");
 
@@ -260,8 +255,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "deleteVeinByGroupId", method = RequestMethod.DELETE)
 	@ResponseBody
-	public MessageResult deleteVeinByGroupId(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult deleteVeinByGroupId(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 
@@ -297,8 +291,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "deleteVeinByEmpId", method = RequestMethod.DELETE)
 	@ResponseBody
-	public MessageResult deleteVeinByEmpId(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult deleteVeinByEmpId(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String userId = (String) object.get("userId");
 		logger.info("---删除某用户的所有静脉特征");
@@ -333,8 +326,7 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "insertVeinFeat", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult insertVeinFeat(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult insertVeinFeat(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 		String userId = (String) object.get("userId");
@@ -351,9 +343,7 @@ public class ClientController {
 			if (userService.selectEmpVeinEum(userId) >= 8) {
 				return new MessageResult(-5, "用户静脉特征已满");
 			} else {
-				if (!(groupId == null)) {
-					userService.updateGroupByEmpId(userId);
-				}
+				
 				for (String veinFeats : veinFeat) {
 					userService.insertEmpVein(userId, veinFeats);
 					//新增一条日志
@@ -374,12 +364,23 @@ public class ClientController {
 	 * 查询所有用户 返回所有用户
 	 *
 	 */
-	@RequestMapping(value = "selectUser", method = RequestMethod.GET)
+	@RequestMapping(value = "selectUser", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult selectUser() {
-		return userService.selectUser();
-		
-
+		MessageResult mr = userService.selectUser();
+		System.out.println(mr.toString());
+		return mr;
+	}
+	@RequestMapping(value = "selectUserByuserId", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult selectUserByuserId(String userId) {
+		MessageResult mr;
+		if (userId==null) {
+			mr = userService.selectUserByUserId(userId);
+		}else {
+			mr = userService.selectUserByUserId(userId);
+		}
+		return mr;
 	}
 	
 	/**
@@ -388,12 +389,14 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "deleteUsers", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectUser(String[] ids) {
-		if(ids.length==0){
+	public MessageResult deleteUsers(String ids) {
+		if(StringUtils.isEmpty(ids)){
 			return new MessageResult(-1, "参数异常");
 		}
+		System.out.println("ids:"+ids);
+		String[] userIds = ids.split(",");
 		try{
-			for(String userId:ids){
+			for(String userId:userIds){
 				userService.deleteById(userId);
 			}
 		}catch(Exception e){
@@ -402,10 +405,35 @@ public class ClientController {
 		}
 		//新增一条日志
 		String uid = request.getSession().getAttribute("userId").toString();
-		String logContent = uid+"删除了"+ids.toString()+"用户";
+		String logContent = uid+"删除了"+ids+"用户";
 		EmpLog empLog = new EmpLog(uid,"delete",logContent);
 		empLogMapper.insertLog(empLog);
 		return new MessageResult(0, "操作成功"); 
 	}
+	/**
+	 * 检索指定用户
+	 *
+	 */
+	@RequestMapping(value = "checkUser", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult checkUser(String userId) {
+		if(userId==null){
+			return new MessageResult(-1, "参数异常");
+		}
+		try{
+			
+				Integer count=userService.checkEmpId(userId);
+				if(count==0){
+					new MessageResult(-9, "检索失败"); 
+				}
+			
+		}catch(Exception e){
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
+		
+		return new MessageResult(0, "操作成功"); 
+	}
+	
 	
 }

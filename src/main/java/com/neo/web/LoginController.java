@@ -46,7 +46,11 @@ public class LoginController {
 	@RequestMapping(value="checkUserInfo",method=RequestMethod.POST)
 	@ResponseBody
 	public MessageResult loginIndex(String userId,String password){
-		return userInfoService.check(userId, password);
+		if(userId==null||password==null){
+			return new MessageResult(0,"参数错误");
+		}
+		MessageResult mr = userInfoService.check(userId, password);
+		return mr;
 	}
 	
 	/**
