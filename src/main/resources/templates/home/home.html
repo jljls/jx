@@ -21,6 +21,15 @@
             color: #fff;
         }
 
+        .hover {
+            background-color: gainsboro !important;
+        }
+
+        select {
+            border: 1px solid gainsboro;
+            color: #777;
+        }
+
         /*左边导航栏*/
         .navigation {
             width: 200px;
@@ -84,27 +93,13 @@
 
         /*右边信息主体*/
         .detail-body {
-            height: 84%;
+            height: 100%;
             padding: 20px;
             font-size: 16px;
             color: #676a6c;
             background-color: #F4F4F5;
             overflow: auto;
-        }
-
-        .add-operate {
-            padding: 10px;
-            font-size: 16px;
-            color: #676a6c;
-            background-color: #F4F4F5;
-            text-align: center;
-            background-color: white;
-            border: 1px solid transparent;
-        }
-
-        .add-operate:hover {
-            border: 1px solid #E7EBED;
-            color: black;
+            display: none;
         }
 
         .body-title {
@@ -147,8 +142,10 @@
         }
 
         .body-operate input {
-            width: 250px;
             height: 25px;
+            border: 1px solid gainsboro;
+            border-radius: 3px;
+            padding: 0px 5px;
         }
 
         .body-table {
@@ -158,10 +155,14 @@
         }
 
         .body-table th {
-            border: 1px solid #2E4251;
+            border: 1px solid gainsboro;
             padding: 10px 5px;
             white-space: nowrap;
             overflow: auto;
+        }
+
+        .body-table tbody tr:nth-child(odd) {
+            background-color: #FAFAFA;
         }
 
         /*人员管理表格信息 end*/
@@ -172,7 +173,7 @@
     <div class="navigation">
         <div class="admin-information">
             <div style="position: absolute;height: 40px;top: 0;left: 0;right: 0;bottom: 0;margin: auto;">
-                <div style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;">管理员账号</div>
+                <div style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;">admin</div>
                 <div class="click" style="color: #8095a8;font-size: 14px">退出</div>
             </div>
         </div>
@@ -180,6 +181,7 @@
             <li class="click">人员管理</li>
             <li class="click">管理员</li>
             <li class="click">系统日志</li>
+            <li class="click">人员注册</li>
             <li class="click">系统设置</li>
         </ul>
     </div>
@@ -192,133 +194,393 @@
         </div>
         <!-- 右边信息头部 end-->
         <!-- 右边信息主体 begin-->
-        <div class="detail-body">
-            <!-- 右边信息数据添加 begin-->
-            <div class="add-operate">
-                <div style="margin: 10px auto">
-                    <input id="userid" type="text" placeholder="用户ID" style="width: 200px;height: 25px;"/>
-                    <input id="groupid" type="text" placeholder="分组ID" style="width: 200px;height: 25px;"/>
-                    <button class="click"
-                            style="width: 80px;height: 35px;border: none;border-radius: 5px;background-color: gainsboro;cursor: pointer;color: darkolivegreen;">
-                        添加
-                    </button>
-                    <span id="err"></span>
+        <!-- div存储各个导航栏对应的信息-->
+        <div style="height: 100%;;position: relative;background-image: url( ./trianglify.png);background-repeat:no-repeat;">
+            <div class="detail-body"
+                 style="height: 50px;text-align: center;font-size:38px;display: block;background-color: transparent;position: absolute;top: -20px;left: 0;right: 0;bottom: 0;margin: auto">
+                欢迎使用指静脉后台管理系统
+            </div>
+            <!--人员管理页面-->
+            <div class="detail-body detail-body-1">
+                <div class="body-title">
+                    人员列表
+                    <div style="float: right">已注册用户:124,已注册手指:198</div>
                 </div>
-                <div class="hidden">
-                    <span>点击上拉</span>
+                <div class="body-information">
+                    <div class="body-operate">
+                        <button onclick="qx()">全选</button>
+                        <button onclick="dellist()">批量删除</button>
+                        <input id="kw" type="text" placeholder="输入用户ID搜索"/>
+                        <button>搜索</button>
+                    </div>
+                    <table class="body-table">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>用户(userId)</th>
+                            <th>分组(groupId)</th>
+                            <th>删除</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
-            <!-- 右边信息数据添加 end-->
-            <div class="body-title">人员列表</div>
-            <div class="body-information">
-                <div class="body-operate">
-                    <button onclick="qx()">全选</button>
-                    <button onclick="dellist()">批量删除</button>
-                    <input id="kw" type="text" placeholder="输入用户ID搜索"/>
-                    <button>搜索</button>
+            <!-- 管理员页面-->
+            <div class="detail-body detail-body-2">
+                <div class="body-title">
+                    管理员列表
+                    <div style="float: right">管理员数:64</div>
                 </div>
-                <table class="body-table">
-                    <thead>
-                    <tr>
-                        <th>编号</th>
-                        <th>用户(userId)</th>
-                        <th>分组(groupId)</th>
-                        <th>删除</th>
-                    </tr>
+                <div class="body-information">
+                    <div class="body-operate">
+                        <button onclick="qx()">全选</button>
+                        <button onclick="dellist()">批量删除</button>
+                        <input id="kw" type="text" placeholder="输入用户ID搜索"/>
+                        <button>搜索</button>
+                    </div>
+                    <table class="body-table">
+                        <thead>
+                        <tr>
+                            <th>编号</th>
+                            <th>用户(userId)</th>
+                            <th>分组(groupId)</th>
+                            <th>删除</th>
+                        </tr>
 
 
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            <input type="checkbox"/>
-                        </th>
-                        <th>rtfgbh</th>
-                        <th>rtfgn</th>
-                        <th class="click" onclick="del(this)">删除</th>
-                    </tr>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 系统日志页面-->
+            <div class="detail-body detail-body-3">
+                <div class="body-title">系统日志</div>
+                <div class="body-information">
+                    <div class="body-operate">
+                        <!--<button onclick="qx()">全选</button>-->
+                        <!--<button onclick="dellist()">批量删除</button>-->
+                        <!--<input id="kw" type="text" placeholder="输入用户ID搜索"/>-->
+                        <!--<button>搜索</button>-->
+                        <div style="padding: 20px;">
+                            <label for="star" style="margin: 0px 10px 0px 20px">开始时间:</label>
+                            <select id="star">
+                                <option>156486</option>
+                                <option>55656</option>
+                            </select>
+                            <label for="end" style="margin:  0px 10px 0px 20px">截止时间:</label>
+                            <select id="end">
+                                <option>5256</option>
+                                <option>52556</option>
+                            </select>
+                        </div>
+                        <button>搜索</button>
+                    </div>
+                    <table class="body-table">
+                        <thead>
+                        <tr>
+                            <!--时间，用户，操作类型（登陆后台，添加用户，删除用户，添加管理员，删除管理员，给用户添加指静脉），对象（对于添加或删除用户等需要记录下新添加的用户ID），用户IP-->
+                            <th>时间</th>
+                            <th>用户</th>
+                            <th>影响对象</th>
+                            <th>用户IP</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>
+                                <input type="checkbox"/>
+                            </th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- 人员注册页面-->
+            <div class="detail-body detail-body-4">
+                <div class="body-title">人员注册</div>
+                <div class="body-information">
+                    <div class="body-operate" style="padding:0px">
+                        <input id="new-pu" type="text" placeholder="用户ID"/>
+                        <input id="new-pg" type="text" placeholder="分组ID"/>
+                        <button>添加</button>
+                    </div>
+                </div>
+                <div class="body-title">管理员注册</div>
+                <div class="body-information">
+                    <div class="body-operate" style="padding:0px">
+                        <input id="new-gu" type="text" placeholder="管理员账号"/>
+                        <input id="new-gg" type="text" placeholder="管理员密码"/>
+                        <button>添加</button>
+                    </div>
+                </div>
+            </div>
+            <!-- 系统设置页面-->
+            <div class="detail-body detail-body-5">
+                <div class="body-title">密码修改</div>
+                <div class="body-information">
+                    <div class="body-operate" style="padding:0px">
+                        <input id="new-pw" type="text" placeholder="新密码"/>
+                        <button>修改</button>
+                    </div>
+                </div>
+                <div class="body-title">日志管理</div>
+                <div class="body-information">
+                    <div class="body-operate" style="padding:0px">
+                        <div>
+                            <label for="data-setting" style="margin: 0px 10px 0px 0px">日志保存时间:</label>
+                            <select id="data-setting">
+                                <option>60</option>
+                                <option>75</option>
+                                <option>90</option>
+                            </select>
+                        </div>
+
+                        <button>设置</button>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- 右边信息主体 end-->
@@ -326,21 +588,32 @@
 </div>
 <script>
     $(document).ready(function () {
-        $(".nav-list li").click(function () {
-            $(".nav-list li").siblings().removeClass("active");
-            $(this).addClass("active")
+        //表单隔行变色
+        $(".body-table tbody th:last-child").css("text-decoration", "underline");
+        $(".body-table tbody th").hover(function () {
+            $(this).parent().addClass("hover");
+        }, function () {
+            $(this).parent().removeClass("hover");
         })
-        $(".hidden").click(function () {
-                    var dd=$(".add-operate div:first-child");
-                    if ($(".add-operate div:first-child").css("display") == 'none') {
-                        dd.slideDown();
-                        $(".hidden span").html("点击上拉");
-                    } else {
-                        dd.slideUp();
-                        $(".hidden span").html("点击下拉");
-                    }
-                }
-        )
+        //导航栏点击事件
+        $(".nav-list li").click(function () {
+            $(this).addClass("active").siblings().removeClass("active");
+            if ($(this).html() == "人员管理") {
+                $(".detail-body-1").slideDown().siblings().css("display", "none");
+            }
+            if ($(this).html() == "管理员") {
+                $(".detail-body-2").slideDown().siblings().css("display", "none");
+            }
+            if ($(this).html() == "系统日志") {
+                $(".detail-body-3").slideDown().siblings().css("display", "none");
+            }
+            if ($(this).html() == "人员注册") {
+                $(".detail-body-4").slideDown().siblings().css("display", "none");
+            }
+            if ($(this).html() == "系统设置") {
+                $(".detail-body-5").slideDown().siblings().css("display", "none");
+            }
+        })
     })
     //导航显示信息
     function show() {
@@ -371,13 +644,13 @@
             return;
         }
         //添加
-        $(".body-table").append("<tr><th><input type='checkbox'></th><th>" + userid + "</th><th>" + groupid + "</th><th><button class='click' onclick='del(this)'>删除</button></th></tr>");
+        $(".body-table").append("<tr><th><input type='checkbox'></th><th>" + userid + "</th><th>" + groupid + "</th><th class='click' onclick='del(this)'>删除</th></tr>");
     }
 
     //删除
     function del(a) {
         if (confirm("您是否删除本条数据！！！")) {
-            $(a).parent().parent().remove();
+            $(a).parent().remove();
         }
     }
 
