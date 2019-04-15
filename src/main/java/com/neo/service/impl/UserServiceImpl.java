@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 
+import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
 import com.jx.entity.Base64ToByte;
 import com.jx.entity.EmpLog;
 import com.jx.entity.Employee;
@@ -34,8 +35,8 @@ public class UserServiceImpl  implements UserService{
 	private Base64ToByte btb = new Base64ToByte();
 	private JXVeinJavaSDK_T910 jx = new JXVeinJavaSDK_T910();
 	@Override
-	public void insertEmpBYGroupId(String userId,String groupId) {
-		userMapper.insertEmpBYGroupId(userId,groupId);
+	public void insertEmpBYGroupId(String userId,String groupId,String uid) {
+		userMapper.insertEmpBYGroupId(userId,groupId,uid);
 		
 	}
 
@@ -225,6 +226,18 @@ public class UserServiceImpl  implements UserService{
 			}
 			return new  MessageResult(0,"操作成功");
 		}
+
+	@Override
+	public MessageResult selectUserByUserId(String userId) {
+		List<Employee> list;
+		try {
+			list = userMapper.selectUserByUserId(userId);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
+		return new MessageResult(0, "操作成功", list);
+	}
 
 
 

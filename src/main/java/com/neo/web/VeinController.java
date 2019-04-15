@@ -49,8 +49,7 @@ public class VeinController {
 	 */
 	@RequestMapping(value = "check", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult check(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult check(@RequestBody String jsonString){
 		//从参数中获取userId和veinFeat
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String userId = (String) object.get("userId");
@@ -73,8 +72,7 @@ public class VeinController {
 	 */
 	@RequestMapping(value = "checkAllToN", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult checkAllToN(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult checkAllToN(@RequestBody String jsonString){
 		
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String veinFeat = (String) object.get("veinFeat");
@@ -127,8 +125,7 @@ public class VeinController {
 	 */
 	@RequestMapping(value = "checkToNByGroupId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult checkToNByGroupId(@RequestBody String jsonString)
-			throws UnsupportedEncodingException, IOException, Exception {
+	public MessageResult checkToNByGroupId(@RequestBody String jsonString){
 		JSONObject object = JSONObject.fromObject(jsonString);
 		String groupId = (String) object.get("groupId");
 		String veinFeat = (String) object.get("veinFeat");

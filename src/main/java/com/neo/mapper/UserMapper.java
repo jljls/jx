@@ -1,20 +1,16 @@
 package com.neo.mapper;
 
-import java.sql.Array;
 import java.util.List;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.jx.entity.Employee;
-import com.jx.entity.VeinFeat;
 
 
 public interface UserMapper {
 	
 	Integer selectEmp();
-	void insertEmpBYGroupId(@Param("userId")String userId,@Param("groupId")String groupId);
+	void insertEmpBYGroupId(@Param("userId")String userId,@Param("groupId")String groupId,@Param("uid")String uid);
 	void insertEmp();
 	
 	Integer selectRegisteEmp();
@@ -52,5 +48,6 @@ public interface UserMapper {
 
 	Integer checkEmpId(String userId);
 	List<Employee> selectUser();
+	List<Employee> selectUserByUserId(String userId);
 
 }

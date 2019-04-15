@@ -10,7 +10,6 @@
 <script th:inline="javascript">
 
 function doLogin(){
-	debugger;
 	var url = "checkUserInfo";
 	var userId = $("#userId").val();
 	var param = {userId:userId};
@@ -18,7 +17,10 @@ function doLogin(){
 	$.post(url,param,function(result){
 		if(result.code==0){
 			debugger;
-			$.post("index",{},function(){});
+			window.location='/jx_CMS/index';
+			/* $.ajax({url : "index",	type : "post",	
+				contentType: 'application/json',	
+				}); */
 		}else{
 			alert(result.msg);
 		}

@@ -67,7 +67,7 @@
        from t_employee
     </select>
     <!-- 查询user 返回所有user -->
-    <select id="selectUser" parameterType="java.lang.String" resultType="com.jx.entity.Employee" >
+    <select id="selectUser" resultType="com.jx.entity.Employee" >
        select
        user_id as userId,group_id as groupId
        from t_employee
@@ -123,9 +123,9 @@
     <insert id="insertEmpBYGroupId" parameterType="java.lang.String" >
        INSERT INTO 
        		t_employee
-       		(user_id,group_id) 
+       		(user_id,group_id,create_time,create_by,update_time,update_by) 
        	VALUES
-       		(#{userId},#{groupId})
+       		(#{userId},#{groupId},now(),#{uid},now(),#{uid})
     </insert>
     
     
@@ -191,7 +191,12 @@
      where v.user_id=#{userId}
     </select>
     
-    
+    <select id="selectUserByUserId" parameterType="java.lang.String" resultType="com.jx.entity.Employee">
+    select
+       user_id as userId,group_id as groupId
+    from t_employee
+    where user_id = #{userId} 
+    </select>
     
     
 

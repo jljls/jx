@@ -16,7 +16,7 @@ import com.jx.entity.VeinFeat;
 public interface UserService {
 	//查询用户的总数
 	Integer selectEmp();	
-	 void insertEmpBYGroupId( String userId, String groupId);
+	 void insertEmpBYGroupId( String userId, String groupId,String uid);
 	 void insertEmp();
 	 
 	 //查询已经注册的用户
@@ -44,5 +44,6 @@ public interface UserService {
 	List<VeinFeat> selectVeinByGroupId(String groupId);
 	MessageResult selectUserIdandVeinFeat(String userId,String veinFeat);
 	MessageResult selectUser();
+	MessageResult selectUserByUserId(String userId);
 	MessageResult deleteByIds(String[] ids);
 	}
