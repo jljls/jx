@@ -836,12 +836,15 @@
             $(this).addClass("active").siblings().removeClass("active");
             if ($.trim($(this).text()) == "用户管理") {
                 $(".detail-body-1").slideDown(100).siblings().css("display", "none");
+                doFind();
             }
             if ($.trim($(this).text()) == "管理人员") {
                 $(".detail-body-2").slideDown(100).siblings().css("display", "none");
+                doFindeUserInfo();
             }
             if ($.trim($(this).text()) == "系统日志") {
                 $(".detail-body-3").slideDown(100).siblings().css("display", "none");
+                doFindLog();
             }
             if ($.trim($(this).text()) == "人员注册") {
                 $(".detail-body-4").slideDown(100).siblings().css("display", "none");
