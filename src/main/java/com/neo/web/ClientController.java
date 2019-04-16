@@ -2,6 +2,8 @@ package com.neo.web;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -442,5 +444,24 @@ public class ClientController {
 		String uid = session.getAttribute("userId").toString(); 
 		System.out.println(uid);
 		return new MessageResult(0, "操作成功",uid); 
+	}
+	/**
+	 * 查询已经注册用户和已注册手指数
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "selectUAndV", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult selectUAndV(Model model, HttpSession session) {
+		logger.info("---查询手指数");
+		
+			Integer num = userService.selectVeinNum();
+			Integer b=userService.selectRegisteEmp();
+		List<Object> list =new ArrayList<Object>();
+		list.add(num);
+		list.add(b);
+		return new MessageResult(0, "操作成功", b);
+
 	}
 }

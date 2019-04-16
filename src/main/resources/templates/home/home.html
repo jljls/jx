@@ -174,7 +174,7 @@
     <div class="navigation">
         <div class="admin-information">
             <div style="position: absolute;height: 40px;top: 0;left: 0;right: 0;bottom: 0;margin: auto;">
-                <div style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;">admin</div>
+                <div id="people" style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;"></div>
                 <div class="click" style="color: #8095a8;font-size: 14px">退出</div>
             </div>
         </div>
@@ -225,7 +225,7 @@
             <div class="detail-body detail-body-1">
                 <div class="body-title">
                     人员列表
-                    <div style="float: right">已注册用户:124,已注册手指:198</div>
+                    <div  id="veinnum" style="float: right">已注册用户:124,已注册手指:198</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
@@ -635,6 +635,8 @@
 </div>
 <script>
     $(document).ready(function () {
+    	people();
+    	veinnum();
         //删除操作下划线
         $(".body-table tbody th:last-child").css("text-decoration", "underline");
         //表单隔行变色
@@ -833,6 +835,36 @@
 			}
 		});
 	}
+  //显示登陆的名字
+	var temp;
+	function people(){
+		//debugger;
+		var url="people";
+		var param={};
+		$.ajax({ url: "people", dataType : 'json',
+			contentType: "application/json;charset=utf-8",
+			//async : true,
+			 success: function(result){
+				 temp=result;
+				 $("#people").html(temp.data);
+	      }});
+	}
+	//显示已注册用户 已注册手指
+	var uandv;
+	function veinnum(){
+		debugger;
+		var url="selectUAndV";
+		var param={};
+		$.post({ url: "people", dataType : 'json',
+			contentType: "application/json;charset=utf-8",
+			//async : true,
+			 success: function(result){
+				 uandv=result;
+				 console.log(uandv.data);
+				 $("#veinnum").html(uandv.data);
+	      }});
+	}
+ 
 	/* function setTableBodyRows(result){
 		var tBody=$("#tbodyId");
 		tBody.empty();
