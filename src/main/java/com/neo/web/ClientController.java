@@ -432,7 +432,12 @@ public class ClientController {
 			return new MessageResult(-100, "未知错误");
 		}
 		if(count==1){
-			return new MessageResult(0, "操作成功"); 
+			//查询某一个人的注册的静态特征
+			Integer num=userService.selectEmpVeinEum(userId);
+			String s="该用户已经注册,注册指静脉数："+num;
+			return new MessageResult(0, "操作成功",s);
+			
+			
 		}
 		return	new MessageResult(-9,"检索失败");
 		
