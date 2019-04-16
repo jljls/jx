@@ -121,7 +121,7 @@
             var tds = "<th><input type='checkbox' name='checkId' value='" + result[i].id + "'/></th>" +
              "<th>" + result[i].userId + "</th>" +
              "<th>" + result[i].groupId + "</th>" +
-             "<th class='lick' onclick='del(this)'>删除</th>";
+             "<th class='click' onclick='del(this)'>删除</th>";
             //2.4将th添加到tr对象中(一行要放多个)
             tr.append(tds);
             //2.5将tr追加到tbody中

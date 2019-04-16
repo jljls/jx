@@ -44,17 +44,17 @@ function uifadd() {
 
 //管理员搜索
 function doFindeUserInfo() {
-    var url = "selectUInfoByUserId";
+	debugger;
+    var url = "selectUInfoAll";
     var userId = $("#kw").val();
-    if (!userId) {
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                setUserInfo(result.data);
-            } else {
-                alert(result.msg);
-            }
-        });
-    }
+    var param = {userId:userId}
+    $.post(url,param,function (result) {
+        if (result.code == 0) {
+            setUserInfo(result.data);
+        } else {
+            alert(result.msg);
+        }
+    });
 }
 //设置管理员表格
 function setUserInfo(result) {
@@ -63,11 +63,10 @@ function setUserInfo(result) {
     for (var i in result) {
         var tr = $("<tr></tr>");
         tr.data("id", result[i].id);
-        var tds = "";
-        /* "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+        var tds = "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
          "<th>"+result[i].userId+"</th>"+
          "<th>"+result[i].groupId+"</th>"+
-         "<th class='lick' onclick='del(this)'>删除</th>"; */
+         "<th class='click' onclick='del(this)'>删除</th>";
         //2.4将th添加到tr对象中(一行要放多个)
         tr.append(tds);
         //2.5将tr追加到tbody中

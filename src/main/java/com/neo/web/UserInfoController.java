@@ -40,11 +40,11 @@ public class UserInfoController {
 	/*
 	 * 查询所有管理员
 	 */
-	@RequestMapping(value="/selectUInfoAll", method = RequestMethod.GET)
+	@RequestMapping(value="/selectUInfoAll", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectUInfoAll(Integer pageCurrent) {
+	public MessageResult selectUInfoAll(String userId,Integer pageCurrent) {
 		
-		return userInfoService.selectUInfoAll(pageCurrent);
+		return userInfoService.selectUInfoAll(userId,pageCurrent);
 	}
 	/*
 	 * 按userId删除管理员

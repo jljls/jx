@@ -46,14 +46,14 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 
 	@Override
-	public MessageResult selectUInfoAll(Integer pageCurrent) {
+	public MessageResult selectUInfoAll(String userId,Integer pageCurrent) {
 		int pageSize = 20;
 		if(StringUtils.isEmpty(pageCurrent))
 			pageCurrent = 1;
 		int startIndex=(pageCurrent-1)*pageSize;
 		List<UserInfo> list;
 		try{
-			  list=userInfoMapper.selectUInfoAll(startIndex,pageSize);
+			  list=userInfoMapper.selectUInfoAll(userId,startIndex,pageSize);
 		 }catch(Exception e){
 			 e.printStackTrace();
 			 return new MessageResult(-1,"参数错误");

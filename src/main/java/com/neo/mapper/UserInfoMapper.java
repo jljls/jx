@@ -24,7 +24,7 @@ public interface UserInfoMapper {
 	/*
 	 * 查询所有userInfo
 	 */
-	List<UserInfo>  selectUInfoAll(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+	List<UserInfo>  selectUInfoAll(@Param("userId")String userId,@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
 	/*
 	 * 删除userInfo
 	 */

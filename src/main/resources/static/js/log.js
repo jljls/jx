@@ -1,4 +1,4 @@
-//日志搜索(有问题)
+//日志搜索
     function doFindLog() {
         var url = "selectLog";
         var param = {};
@@ -47,11 +47,12 @@
             //2.3在th对象内容填充具体数据
             //th0.append(result[id].id);
             //....
-            var tds = "";
-            /* "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+            var tds = "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+             "<th>"+result[i].createTime+"</th>"+
              "<th>"+result[i].userId+"</th>"+
-             "<th>"+result[i].groupId+"</th>"+
-             "<th class='lick' onclick='del(this)'>删除</th>"; */
+             "<th>"+result[i].type+"</th>"+
+             "<th>"+result[i].logContent+"</th>"+
+             "<th class='lick' onclick='del(this)'>删除</th>";
             //2.4将th添加到tr对象中(一行要放多个)
             tr.append(tds);
             //2.5将tr追加到tbody中

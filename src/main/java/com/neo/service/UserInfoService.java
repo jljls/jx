@@ -7,7 +7,7 @@ public interface UserInfoService {
 
 	public MessageResult insertUserInfo(String userId, String name, String password);
 
-	public MessageResult selectUInfoAll(Integer pageCurrent);
+	public MessageResult selectUInfoAll(String userId,Integer pageCurrent);
 
 	public MessageResult deleteUInfoById(String userId);
 

@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neo.mapper.EmpLogMapper" >
+    <sql id="whereQuery">
+		<where>
+			<if test="startTime!=null and startTime!=''">
+				create_time &gt;= #{startTime}
+			</if>
+			<if test="endTime!=null and endTime!=''">
+				and create_time &lt;= #{endTime}
+			</if>
+		</where>   
+   </sql>
     <insert id="insertLog" parameterType="empLog" >
 	insert into emp_log
 	(user_id,type,log_content,create_by,create_time,update_by,update_time)
@@ -8,12 +18,12 @@
 	#{userId},#{type},#{logContent},#{createBy},now(),#{updateBy},now()
 	)
 	</insert>
-	<select id="selectLog" parameterType="java.lang.String" resultType="com.jx.entity.EmpLog">
+	<select id="selectLog" resultType="com.jx.entity.EmpLog">
 	select id as id,user_id as userId,type as type,log_content as logContent,
 		   create_by as createBy, create_time as createTime,update_by as updateBy,
 		   update_time as updateTime
 	from emp_log 
-	where create_time &gt;= #{startTime}  and create_time &lt;= #{endTime} 
+	<include refid="whereQuery"></include> 
 	limit #{startIndex},#{pageSize}
 	</select>
 	<delete id="deleteLog" parameterType="java.lang.String">
