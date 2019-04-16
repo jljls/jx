@@ -53,6 +53,14 @@ public class LoginController {
 		return mr;
 	}
 	
+	@RequestMapping(value="/loginOut")
+	public String loginOut(){
+		//跳转到管理员登录页面
+		return "/login";
+	}
+	
+	
+	
 	/**
 	 * 跳转到用户登录演示
 	 * @return

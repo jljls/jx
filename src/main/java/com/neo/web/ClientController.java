@@ -454,17 +454,15 @@ public class ClientController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping(value = "selectUAndV", method = RequestMethod.POST)
+	@RequestMapping(value = "selectUAndV", method = RequestMethod.GET)
 	@ResponseBody
 	public MessageResult selectUAndV(Model model, HttpSession session) {
 		logger.info("---查询手指数");
 		
 			Integer num = userService.selectVeinNum();
 			Integer b=userService.selectRegisteEmp();
-		List<Object> list =new ArrayList<Object>();
-		list.add(num);
-		list.add(b);
-		return new MessageResult(0, "操作成功", b);
+			String str = "当前已注册用户:"+b+"已注册手指数:"+num;
+		return new MessageResult(0, "操作成功", str);
 
 	}
 }

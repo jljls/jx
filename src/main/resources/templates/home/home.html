@@ -175,7 +175,7 @@
         <div class="admin-information">
             <div style="position: absolute;height: 40px;top: 0;left: 0;right: 0;bottom: 0;margin: auto;">
                 <div id="people" style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;"></div>
-                <div class="click" style="color: #8095a8;font-size: 14px">退出</div>
+                <div class="click" style="color: #8095a8;font-size: 14px" onclick="loginOut()">退出</div>
             </div>
         </div>
         <ul class="nav-list">
@@ -816,6 +816,14 @@
     	
     }
     
+    function loginOut(){
+    	debugger;
+    	url = "loginOut";
+    	$.getJSON(url,function(){
+    		alert("退出成功");
+    	});
+    }
+    
     //全选
     function qx() {
         var ids = $(".body-table :checkbox");
@@ -852,20 +860,13 @@
 	      }});
 	}
 	//显示已注册用户 已注册手指
-	var uandv;
 	function veinnum(){
-		debugger;
 		var url="selectUAndV";
 		var param={};
-		$.post({ url: "people", dataType : 'json',
-			contentType: "application/json;charset=utf-8",
-			//async : true,
-			 success: function(result){
-				 uandv=result;
-				 console.log(uandv.data);
-				 $("#veinnum").html(uandv.data);
-	      }});
-	}
+		$.getJSON(url,function(result){
+			$("#veinnum").html(result.data);
+		});
+	}	
  
 	/* function setTableBodyRows(result){
 		var tBody=$("#tbodyId");
