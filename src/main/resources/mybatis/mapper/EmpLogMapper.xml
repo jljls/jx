@@ -19,5 +19,9 @@
 		delete from emp_log
 		where create_time &gt;= #{startTime}  and  create_time &lt;=#{endTime} 
 	</delete>
-	
+	<!-- 查询当前日志数 -->
+	<select id="selectLogNum"  resultType="java.lang.Integer">
+	select count(id)
+	from emp_log 
+	</select>
 </mapper>

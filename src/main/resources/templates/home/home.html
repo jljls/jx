@@ -243,7 +243,7 @@
                             <th>删除</th>
                         </tr>
                         </thead>
-                        <tbody id="tbodyId">0
+                        <tbody id="tbodyId">
                         <tr>
                             <th>
                                 <input type="checkbox"></input>
@@ -340,7 +340,7 @@
             <div class="detail-body detail-body-2">
                 <div class="body-title">
                     管理员列表
-                    <div style="float: right">管理员数:64</div>
+                    <div style="float: right" id="sysNum">管理员数:64</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
@@ -358,7 +358,7 @@
                             <th>删除</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="userInfotBody">
                         <tr>
                             <th>
                                 <input type="checkbox"></input>
@@ -455,7 +455,7 @@
             <div class="detail-body detail-body-3">
                 <div class="body-title">
                     系统日志
-                    <div style="float: right">日志数量:3596</div>
+                    <div style="float: right" id="logNum">日志数量:3596</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
@@ -635,6 +635,8 @@
 </div>
 <script>
     $(document).ready(function () {
+    	selectUInfoNum();
+    	logNum();
     	people();
     	veinnum();
         //删除操作下划线
@@ -914,6 +916,7 @@
 		});
 	}
 	
+	//删除日志
 	function deleteLog(){
 		var url = "deleteLog";
 		var param = {id};
@@ -921,6 +924,17 @@
 			if(result.code==0){
 				alert(result.msg);
 				doFindLog();
+			}
+		});
+	}
+	
+	//显示当前日志数
+	function logNum(){
+		debugger;
+		var url = "logNum";
+		$.getJSON(url,function (result){
+			if(result.code==0){
+				$("#logNum").html("日志数量:"+result.data);
 			}
 		});
 	}
@@ -969,10 +983,42 @@
 		var url = "selectUInfoNum";
 		$.getJSON(url,function(result){
 			if(result.code==0){
-				$("#sysNUm").html(result.data);
+				$("#sysNum").html(result.data);
 			}
 		});
 	}
+	
+	//管理员搜索
+	function doFindeUserInfo(){
+		var url = "selectUInfoByUserId";
+		var userId = $("#userInfo").val();
+		$.post(url,param,function (result){
+			if(result.code){
+				setUserInfo(result.data);
+			}else{
+				alert(result.msg);
+			}
+		});
+	}
+	//设置管理员表格
+	function setUserInfo(result){
+		var tBody=$("#userInfotBody");
+		tBody.empty();
+		for(var i in result){
+			var tr=$("<tr></tr>");
+			 tr.data("id",result[i].id);
+			 var tds="";	
+			         /* "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+			         "<th>"+result[i].userId+"</th>"+
+			         "<th>"+result[i].groupId+"</th>"+
+			         "<th class='lick' onclick='del(this)'>删除</th>"; */
+			 //2.4将th添加到tr对象中(一行要放多个)
+			 tr.append(tds);
+			 //2.5将tr追加到tbody中
+			 tBody.append(tr);
+		}
+	}
+	
 </script>
 </body>
 </html>
