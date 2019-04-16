@@ -53,5 +53,16 @@ public class EmpLogController {
 		return empLogServic.selectLogNum();
 	}
 	
+	@RequestMapping(value = "/deleteLogById", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult deleteLogById(Integer id) {
+		// 删除日志
+		MessageResult mr = empLogServic.deleteLogById(id);
+		// 新增一条操作日志
+		String userId = request.getSession().getAttribute("userId").toString();
+		EmpLog empLog = new EmpLog(userId, "删除", userId + "删除了一条日志记录");
+		empLogServic.insertEmpLog(empLog);
+		return mr;
+	}
 	
 }

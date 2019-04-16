@@ -10,4 +10,5 @@ public interface EmpLogService {
 	public MessageResult selectLogNum();
 	public void deleteLog(String datetime);
 	public List<EmpLog> selectLog(String startTime,String endTime,Integer pageCurrent);
+	public MessageResult deleteLogById(Integer id);
 }

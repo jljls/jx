@@ -50,4 +50,15 @@ public class EmpLogServiceImpl implements EmpLogService{
 			return new MessageResult(-100, "未知错误");
 		}
 	}
+
+	@Override
+	public MessageResult deleteLogById(Integer id) {
+		try {
+			empLogMapper.deleteLogById(id);
+			return new MessageResult(0, "操作成功");
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
+	}
 }

@@ -36,4 +36,10 @@
 	select count(id)
 	from emp_log 
 	</select>
+	
+	<!-- 根据指定id删除日志 -->
+	<delete id="deleteLogById" parameterType="java.lang.Integer">
+		delete from emp_log
+		where id = #{id} 
+	</delete>
 </mapper>

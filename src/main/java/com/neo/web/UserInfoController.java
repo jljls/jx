@@ -54,7 +54,7 @@ public class UserInfoController {
 	public MessageResult deleteUInfoById( String userId) {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
-		if("admin".equals(uid)){
+		if(!"admin".equals(uid)){
 			return new MessageResult(-100,"权限不足");
 		}
 		if(userId==null){
@@ -72,7 +72,7 @@ public class UserInfoController {
 	public MessageResult deleteUInfoByIds(String[] ids) {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
-		if("admin".equals(uid)){
+		if(!"admin".equals(uid)){
 			return new MessageResult(-100,"权限不足");
 		}
 		if(ids.length==0){

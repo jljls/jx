@@ -14,9 +14,9 @@
     }
 
     //删除日志
-    function deleteLog(a) {
-        var logid = $(a).prev().prev().prev().prev().prev().prev();
-        var url = "deleteLog";
+    function delll(a) {
+    	var logid = $(a).parent().data("id");
+        var url = "deleteLogById";
         var param = {id: logid};
         $.post(url, param, function (result) {
             if (result.code == 0) {
@@ -52,7 +52,7 @@
              "<th>"+result[i].userId+"</th>"+
              "<th>"+result[i].type+"</th>"+
              "<th>"+result[i].logContent+"</th>"+
-             "<th class='lick' onclick='del(this)'>删除</th>";
+             "<th class='lick' onclick='delll(this)'>删除</th>";
             //2.4将th添加到tr对象中(一行要放多个)
             tr.append(tds);
             //2.5将tr追加到tbody中

@@ -62,11 +62,10 @@ function setUserInfo(result) {
     tBody.empty();
     for (var i in result) {
         var tr = $("<tr></tr>");
-        tr.data("id", result[i].id);
-        var tds = "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+        tr.data("id", result[i].userId);
+        var tds = "<th><input type='checkbox' name='checkId' value='"+result[i].userId+"'/></th>"+
          "<th>"+result[i].userId+"</th>"+
-         "<th>"+result[i].groupId+"</th>"+
-         "<th class='click' onclick='del(this)'>删除</th>";
+         "<th class='click' onclick='dell(this)'>删除</th>";
         //2.4将th添加到tr对象中(一行要放多个)
         tr.append(tds);
         //2.5将tr追加到tbody中
@@ -75,9 +74,10 @@ function setUserInfo(result) {
 }
 
 //删除
-function del(a) {
+function dell(a) {
 	debugger;
     if (confirm("您是否删除本条数据！！！")) {
+    	debugger;
         var url = "deleteUInfoById";
         var userId = $(a).parent().data("id");
         var param = {userId:userId};
