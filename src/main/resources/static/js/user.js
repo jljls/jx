@@ -24,7 +24,7 @@
             if (result.code == 0) {
                 $("#user-tip").html("注册成功!").css("color", "#3d3");
             } else {
-                $("#user-tip").html(result.msg);
+                $("#user-tip").html(result.msg).css("color", "#d33");
             }
         });
     }

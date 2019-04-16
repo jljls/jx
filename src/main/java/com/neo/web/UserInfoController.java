@@ -95,7 +95,6 @@ public class UserInfoController {
 	@RequestMapping(value="/upDatapws", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult upDatapws(String pws) {
-		System.out.println(pws);
 		String userId = request.getSession().getAttribute("userId").toString();
 		if(pws==null){
 			return new MessageResult(-1,"参数错误");

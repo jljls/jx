@@ -52,7 +52,7 @@
              "<th>"+result[i].userId+"</th>"+
              "<th>"+result[i].type+"</th>"+
              "<th>"+result[i].logContent+"</th>"+
-             "<th class='lick' onclick='delll(this)'>删除</th>";
+             "<th class='click' onclick='delll(this)'>删除</th>";
             //2.4将th添加到tr对象中(一行要放多个)
             tr.append(tds);
             //2.5将tr追加到tbody中
