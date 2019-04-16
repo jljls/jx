@@ -3,7 +3,7 @@
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>指静脉后台管理系统</title>
-    <script type="text/javascript" src="../../static/jquery/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="./jquery/jquery-1.7.1.js"></script>
     <style>
         * {
             margin: 0px;
@@ -187,7 +187,7 @@
             <li class="click">
                 <img src="./admin.png" alt=""
                      style="width:26px;height: 22px;vertical-align: bottom"/>
-                <span style="margin: 10px;">管理员</span>
+                <span style="margin: 10px;">管理人员</span>
             </li>
             <li class="click">
                 <img src="./data.png" alt=""
@@ -581,7 +581,7 @@
                     <div class="body-operate" style="padding:0px">
                         <input id="new-gu" type="text" placeholder="管理员账号"></input>
                         <input id="new-gg" type="text" placeholder="管理员密码"></input>
-                        <button>添加</button>
+                        <button onclick="uifadd()">添加</button>
                     </div>
                 </div>
                 <div class="body-title">指静脉注册</div>
@@ -594,9 +594,9 @@
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px">
-                        <button>检索</button>
+                        <button onclick="search()">检索</button>
                         <button>添加指静脉</button>
-                        <button>清空指静脉</button>
+                        <button onclick="cleanvein()">清空指静脉</button>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
@@ -684,25 +684,81 @@
         }
     }
 
-    //表单验证+添加
+    //添加员工
     function save() {
         //获取值
         $("#errmsg").html("");
-        var userid = $("#userid").val();
-        var groupid = $("#groupid").val();
+        var userId = $("#new-pu").val();
+        var groupId = $("#new-pg").val();
         //表单验证
-        if (!userid) {
-            $("#errmsg").html("*用户ID不能为空");
+        if (!userId) {
+            alert("用户ID不能为空");
             return;
         }
-        if (!groupid) {
-            $("#errmsg").html("*分组ID不能为空");
-            return;
-        }
+       
         //添加
-        doAdd();
+        doAdd(userId,groupId);
     }
-
+    
+     //添加管理员
+     function uifadd() {
+    	// $("#errmsg").html("");
+    	 var userId = $("#new-gu").val();
+         var password = $("#new-gg").val();
+         if (!userId) {
+            alert("管理员账号不能为空");
+             return;
+         }
+         if (!password) {
+            alert("管理员密码不能为空");
+             return;
+         }
+         url="insertUserInfo";
+         var param = {userId:userId,name:"普通管理员",password:password};
+ 		
+         $.post(url,param,function(result){
+ 			if(result.code==0){
+ 				alert("添加管理员成功");
+ 				$("#new-gu").val('');
+ 				 $("#new-gg").val('');
+ 			}else{
+ 				alert(result.msg);
+ 			}
+ 		});
+         
+     }
+     
+     //检索
+     function search() {
+    	 $("#errmsg").html("");
+    	 var userId = $("#uid").val();
+         url="checkUser";
+         var param = {userId:userId};
+ 		
+         $.post(url,param,function(result){
+ 			if(result.code==0){
+ 				alert("检索成功");
+ 			}else{
+ 				alert(result.msg);
+ 			}
+ 		});
+         
+     }
+     function cleanvein(){
+    	// $("#errmsg").html("");
+    	 var userId = $("#uid").val();
+    	 url="deleteVeinByEmpId";
+    	 var param={userId:userId};
+    	 $.post(url,param,function(result){
+  			if(result.code==0){
+  				alert("清空成功");
+  			}else{
+  				alert(result.msg);
+  			}
+  		});
+           
+     }
+ 
     //删除
     function del(a) {
         if (confirm("您是否删除本条数据！！！")) {
@@ -752,21 +808,23 @@
         var ids = $(".body-table :checkbox");
         ids.prop("checked", true);
     }
-    function doAdd(){
+    function doAdd(userId,groupId){
 		var url = "insertEmp";
-		var userId = $("#userid").val();
-		var groupId = $("#groupid").val();
+		//var userId = $("#userId").val();
+		//var groupId = $("#groupId").val();
 		var param = {userId:userId,groupId:groupId};
 		$.post(url,param,function(result){
 			if(result.code==0){
-				alert(result.msg);
+				alert("添加员工成功");
+				 $("#new-pu").val('');
+			     $("#new-pg").val('');
 				doFind();
 			}else{
 				alert(result.msg);
 			}
 		});
 	}
-	function setTableBodyRows(result){
+	/* function setTableBodyRows(result){
 		var tBody=$("#tbodyId");
 		tBody.empty();
 		for(var i in result){
@@ -788,7 +846,7 @@
 			 tBody.append(tr);
 			
 		}
-	}
+	} */
 	function doFindUserId(){
 		var url = "selectUserByuserId";
 		var userId = $("#kw").val();

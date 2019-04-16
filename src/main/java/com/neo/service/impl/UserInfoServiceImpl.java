@@ -36,7 +36,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 			 EmpLog empLog = new EmpLog();
 		 }catch(Exception e){
 			 e.printStackTrace();
-			 return new MessageResult(-100,"参数错误");
+			 return new MessageResult(-1,"参数错误");
 		 }
 		 
 		 return new  MessageResult(0,"操作成功");
@@ -51,7 +51,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 			  list=userInfoMapper.selectUInfoAll();
 		 }catch(Exception e){
 			 e.printStackTrace();
-			 return new MessageResult(-100,"参数错误");
+			 return new MessageResult(-1,"参数错误");
 		 }
 		 
 		 return new  MessageResult(0,"操作成功",list);
@@ -97,7 +97,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	public MessageResult check(String userId, String password) {
 		List<UserInfo> list = userInfoMapper.check(userId, password);
 		if(list.size()==0){
-			return new MessageResult(-1,"参数错误");
+			return new MessageResult(-11,"密码错误");
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userId);

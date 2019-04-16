@@ -10,7 +10,7 @@
        	user_info
        		(user_id,name,password) 
        	VALUES
-       		(#{userId},#{name},#{password})
+       		(#{userId},'普通管理员',#{password})
     </insert>
   	<select id="selectUInfoAll" parameterType="java.lang.String" resultType="com.jx.entity.UserInfo" >
        select

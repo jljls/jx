@@ -47,7 +47,7 @@ public class LoginController {
 	@ResponseBody
 	public MessageResult loginIndex(String userId,String password){
 		if(userId==null||password==null){
-			return new MessageResult(0,"参数错误");
+			return new MessageResult(-1,"参数错误");
 		}
 		MessageResult mr = userInfoService.check(userId, password);
 		return mr;

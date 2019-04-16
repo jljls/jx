@@ -2,6 +2,7 @@
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import com.jx.entity.MessageResult;
 import com.neo.service.UserInfoService;
 
 @Controller
-@RequestMapping("/userInfo")
 @Async
 public class UserInfoController {
 	@Resource
@@ -26,13 +26,15 @@ public class UserInfoController {
 	@RequestMapping(value="/insertUserInfo", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult insertUserInfo( String userId,String name,String password) {
-		
+		HttpSession session = request.getSession();
+		String uid = session.getAttribute("userId").toString(); 
+		if(!"admin".equals(uid)){
+			return new  MessageResult(-100,"权限不足");
+		}
 		if(userId==null||name==null||password==null){
 			return new MessageResult(-1,"参数错误");
 		}
-		if(!"admin".equals(userId)){
-			return new  MessageResult(-100,"权限不足");
-		}
+		
 		return userInfoService.insertUserInfo(userId, name, password);
 	}
 	/*
@@ -50,13 +52,15 @@ public class UserInfoController {
 	@RequestMapping(value="/deleteUInfoById", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult deleteUInfoById( String userId) {
-		
+		HttpSession session = request.getSession();
+		String uid = session.getAttribute("userId").toString(); 
+		if("admin".equals(uid)){
+			return new MessageResult(-100,"权限不足");
+		}
 		if(userId==null){
 			return new MessageResult(-1,"参数错误");
 		}
-		if("admin".equals(userId)){
-			return new MessageResult(-100,"权限不足");
-		}
+		
 		return userInfoService.deleteUInfoById(userId);
 	}
 	
@@ -66,9 +70,15 @@ public class UserInfoController {
 	@RequestMapping(value="/deleteUInfoByIds", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult deleteUInfoByIds(String[] ids) {
+		HttpSession session = request.getSession();
+		String uid = session.getAttribute("userId").toString(); 
+		if("admin".equals(uid)){
+			return new MessageResult(-100,"权限不足");
+		}
 		if(ids.length==0){
 			return new MessageResult(-1,"参数错误");
 		}
+		
 		return userInfoService.deleteUInfoByIds(ids);
 	} 
 	
