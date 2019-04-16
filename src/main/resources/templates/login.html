@@ -1,57 +1,113 @@
 <!doctype html>
 <html>
 <head>
-<meta charset="utf-8"/>
-<title>登录</title>
-<link  href="./css/loginTo.css" rel="stylesheet" type="text/css" />
-<link  href="./css/logAndR.css" rel="stylesheet" type="text/css" />
-<script src="./jquery/jquery-1.7.1.js"></script>
-<script src="./js/jxWebSDK.js"></script>
-<script th:inline="javascript">
-
-function doLogin(){
-	var url = "checkUserInfo";
-	var userId = $("#userId").val();
-	var param = {userId:userId};
-	param.password = $("#password").val();
-	$.post(url,param,function(result){
-		if(result.code==0){
-			debugger;
-			window.location='/jx_CMS/index';
-			/* $.ajax({url : "index",	type : "post",	
-				contentType: 'application/json',	
-				}); */
-		}else{
-			alert(result.msg);
-		}
-	});
-}
-
-
-
-</script>
+    <meta charset="utf-8"/>
+    <title>登录</title>
+    <link href="./css/loginTo.css" rel="stylesheet" type="text/css"/>
+    <link href="./css/logAndR.css" rel="stylesheet" type="text/css"/>
+    <script src="./jquery/jquery-1.7.1.js"></script>
+    <script src="./js/jxWebSDK.js"></script>
 
 </head>
 <body>
-	<div class="header" id="head">
-		<div class="title">静脉特征登录</div>
-	</div>
-	<div class="wrap" id="wrap">
-		<div class="logGet">
-			<!-- 头部提示信息 -->
-			<div class="logD logDtip">
-				<p class="p1">登录</p>
-			</div>
-			<!-- 输入框 -->
-			<div class="lgD">
-				<p class="p2" >用户ID</p>
-				<input id="userId" name="uname" placeholder="请输入用户ID" />
-				<input id="password" name="uname" placeholder="请输入密码" />
-			</div>
-			<div class="logC">
-				<button onclick="doLogin()">静脉登录</button>
-			</div>
-		</div>
-	</div>
-	</body>
+<div class="header" id="head">
+    <div class="title">静脉特征登录</div>
+</div>
+<div class="wrap" id="wrap">
+    <div class="logGet">
+        <!-- 头部提示信息 -->
+        <div class="logD logDtip">
+            <p class="p1">登录</p>
+        </div>
+        <!-- 输入框 -->
+        <div class="lgD">
+            <p class="p2">用户ID</p>
+            <input id="userId" name="uname" placeholder="请输入用户ID"/>
+            <input id="password" name="uname" placeholder="请输入密码"/>
+        </div>
+        <div class="logC">
+            <button onclick="doLogin()">静脉登录</button>
+        </div>
+    </div>
+    <span id="pageId">
+		<a class="first">首页</a>
+		<a class="pre">上一页</a>&nbsp;
+		<a class="next">下一页</a>
+		<a class="last">尾页</a>
+		<a class="pageCount">总页数(1)</a>
+		<a class="pageCurrent">当前页(1)</a>
+	</span>
+</div>
+
+</body>
+<script th:inline="javascript">
+
+    function doLogin() {
+        var url = "checkUserInfo";
+        var userId = $("#userId").val();
+        var param = {userId: userId};
+        param.password = $("#password").val();
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                debugger;
+                window.location = '/jx_CMS/index';
+                /* $.ajax({url : "index",	type : "post",
+                 contentType: 'application/json',
+                 }); */
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+
+    $(document).ready(function(){
+        //在pageId对应的对象的相关元素上注册点击事件
+        $("#pageId").on('click',
+                '.pre,.next,.first,.last',jumpToPage);
+    });
+
+    //设置分页
+    function setPagination(pageObject){
+        //1.初始化总页数
+        $(".pageCount").html("总页数("+pageObject.pageCount+")");
+        //2.初始化当前页的页码
+        $(".pageCurrent").html("当前页("+pageObject.pageCurrent+")");
+        //3.在pageId对应的对象上绑定总页数
+        //data函数用于以key/value的方式在对象上绑定数据
+        $("#pageId").data("pageCount",pageObject.pageCount);
+        //4.在pageId对象的对象上绑定当前页面值
+        $("#pageId").data("pageCurrent",pageObject.pageCurrent);
+    }
+    //定义一个函数,通过此函数实现页面的跳转
+    function jumpToPage(){
+        //获得点击对象上class属性对应的值,根据此值
+        //判定具体点击的是哪个对象(例如上一页,下一页)
+        var clazz=$(this).attr("class");
+        //获得pageId对象上绑定的pageCurrent对应的值
+        var pageCurrent=$('#pageId').data("pageCurrent");
+        //获得pageId对象上绑定的pageCount对应的值
+        var pageCount=$('#pageId').data("pageCount")
+        //根据class属性的值判断点击的是否是上一页
+        if(clazz=='pre'&&pageCurrent>1){
+            pageCurrent--;
+        }
+        //判断点击的是否是下一页
+        if(clazz=="next"&&pageCurrent<pageCount){
+            pageCurrent++;
+        }
+        //判断点击的对象是否是首页
+        if(clazz=="first"){
+            pageCurrent=1;
+        }
+        //判定点击的对象是否是尾页
+        if(clazz=="last"){
+            pageCurrent=pageCount;
+        }
+        //重写绑定pageCurrent的值,
+        $('#pageId').data("pageCurrent",pageCurrent);
+        //重新执行查询操作(根据pageCurrent的值)
+        doGetObjects();
+    }
+
+</script>
 </html>

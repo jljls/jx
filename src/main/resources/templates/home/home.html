@@ -74,8 +74,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 5px 0px;
-            border-bottom: 1px solid #293B47;
+            padding: 0px 0px 5px 0px;
         }
 
         .detail .detail-head .show-detail {
@@ -86,16 +85,17 @@
             border-radius: 5px;
             /*background-color: #00D297;*/
             background-image: url("./detail.png");
-            background-size:35px auto;
+            background-size: 35px auto;
         }
+
         .detail .detail-head .show-detail:hover {
-           background-color: #C5C5C5;
+            background-color: #C5C5C5;
         }
 
         /*右边信息主体*/
         .detail-body {
             height: 100%;
-            padding: 20px;
+            padding: 10px 20px 20px;
             font-size: 16px;
             color: #676a6c;
             background-color: #F4F4F5;
@@ -126,9 +126,6 @@
 
         .body-operate {
             color: #A3B1BB;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
             padding: 0px 0px 20px;
         }
 
@@ -140,6 +137,11 @@
             background-color: gainsboro;
             cursor: pointer;
             color: darkolivegreen;
+            margin: 0px 20px;
+        }
+
+        #fy-1 button, #fy-2 button, #fy-3 button {
+            margin: 0;
         }
 
         .body-operate input {
@@ -147,6 +149,11 @@
             border: 1px solid gainsboro;
             border-radius: 3px;
             padding: 0px 5px;
+            margin: 0px 10px;
+        }
+
+        .body-operate .data input {
+            width: 30px;
         }
 
         .body-table {
@@ -182,12 +189,12 @@
             <li class="click">
                 <img src="./person.png" alt=""
                      style="width:26px;height: 22px;vertical-align: bottom"/>
-                <span style="margin: 10px;">人员管理</span>
+                <span style="margin: 10px;">用户管理</span>
             </li>
             <li class="click">
                 <img src="./admin.png" alt=""
                      style="width:26px;height: 22px;vertical-align: bottom"/>
-                <span style="margin: 10px;">管理员</span>
+                <span style="margin: 10px;">管理人员</span>
             </li>
             <li class="click">
                 <img src="./data.png" alt=""
@@ -207,22 +214,29 @@
         </ul>
     </div>
     <div class="detail">
-        <!-- 右边信息头部 begin-->
-        <div class="detail-head">
-            <div class="show-detail click" onclick="show()"></div>
-            <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
-            <div class="show-detail" style="opacity: 0"></div>
-        </div>
-        <!-- 右边信息头部 end-->
         <!-- 右边信息主体 begin-->
         <!-- div存储各个导航栏对应的信息-->
         <div style="height: 100%;;position: relative;background-image: url( ./image/trianglify.png);background-repeat:no-repeat;">
+            <!-- 右边信息头部 begin-->
+            <div class="detail-head">
+                <div class="show-detail click" onclick="show()"></div>
+                <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+                <div class="show-detail" style="opacity: 0"></div>
+            </div>
+            <!-- 右边信息头部 end-->
             <div class="detail-body"
                  style="height: 50px;text-align: center;font-size:38px;display: block;background-color: transparent;position: absolute;top: -20px;left: 0;right: 0;bottom: 0;margin: auto">
                 欢迎使用指静脉后台管理系统
             </div>
             <!--人员管理页面-->
             <div class="detail-body detail-body-1">
+                <!-- 右边信息头部 begin-->
+                <div class="detail-head">
+                    <div class="show-detail click" onclick="show()"></div>
+                    <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+                    <div class="show-detail" style="opacity: 0"></div>
+                </div>
+                <!-- 右边信息头部 end-->
                 <div class="body-title">
                     人员列表
                     <div style="float: right">已注册用户:124,已注册手指:198</div>
@@ -231,16 +245,26 @@
                     <div class="body-operate">
                         <button onclick="qx()">全选</button>
                         <button onclick="dellist()">批量删除</button>
-                        <input id="kw" type="text" placeholder="输入用户ID搜索"></input>
-                        <button onclick="doFindUserId()">搜索</button>
+                        <div style="float:right">
+                            <input id="kw" type="text" placeholder="输入用户ID搜索"></input>
+                            <button onclick="doFindUserId()" style="
+                                width: 50px;
+                                height: 30px;
+                                background-image: url(./search.png);
+                                background-size: 35px 30px;
+                                background-repeat: no-repeat;
+                                vertical-align: bottom;
+                                background-position: 50% top;"
+                                    ></button>
+                        </div>
                     </div>
-                    <table class="body-table">
+                    <table class="body-table body-table-1">
                         <thead>
                         <tr>
                             <th>编号</th>
                             <th>用户(userId)</th>
                             <th>分组(groupId)</th>
-                            <th>删除</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody id="tbodyId">
@@ -334,28 +358,60 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div id="fy-1" class="body-operate"
+                         style="padding: 20px 150px;display: flex;justify-content: space-around;align-items:center">
+                        <button class="first">首页</button>
+                        <button class="pre">上一页</button>
+                        <div>
+                            跳转至
+                            <input type="text" style="width:28px"/>
+                            页
+                        </div>
+                        <button class="gotopage">确定</button>
+                        <button class="next">下一页</button>
+                        <button class="last">尾页</button>
+                        <div class="pageCount">总页数(1)</div>
+                        <div class="pageCurrent">当前页(1)</div>
+                    </div>
                 </div>
             </div>
             <!-- 管理员页面-->
             <div class="detail-body detail-body-2">
+                <!-- 右边信息头部 begin-->
+                <div class="detail-head">
+                    <div class="show-detail click" onclick="show()"></div>
+                    <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+                    <div class="show-detail" style="opacity: 0"></div>
+                </div>
+                <!-- 右边信息头部 end-->
                 <div class="body-title">
                     管理员列表
                     <div style="float: right">管理员数:64</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
-                        <button onclick="qx()">全选</button>
+                        <button onclick="qx(2)">全选</button>
                         <button onclick="dellist()">批量删除</button>
-                        <input id="kw" type="text" placeholder="输入用户ID搜索"/>
-                        <button>搜索</button>
+                        <div style="float: right">
+                            <input id="kw" type="text" placeholder="输入管理员ID搜索"/>
+                            <button style="
+                                width: 50px;
+                                height: 30px;
+                                background-image: url(./search.png);
+                                background-size: 35px 30px;
+                                background-repeat: no-repeat;
+                                vertical-align: bottom;
+                                background-position: 50% top;"
+                                    ></button>
+                        </div>
                     </div>
-                    <table class="body-table">
+                    <table class="body-table body-table-2">
                         <thead>
                         <tr>
                             <th>编号</th>
                             <th>用户(userId)</th>
                             <th>分组(groupId)</th>
-                            <th>删除</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -449,39 +505,74 @@
                         </tr>
                         </tbody>
                     </table>
+                    <div id="fy-2" class="body-operate"
+                         style="padding: 20px 150px;display: flex;justify-content: space-around;align-items:center">
+                        <button class="first">首页</button>
+                        <button class="pre">上一页</button>
+                        <div>
+                            跳转至
+                            <input type="text" style="width:28px"/>
+                            页
+                        </div>
+                        <button class="gotopage">确定</button>
+                        <button class="next">下一页</button>
+                        <button class="last">尾页</button>
+                        <div class="pageCount">总页数(1)</div>
+                        <div class="pageCurrent">当前页(1)</div>
+                    </div>
                 </div>
             </div>
             <!-- 系统日志页面-->
             <div class="detail-body detail-body-3">
+                <!-- 右边信息头部 begin-->
+                <div class="detail-head">
+                    <div class="show-detail click" onclick="show()"></div>
+                    <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+                    <div class="show-detail" style="opacity: 0"></div>
+                </div>
+                <!-- 右边信息头部 end-->
                 <div class="body-title">
                     系统日志
                     <div style="float: right">日志数量:3596</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
-                        <div style="padding: 20px;">
-                            <label for="star" style="margin: 0px 10px 0px 20px">开始时间:</label>
-                            <select id="star">
-                                <option>156486</option>
-                                <option>55656</option>
-                            </select>
-                            <label for="end" style="margin:  0px 10px 0px 20px">截止时间:</label>
-                            <select id="end">
-                                <option>5256</option>
-                                <option>52556</option>
-                            </select>
+                        <div style="padding: 20px 0px;" class="data">
+                            <label style="margin: 0px 10px 0px 20px">开始时间:</label>
+                            <input id="star-year" type="text" maxlength="4"/>
+                            <label for="star-year">年</label>
+                            <input id="star-mouth" type="text" maxlength="2"/>
+                            <label for="star-mouth">月</label>
+                            <input id="star-day" type="text" maxlength="2"/>
+                            <label for="star-day">日</label>
+                            <label style="margin:  0px 10px 0px 60px">截止时间:</label>
+                            <input id="end-year" type="text" maxlength="4"/>
+                            <label for="end-year">年</label>
+                            <input id="end-mouth" type="text" maxlength="2"/>
+                            <label for="end-mouth">月</label>
+                            <input id="end-day" type="text" maxlength="2"/>
+                            <label for="end-day">日</label>
+                            <button style="
+                            float:right;
+                            margin-top: -7px;
+                            width: 50px;
+                            height: 30px;
+                            background-image: url(./search.png);
+                            background-size: 35px 30px;
+                            background-repeat: no-repeat;
+                            vertical-align: bottom;
+                            background-position: 50% top;"
+                                    ></button>
                         </div>
-                        <button>搜索</button>
                     </div>
                     <table class="body-table">
                         <thead>
                         <tr>
-                            <!--时间，用户，操作类型（登陆后台，添加用户，删除用户，添加管理员，删除管理员，给用户添加指静脉），对象（对于添加或删除用户等需要记录下新添加的用户ID），用户IP-->
                             <th>时间</th>
                             <th>用户</th>
                             <th>影响对象</th>
                             <th>用户IP</th>
-                            <th>删除</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -490,7 +581,49 @@
                             <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
-                            <th>删除</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
@@ -504,70 +637,50 @@
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
-                            <th>删除</th>
-                        </tr>
-                        <tr>
-                            <th>sdgvb</th>
-                            <th>rtfgbh</th>
-                            <th>rtfgn</th>
-                            <th>rtfgn</th>
-                            <th>删除</th>
-                        </tr>
-                        <tr>
-                            <th>sdgvb</th>
-                            <th>rtfgbh</th>
-                            <th>rtfgn</th>
-                            <th>rtfgn</th>
-                            <th>删除</th>
-                        </tr>
-                        <tr>
-                            <th>sdgvb</th>
-                            <th>rtfgbh</th>
-                            <th>rtfgn</th>
-                            <th>rtfgn</th>
-                            <th>删除</th>
-                        </tr>
-                        <tr>
-                            <th>sdgvb</th>
-                            <th>rtfgbh</th>
-                            <th>rtfgn</th>
-                            <th>rtfgn</th>
-                            <th>删除</th>
-                        </tr>
-                        <tr>
-                            <th>sdgvb</th>
-                            <th>rtfgbh</th>
-                            <th>rtfgn</th>
-                            <th>rtfgn</th>
-                            <th>删除</th>
-                        </tr>
-                        <tr>
-                            <th>sdgvb</th>
-                            <th>rtfgbh</th>
-                            <th>rtfgn</th>
-                            <th>rtfgn</th>
-                            <th>删除</th>
+                            <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
                             <th>yhbgui</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
-                            <th>删除</th>
+                            <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbh</th>
                             <th>rtfgn</th>
                             <th>rtfgn</th>
-                            <th>删除</th>
+                            <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         </tbody>
                     </table>
+                    <div id="fy-3" class="body-operate"
+                         style="padding: 20px 150px;display: flex;justify-content: space-around;align-items:center">
+                        <button class="first">首页</button>
+                        <button class="pre">上一页</button>
+                        <div>
+                            跳转至
+                            <input type="text" style="width:28px"/>
+                            页
+                        </div>
+                        <button class="gotopage">确定</button>
+                        <button class="next">下一页</button>
+                        <button class="last">尾页</button>
+                        <div class="pageCount">总页数(1)</div>
+                        <div class="pageCurrent">当前页(1)</div>
+                    </div>
                 </div>
             </div>
             <!-- 人员注册页面-->
             <div class="detail-body detail-body-4">
+                <!-- 右边信息头部 begin-->
+                <div class="detail-head">
+                    <div class="show-detail click" onclick="show()"></div>
+                    <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+                    <div class="show-detail" style="opacity: 0"></div>
+                </div>
+                <!-- 右边信息头部 end-->
                 <div class="body-title">人员注册</div>
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
@@ -588,44 +701,55 @@
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
                         <input id="uid" type="text" placeholder="用户ID"/>
-
-                        <div>df</div>
+                        <span style="color: #d33">该用户已注册,注册指静脉数:4</span>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
-                    <div class="body-operate" style="padding:0px">
-                        <button>检索</button>
+                    <div class="body-operate" style="padding:0px 10px">
+                        <button style="margin-left: 0px;">检索</button>
                         <button>添加指静脉</button>
                         <button>清空指静脉</button>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px">
-                        <div>fvyihgviu</div>
+                        <div style="padding: 0px 10px;color: #d33">第一步</div>
                     </div>
                 </div>
             </div>
             <!-- 系统设置页面-->
             <div class="detail-body detail-body-5">
+                <!-- 右边信息头部 begin-->
+                <div class="detail-head">
+                    <div class="show-detail click" onclick="show()"></div>
+                    <div style="color: #A3B1BB;font-size: 32px;font-weight: bold;">指静脉后台管理系统</div>
+                    <div class="show-detail" style="opacity: 0"></div>
+                </div>
+                <!-- 右边信息头部 end-->
                 <div class="body-title">密码修改</div>
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
-                        <input id="new-pw" type="text" placeholder="新密码"></input>
-                        <button>修改</button>
+                        <input id="new-pw" type="password" placeholder="新密码"></input>
+                        <input id="new-pw-agin" type="password" placeholder="再次输入新密码" onchange="proofread()"></input>
+                        <span id="password-edit" style="display: none;color: #d33">两次密码输入不一致</span>
+                        <button style="float: right;margin-top: -4px; margin-right: 30px">修改</button>
                     </div>
                 </div>
                 <div class="body-title">日志管理</div>
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
-                        <div>
+                        <div style="margin: 10px;">
                             <label for="data-setting" style="margin: 0px 10px 0px 0px">日志保存时间:</label>
                             <select id="data-setting">
-                                <option>60</option>
-                                <option>75</option>
-                                <option>90</option>
+                                <option>30天</option>
+                                <option>60天</option>
+                                <option>半年</option>
+                                <option>一年</option>
+                                <option>永远</option>
                             </select>
+                            <button style="float: right;margin-top: -7px;">设置</button>
                         </div>
-                        <button>设置</button>
+
                     </div>
                 </div>
             </div>
@@ -643,26 +767,39 @@
         }, function () {
             $(this).parent().removeClass("hover");
         })
+        //分页跳转
+        $("#fy-1,#fy-2,#fy-3").on('click',
+                '.pre,.next,.first,.last', jumpToPage);
+        $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on('click', jumpToPagedetail);
         //导航栏点击事件
         $(".nav-list li").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
-            if ($.trim($(this).text()) == "人员管理") {
-                $(".detail-body-1").slideDown().siblings().css("display", "none");
+            if ($.trim($(this).text()) == "用户管理") {
+                $(".detail-body-1").slideDown(100).siblings().css("display", "none");
             }
-            if ($.trim($(this).text()) == "管理员") {
-                $(".detail-body-2").slideDown().siblings().css("display", "none");
+            if ($.trim($(this).text()) == "管理人员") {
+                $(".detail-body-2").slideDown(100).siblings().css("display", "none");
             }
             if ($.trim($(this).text()) == "系统日志") {
-                $(".detail-body-3").slideDown().siblings().css("display", "none");
+                $(".detail-body-3").slideDown(100).siblings().css("display", "none");
             }
             if ($.trim($(this).text()) == "人员注册") {
-                $(".detail-body-4").slideDown().siblings().css("display", "none");
+                $(".detail-body-4").slideDown(100).siblings().css("display", "none");
             }
             if ($.trim($(this).text()) == "系统设置") {
-                $(".detail-body-5").slideDown().siblings().css("display", "none");
+                $(".detail-body-5").slideDown(100).siblings().css("display", "none");
             }
         })
     })
+    //密码校验错误提示
+    function proofread() {
+        if ($("#new-pw").val() !== $("#new-pw-agin").val()) {
+            $("#password-edit").css("display", "inline");
+        } else {
+            $("#password-edit").css("display", "none");
+        }
+    }
+
     //导航显示信息
     function show() {
         if ($(".navigation").width() > 50) {
@@ -706,16 +843,15 @@
     //删除
     function del(a) {
         if (confirm("您是否删除本条数据！！！")) {
-        	var url = "deleteById";
-        	var param={};
-        	$.post(url,param,function(result){
-        		if(result.code==0){
-        			alert("删除成功!");
-        		}else{
-        			alert(result.msg);
-        		}
-        			doFind();
-        	});
+            var url = "deleteById";
+            var param = {};
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                    $(a).parent().remove();
+                } else {
+                    alert(result.msg);
+                }
+            });
         }
     }
 
@@ -727,78 +863,162 @@
         }
         var userIds;
         $("#tbodyId input[name='checkId']").each(function () {
-        	if($(this).prop("checkId")){//判断此input对象是否被选中
-    			if(userIds==""){
-    				userIds += $(this).val();
-    			}else{
-    				userIds += ","+$(this).val(); 
-    			}
-    		}
+            if ($(this).prop("checkId")) {//判断此input对象是否被选中
+                if (userIds == "") {
+                    userIds += $(this).val();
+                } else {
+                    userIds += "," + $(this).val();
+                }
+            }
         })
         var url = "deleteUsers";
-        var param = {ids:userIds};
-        $.post(url,param,function(result){
-        	if(result.code==0){
-        		alert(result.msg);
-        	}else{
-        		alert(result.msg);
-        	}
-        	doFind();
+        var param = {ids: userIds};
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                ids.each(function () {
+                    $(this).parent().parent().remove();
+                })
+            } else {
+                alert(result.msg);
+            }
         });
     }
 
     //全选
-    function qx() {
-        var ids = $(".body-table :checkbox");
-        ids.prop("checked", true);
+    function qx(ind) {
+        if (ind == 1) {
+            var ids = $(".body-table-1 :checkbox");
+            ids.prop("checked", true);
+        }
+        if (ind == 2) {
+            var ids = $(".body-table-2 :checkbox");
+            ids.prop("checked", true);
+        }
+
     }
-    function doAdd(){
-		var url = "insertEmp";
-		var userId = $("#userid").val();
-		var groupId = $("#groupid").val();
-		var param = {userId:userId,groupId:groupId};
-		$.post(url,param,function(result){
-			if(result.code==0){
-				alert(result.msg);
-				doFind();
-			}else{
-				alert(result.msg);
-			}
-		});
-	}
-	function setTableBodyRows(result){
-		var tBody=$("#tbodyId");
-		tBody.empty();
-		for(var i in result){
-			var tr=$("<tr></tr>");
-			 tr.data("id",result[i].userId);
-			 //2.2构建每行th对象(一行有多个)
-			 //var td0=$("<th></th>");
-			 //....
-			 //2.3在th对象内容填充具体数据
-			 //th0.append(result[id].id);
-			 //....
-			 var tds="<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
-			         "<th>"+result[i].userId+"</th>"+
-			         "<th>"+result[i].groupId+"</th>"+
-			         "<th class='lick' onclick='del(this)'>删除</th>";
-			 //2.4将th添加到tr对象中(一行要放多个)
-			 tr.append(tds);
-			 //2.5将tr追加到tbody中
-			 tBody.append(tr);
-			
-		}
-	}
-	function doFindUserId(){
-		var url = "selectUserByuserId";
-		var userId = $("#kw").val();
-		var param = {userId:userId};
-		$.post(url,param,function(result){
-			if(result.code==0){
-				setTableBodyRows(result.data);
-			}
-		});
-	}
+    //新增用户
+    function doAdd() {
+        var url = "insertEmp";
+        var userId = $("#userid").val();
+        var groupId = $("#groupid").val();
+        var param = {userId: userId, groupId: groupId};
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                alert(result.msg);
+                doFind();
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+    //表格数据拼接
+    function setTableBodyRows(result) {
+        var tBody = $("#tbodyId");
+        tBody.empty();
+        for (var i in result) {
+            var tr = $("<tr></tr>");
+            tr.data("id", result[i].userId);
+            //2.2构建每行th对象(一行有多个)
+            //var td0=$("<th></th>");
+            //....
+            //2.3在th对象内容填充具体数据
+            //th0.append(result[id].id);
+            //....
+            var tds = "<th><input type='checkbox' name='checkId' value='" + result[i].id + "'/></th>" +
+                    "<th>" + result[i].userId + "</th>" +
+                    "<th>" + result[i].groupId + "</th>" +
+                    "<th class='lick' onclick='del(this)'>删除</th>";
+            //2.4将th添加到tr对象中(一行要放多个)
+            tr.append(tds);
+            //2.5将tr追加到tbody中
+            tBody.append(tr);
+
+        }
+    }
+    //用户ID查找
+    function doFindUserId() {
+        var url = "selectUserByuserId";
+        var userId = $("#kw").val();
+        var param = {userId: userId};
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                setTableBodyRows(result.data);
+            }
+        });
+    }
+    //设置分页
+    function setPagination(pageObject) {
+        //1.初始化总页数
+        $(".pageCount").html("总页数(" + pageObject.pageCount + ")");
+        //2.初始化当前页的页码
+        $(".pageCurrent").html("当前页(" + pageObject.pageCurrent + ")");
+        //3.在pageId对应的对象上绑定总页数
+        //data函数用于以key/value的方式在对象上绑定数据
+        $("#pageId").data("pageCount", pageObject.pageCount);
+        //4.在pageId对象的对象上绑定当前页面值
+        $("#pageId").data("pageCurrent", pageObject.pageCurrent);
+    }
+    //定义一个函数,通过此函数实现页面的跳转
+    function jumpToPage() {
+        //获得点击对象上class属性对应的值,根据此值
+        //判定具体点击的是哪个对象(例如上一页,下一页)
+        var clazz = $(this).attr("class");
+        //获得pageId对象上绑定的pageCurrent对应的值
+        var pageCurrent = $('#pageId').data("pageCurrent");
+        //获得pageId对象上绑定的pageCount对应的值
+        var pageCount = $('#pageId').data("pageCount")
+        //根据class属性的值判断点击的是否是上一页
+        if (clazz == 'pre' && pageCurrent > 1) {
+            pageCurrent--;
+        }
+        //判断点击的是否是下一页
+        if (clazz == "next" && pageCurrent < pageCount) {
+            pageCurrent++;
+        }
+        //判断点击的对象是否是首页
+        if (clazz == "first") {
+            pageCurrent = 1;
+        }
+        //判定点击的对象是否是尾页
+        if (clazz == "last") {
+            pageCurrent = pageCount;
+        }
+        //重写绑定pageCurrent的值,
+        $('#pageId').data("pageCurrent", pageCurrent);
+        //重新执行查询操作(根据pageCurrent的值)
+        doGetObjects();
+    }
+    //定义一个函数,通过此函数实现具体页面的跳转
+    function jumpToPagedetail() {
+        //获得点击对象上class属性对应的值,根据此值
+        //判定具体点击的是哪个对象(例如上一页,下一页)
+        var clazz = $(this).attr("class");
+        //获得pageId对象上绑定的pageCurrent对应的值
+        var pageCurrent = $('#pageId').data("pageCurrent");
+        //获得pageId对象上绑定的pageCount对应的值
+        var pageCount = $('#pageId').data("pageCount")
+        //根据class属性的值判断点击的是否是上一页
+        if (clazz == 'pre' && pageCurrent > 1) {
+            pageCurrent--;
+        }
+        //判断点击的是否是下一页
+        if (clazz == "next" && pageCurrent < pageCount) {
+            pageCurrent++;
+        }
+        //判断点击的对象是否是首页
+        if (clazz == "first") {
+            pageCurrent = 1;
+        }
+        //判定点击的对象是否是尾页
+        if (clazz == "last") {
+            pageCurrent = pageCount;
+        }
+        //重写绑定pageCurrent的值,
+        $('#pageId').data("pageCurrent", pageCurrent);
+        //重新执行查询操作(根据pageCurrent的值)
+        doGetObjects();
+    }
+
 </script>
 </body>
 </html>
