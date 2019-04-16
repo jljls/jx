@@ -751,19 +751,19 @@
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
                         <input id="uid" type="text" placeholder="用户ID"/>
-                        <span id="uvn" style="color: #d33"></span>
+                        <span id="uvn" style="color: #3d3"></span>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px 10px">
                         <button  id="" style="margin-left: 0px;" onclick="search()">检索</button>
-                        <button onclick="startReg()">添加指静脉</button>
-                        <button onclick="cleanvein()">清空指静脉</button>
+                        <button class="clbu" onclick="startReg()" style="display:none;">添加指静脉</button>
+                        <button class="clbu" onclick="cleanvein()" style="display:none;">清空指静脉</button>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px">
-                        <div id="msg" style="padding: 0px 10px;color: #d33">第一步</div>
+                        <div id="msg" style="padding: 0px 10px;color: #3d3"></div>
                     </div>
                 </div>
             </div>
@@ -896,9 +896,11 @@
          $.post(url,param,function(result){
  			if(result.code==0){
  				$("#uvn").html(result.data).css("color", "#3d3");
+ 				$(".clbu").css("display","inline");
  			}else{
+ 				$(".clbu").css("display","none");
+ 				$("#uvn").html("检索失败").css("color", "#d33");
  				
- 				alert(result.msg);
  				
  			}
  		});
@@ -912,6 +914,7 @@
         $.post(url, param, function (result) {
             if (result.code == 0) {
             	$("#msg").html("清空成功").css("color", "#3d3");
+            	search();
             } else {
             	document.getElementById("msg").innerHTML = "清空失败";
             }

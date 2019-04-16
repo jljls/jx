@@ -67,6 +67,7 @@
 	  
 	  
 	  function regVein()
+	  
 	  {
 		if(regState == 0)
 		{
@@ -141,8 +142,9 @@
 			window.clearInterval(regTimer);
 			if(createUser()){
 				$("#msg").html( "指静脉注册成功").css("color", "#3d3");
+				search();
 			}else{
-				document.getElementById("msg").innerHTML = "指静脉注册失败";
+				$("#msg").html( "指静脉注册失败").css("color", "#d33");
  			}
  			return;
  		}
@@ -187,6 +189,11 @@
 
        function startReg()
        {
+    	   if($("#uvn").html().search(/8/)){
+    		   $("#msg").html("指静脉已注册上限!").css("color","#d33");
+    		   return
+    	   }
+    	   
  		regNum = 0;
  		regState = 0;
  		feat_list = [];

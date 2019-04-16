@@ -32,7 +32,7 @@ public class EmpLogController {
 		String startTime = (String) object.get("startTime");
 		String endTime = (String) object.get("endTime");
 		// 删除日志
-		empLogServic.deleteLog(startTime, endTime);
+		//empLogServic.deleteLog(startTime, endTime);
 		// 新增一条操作日志
 		String userId = request.getSession().getAttribute("userId").toString();
 		EmpLog empLog = new EmpLog(userId, "insert", userId + "删除了" + startTime + "到" + endTime + "的日志记录");

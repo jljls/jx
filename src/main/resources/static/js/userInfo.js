@@ -73,3 +73,20 @@ function setUserInfo(result) {
         tBody.append(tr);
     }
 }
+
+//删除
+function del(a) {
+	debugger;
+    if (confirm("您是否删除本条数据！！！")) {
+        var url = "deleteUInfoById";
+        var userId = $(a).parent().data("id");
+        var param = {userId:userId};
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+            	doFindeUserInfo();
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+}

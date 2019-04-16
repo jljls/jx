@@ -26,8 +26,8 @@ public class EmpLogServiceImpl implements EmpLogService{
 	}
 
 	@Override
-	public void deleteLog(String startTime, String endTime) {
-		empLogMapper.deleteLog(startTime, endTime);
+	public void deleteLog(String datetime) {
+		empLogMapper.deleteLog(datetime);
 	}
 
 	@Override
