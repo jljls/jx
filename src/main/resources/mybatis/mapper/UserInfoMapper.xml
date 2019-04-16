@@ -40,7 +40,18 @@
 		where user_id = #{userId} and password = #{password}
 	</select>       
 
-	   
+	<!-- 修改密码 -->
+	<update id="upDatapws" parameterType="java.lang.String">
+		update user_info
+		set password = #{pws}
+		where user_id = #{userId}	
+	</update>  
+    
+    <!-- 查询管理员数 -->
+    <select id="selectUInfoNum" resultType="java.lang.Integer">
+		select count(id)
+		from user_info
+	</select> 
     
     
 

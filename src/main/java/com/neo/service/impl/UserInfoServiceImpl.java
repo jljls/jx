@@ -104,7 +104,32 @@ public class UserInfoServiceImpl implements UserInfoService{
 		return new MessageResult(0, "登录成功");
 	}
 
+	@Override
+	public MessageResult upDatapws(String pws,String userId) {
+		try {
+			int i = userInfoMapper.upDatapws(pws,userId);
+			if(i!=0){
+				return new MessageResult(0, "操作成功!");
+			}else {
+				return new MessageResult(-1, "参数错误!");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误!");
+		}
+	}
 
+
+
+	@Override
+	public MessageResult selectUInfoNum() {
+		try {
+			Integer num = userInfoMapper.selectUInfoNum();
+			return new MessageResult(0, "操作成功", num);
+		} catch (Exception e) {
+			return new MessageResult(-100, "未知错误");
+		}
+	}
 
 	
 

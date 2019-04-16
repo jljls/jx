@@ -82,7 +82,26 @@ public class UserInfoController {
 		return userInfoService.deleteUInfoByIds(ids);
 	} 
 	
+	/*
+	 * 查询当前管理员数
+	 */
+	@RequestMapping(value="/selectUInfoNum", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult selectUInfoNum() {
+		return userInfoService.selectUInfoNum();
+	}
 	
+	//修改管理员密码
+	@RequestMapping(value="/upDatapws", method = RequestMethod.POST)
+	@ResponseBody
+	public MessageResult upDatapws(String pws) {
+		System.out.println(pws);
+		String userId = request.getSession().getAttribute("userId").toString();
+		if(pws==null){
+			return new MessageResult(-1,"参数错误");
+		}
+		return userInfoService.upDatapws(pws,userId);
+	} 
 	
 	
 }

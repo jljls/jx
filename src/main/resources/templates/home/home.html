@@ -471,7 +471,7 @@
                                 <option>52556</option>
                             </select>
                         </div>
-                        <button>搜索</button>
+                        <button onclick="doFindLog()">搜索</button>
                     </div>
                     <table class="body-table">
                         <thead>
@@ -484,7 +484,7 @@
                             <th>删除</th>
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="logtBody">
                         <tr>
                             <th>sdgvb</th>
                             <th>rtfgbhdrgvnujhnvunnvwvnwer</th>
@@ -589,7 +589,7 @@
                     <div class="body-operate" style="padding:0px">
                         <input id="uid" type="text" placeholder="用户ID"/>
 
-                        <div>df</div>
+                        <div></div>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
@@ -601,7 +601,7 @@
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px">
-                        <div>fvyihgviu</div>
+                        <div></div>
                     </div>
                 </div>
             </div>
@@ -611,7 +611,7 @@
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
                         <input id="new-pw" type="text" placeholder="新密码"></input>
-                        <button>修改</button>
+                        <button onclick="upDatepws()">修改</button>
                     </div>
                 </div>
                 <div class="body-title">日志管理</div>
@@ -802,7 +802,16 @@
         	doFind();
         });
     }
-
+	
+    function doFind(){
+    	var url = "selectUser";
+    	$.post(url,function(result){
+    		if(result.code==0)
+    			setTableBodyRows(result.data);
+    	});
+    	
+    }
+    
     //全选
     function qx() {
         var ids = $(".body-table :checkbox");
@@ -854,6 +863,81 @@
 		$.post(url,param,function(result){
 			if(result.code==0){
 				setTableBodyRows(result.data);
+			}
+		});
+	}
+	
+	//日志搜索
+	function doFindLog(){
+		var url = "selectLog";
+		var param = {};
+		param.startTime = $("#startTime").val();
+		param.endTime = $("#endTime").val();
+		$.post(url,param,function(result){
+			if(result.code==0){
+				setLogBody(result.data);
+			}else{
+				alert(result.msg);
+			}
+		});
+	}
+	
+	function deleteLog(){
+		var url = "deleteLog";
+		var param = {id};
+		$.post(url,param,function(result){
+			if(result.code==0){
+				alert(result.msg);
+				doFindLog();
+			}
+		});
+	}
+	
+	function setLogBody(result){
+		var tBody=$("#logtBody");
+		tBody.empty();
+		for(var i in result){
+			var tr=$("<tr></tr>");
+			 tr.data("id",result[i].id);
+			 //2.2构建每行th对象(一行有多个)
+			 //var td0=$("<th></th>");
+			 //....
+			 //2.3在th对象内容填充具体数据
+			 //th0.append(result[id].id);
+			 //....
+			 var tds="";	
+			         /* "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+			         "<th>"+result[i].userId+"</th>"+
+			         "<th>"+result[i].groupId+"</th>"+
+			         "<th class='lick' onclick='del(this)'>删除</th>"; */
+			 //2.4将th添加到tr对象中(一行要放多个)
+			 tr.append(tds);
+			 //2.5将tr追加到tbody中
+			 tBody.append(tr);
+			
+		}
+	}
+	
+	//修改密码
+	function upDatepws(){
+		var url = "upDatapws";
+		var pws = $("#new-pw").val();
+		var param = {pws:pws};
+		$.post(url,param,function(result){
+			if(result.code==0){
+				alert(result.msg);
+			}else{
+				alert(result.msg);
+			}
+		});
+	}
+	
+	//查询当前管理员数
+	function selectUInfoNum(){
+		var url = "selectUInfoNum";
+		$.getJSON(url,function(result){
+			if(result.code==0){
+				$("#sysNUm").html(result.data);
 			}
 		});
 	}
