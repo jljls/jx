@@ -246,7 +246,7 @@
                         <button onclick="qx()">全选</button>
                         <button onclick="dellist()">批量删除</button>
                         <div style="float:right">
-                            <input id="kw" type="text" placeholder="输入用户ID搜索"></input>
+                            <input id="userkw" type="text" placeholder="输入用户ID搜索"></input>
                             <button onclick="doFindUserId()" style="
                                 width: 50px;
                                 height: 30px;
@@ -261,7 +261,7 @@
                     <table class="body-table body-table-1">
                         <thead>
                         <tr>
-                            <th>编号</th>
+                            <th>勾选</th>
                             <th>用户(userId)</th>
                             <th>分组(groupId)</th>
                             <th>操作</th>
@@ -408,7 +408,7 @@
                     <table class="body-table body-table-2">
                         <thead>
                         <tr>
-                            <th>编号</th>
+                            <th>勾选</th>
                             <th>用户(userId)</th>
                             <th>分组(groupId)</th>
                             <th>操作</th>
@@ -817,7 +817,7 @@
         } else {
             $(".nav-list li span").css("display", "inline");
             $(".navigation").animate({
-               checkwidth: '200px'
+               width: '200px'
             });
             $(".admin-information").animate({
                 opacity: '1'
@@ -954,7 +954,6 @@
     }
     
     function loginOut(){
-    	debugger;
     	url = "loginOut";
     	$.getJSON(url,function(){
     		alert("退出成功");
@@ -972,21 +971,6 @@
             ids.prop("checked", true);
         }
 
-    }
-    //新增用户
-    function doAdd() {
-        var url = "insertEmp";
-        var userId = $("#userid").val();
-        var groupId = $("#groupid").val();
-        var param = {userId: userId, groupId: groupId};
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                alert(result.msg);
-                doFind();
-            } else {
-                alert(result.msg);
-            }
-        });
     }
     //表格数据拼接
     function setTableBodyRows(result) {
@@ -1095,6 +1079,7 @@
         //重新执行查询操作(根据pageCurrent的值)
         doGetObjects();
     }
+//    新增用户
     function doAdd(userId,groupId){
 		var url = "insertEmp";
 		//var userId = $("#userId").val();
@@ -1114,7 +1099,6 @@
   //显示登陆的名字
 	var temp;
 	function people(){
-		//debugger;
 		var url="people";
 		var param={};
 		$.ajax({ url: "people", dataType : 'json',
@@ -1157,16 +1141,6 @@
 			
 		}
 	} */
-	function doFindUserId(){
-		var url = "selectUserByuserId";
-		var userId = $("#kw").val();
-		var param = {userId:userId};
-		$.post(url,param,function(result){
-			if(result.code==0){
-				setTableBodyRows(result.data);
-			}
-		});
-	}
 	
 	//日志搜索
 	function doFindLog(){
@@ -1197,7 +1171,6 @@
 	
 	//显示当前日志数
 	function logNum(){
-		debugger;
 		var url = "logNum";
 		$.getJSON(url,function (result){
 			if(result.code==0){

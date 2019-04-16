@@ -2,28 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a941fcee-d88e-4d25-93cc-ae8d29ab4804" name="Default" comment="">
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\admin.png" afterPath="$PROJECT_DIR$/src/main/resources/static/admin.png" />
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\data.png" afterPath="$PROJECT_DIR$/src/main/resources/static/data.png" />
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\detail.png" afterPath="$PROJECT_DIR$/src/main/resources/static/detail.png" />
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\person.png" afterPath="$PROJECT_DIR$/src/main/resources/static/person.png" />
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\register.png" afterPath="$PROJECT_DIR$/src/main/resources/static/register.png" />
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\search.png" afterPath="$PROJECT_DIR$/src/main/resources/static/search.png" />
-      <change type="MOVED" beforePath="C:\Users\home\Desktop\jx\src\main\resources\templates\home\setting.png" afterPath="$PROJECT_DIR$/src/main/resources/static/setting.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/web/ClientController.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/web/ClientController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/web/EmpLogController.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/web/EmpLogController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/mapper/EmpLogMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/mapper/EmpLogMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/EmpLogMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/EmpLogMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/service/EmpLogService.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/service/EmpLogService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/service/impl/EmpLogServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/service/impl/EmpLogServiceImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/web/LoginController.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/web/LoginController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/web/UserInfoController.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/web/UserInfoController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/mapper/UserInfoMapper.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/mapper/UserInfoMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/UserInfoMapper.xml" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/mapper/UserInfoMapper.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/service/UserInfoService.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/service/UserInfoService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/neo/service/impl/UserInfoServiceImpl.java" afterPath="$PROJECT_DIR$/src/main/java/com/neo/service/impl/UserInfoServiceImpl.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/home/home.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/home/home.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="jx.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -133,11 +112,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/home/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.9014084">
-              <caret line="1095" column="23" selection-start-line="1095" selection-start-column="23" selection-end-line="1095" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.6597353">
+              <caret line="1262" column="7" selection-start-line="1262" selection-start-column="7" selection-end-line="1262" selection-end-column="7" />
               <folding>
                 <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -208,10 +187,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="login.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="login.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51039696">
+            <state vertical-scroll-proportion="-3.8028169">
               <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
               <folding />
             </state>
@@ -1377,10 +1356,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.8028169">
+          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/home/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.9014084">
-          <caret line="1095" column="23" selection-start-line="1095" selection-start-column="23" selection-end-line="1095" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.6597353">
+          <caret line="1262" column="7" selection-start-line="1262" selection-start-column="7" selection-end-line="1262" selection-end-column="7" />
           <folding>
             <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -1447,14 +1434,6 @@
             <element signature="n#style#0;n#label#0;n#div#0;n#div#0;n#div#4;n#div#6;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#button#0;n#div#0;n#div#0;n#div#4;n#div#6;n#div#0;n#div#1;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51039696">
-          <caret line="72" column="34" selection-start-line="72" selection-start-column="34" selection-end-line="72" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
