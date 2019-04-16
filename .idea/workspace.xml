@@ -115,8 +115,8 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/home/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7863894">
-              <caret line="727" column="68" selection-start-line="727" selection-start-column="68" selection-end-line="727" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.67296785">
+              <caret line="784" column="17" selection-start-line="784" selection-start-column="17" selection-end-line="784" selection-end-column="17" />
               <folding>
                 <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -612,7 +612,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24743778" sideWeight="0.5" order="1" side_tool="false" content_ui="combo" />
@@ -1374,8 +1374,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/home/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7863894">
-          <caret line="727" column="68" selection-start-line="727" selection-start-column="68" selection-end-line="727" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.67296785">
+          <caret line="784" column="17" selection-start-line="784" selection-start-column="17" selection-end-line="784" selection-end-column="17" />
           <folding>
             <element signature="n#style#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#body#0;n#html#0;n#!!top" expanded="true" />

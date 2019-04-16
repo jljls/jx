@@ -243,8 +243,8 @@
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
-                        <button onclick="qx()">全选</button>
-                        <button onclick="dellist()">批量删除</button>
+                        <button onclick="qx(1)">全选</button>
+                        <button onclick="dellist(1)">批量删除</button>
                         <div style="float:right">
                             <input id="userkw" type="text" placeholder="输入用户ID搜索"></input>
                             <button onclick="doFindUserId()" style="
@@ -386,12 +386,12 @@
                 <!-- 右边信息头部 end-->
                 <div class="body-title">
                     管理员列表
-                    <div style="float: right" id="sysNum">管理员数:64</div>
+                    <div style="float: right" id="sysNum">管理员总数:64</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
                         <button onclick="qx(2)">全选</button>
-                        <button onclick="dellist()">批量删除</button>
+                        <button onclick="dellist(2)">批量删除</button>
                         <div style="float: right">
                             <input id="kw" type="text" placeholder="输入管理员ID搜索"/>
                             <button style="
@@ -533,7 +533,7 @@
                 <!-- 右边信息头部 end-->
                 <div class="body-title">
                     系统日志
-                    <div style="float: right" id="logNum">日志数量:3596</div>
+                    <div style="float: right" id="logNum">日志总数:3596</div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
@@ -567,6 +567,7 @@
                     <table class="body-table">
                         <thead>
                         <tr>
+                            <th>日志序号</th>
                             <th>时间</th>
                             <th>用户</th>
                             <th>操作类型</th>
@@ -577,12 +578,13 @@
                         </thead>
                         <tbody id="logtBody">
                         <tr>
+                            <th>16541</th>
                             <th>2018-04-12</th>
                             <th>峰峰</th>
                             <th>登陆后台</th>
                             <th>东东</th>
                             <th>163.172.35.12</th>
-                            <th class="click" onclick="del(this)">删除</th>
+                            <th class="click" onclick="deleteLog(this)">删除</th>
                         </tr>
                         <tr>
                             <th>2018-04-12</th>
@@ -853,9 +855,11 @@
         if (!userId) {
             $("#user-tip").html("用户ID不能为空!");
             return
+        }else{
+            //添加
+            doAdd(userId, groupId);
         }
-        //添加
-        doAdd(userId, groupId);
+
     }
 
     //添加管理员
@@ -876,7 +880,7 @@
 
         $.post(url, param, function (result) {
             if (result.code == 0) {
-                $("#admin-tip").html("管理员添加成功").css("color","#3d3");
+                $("#admin-tip").html("管理员添加成功").css("color", "#3d3");
             } else {
                 $("#admin-tip").html(result.msg);
             }
@@ -931,19 +935,23 @@
     }
 
     //批量删除
-    function dellist() {
-        var ids = $(".body-table :checked");
+    function dellist(ind) {
+        if (ind == 1) {
+            var ids = $(".body-table-1 :checked");
+        }
+        if (ind == 2) {
+            var ids = $(".body-table-2 :checked");
+        }
         if (ids.length == 0) {
             alert("请选择一条数据");
         }
+
         var userIds;
-        $("#tbodyId input[name='checkId']").each(function () {
-            if ($(this).prop("checkId")) {//判断此input对象是否被选中
-                if (userIds == "") {
-                    userIds += $(this).val();
-                } else {
-                    userIds += "," + $(this).val();
-                }
+        ids.each(function () {
+            if (userIds == "") {
+                userIds += $(this).val();
+            } else {
+                userIds += "," + $(this).val();
             }
         })
         var url = "deleteUsers";
@@ -1011,10 +1019,10 @@
 
         }
     }
-    //用户ID查找
+    //普通用户ID查找
     function doFindUserId() {
         var url = "selectUserByuserId";
-        var userId = $("#kw").val();
+        var userId = $("#userkw").val();
         var param = {userId: userId};
         $.post(url, param, function (result) {
             if (result.code == 0) {
@@ -1094,15 +1102,13 @@
         //重新执行查询操作(根据pageCurrent的值)
         doGetObjects();
     }
-    //    新增用户
+    //新增普通用户
     function doAdd(userId, groupId) {
         var url = "insertEmp";
-        //var userId = $("#userId").val();
-        //var groupId = $("#groupId").val();
         var param = {userId: userId, groupId: groupId};
         $.post(url, param, function (result) {
             if (result.code == 0) {
-                $("#user-tip").html("注册成功!").css("color","#3d3");
+                $("#user-tip").html("注册成功!").css("color", "#3d3");
             } else {
                 $("#user-tip").html(result.msg);
             }
@@ -1112,7 +1118,6 @@
     var temp;
     function people() {
         var url = "people";
-        var param = {};
         $.ajax({
             url: "people", dataType: 'json',
             contentType: "application/json;charset=utf-8",
@@ -1156,7 +1161,7 @@
      }
      } */
 
-    //日志搜索
+    //日志搜索(有问题)
     function doFindLog() {
         var url = "selectLog";
         var param = {};
@@ -1172,12 +1177,12 @@
     }
 
     //删除日志
-    function deleteLog() {
+    function deleteLog(a) {
+        var logid = $(a).prev().prev().prev().prev().prev().prev();
         var url = "deleteLog";
-        var param = {id};
+        var param = {id:logid};
         $.post(url, param, function (result) {
             if (result.code == 0) {
-                alert(result.msg);
                 doFindLog();
             }
         });
@@ -1188,11 +1193,11 @@
         var url = "logNum";
         $.getJSON(url, function (result) {
             if (result.code == 0) {
-                $("#logNum").html("日志数量:" + result.data);
+                $("#logNum").html("日志总数:" + result.data);
             }
         });
     }
-
+    //设置日志表格
     function setLogBody(result) {
         var tBody = $("#logtBody");
         tBody.empty();
@@ -1222,22 +1227,26 @@
     function upDatepws() {
         var url = "upDatapws";
         var pws = $("#new-pw").val();
-        var param = {pws: pws};
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                alert(result.msg);
-            } else {
-                alert(result.msg);
-            }
-        });
+        var pwsa = $("#new-pw-agin").val();
+        if (!pws && !pws && pws == pwsa) {
+            var param = {pws: pws};
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                    $("#password-edit").html("密码修改成功!").css("color", "#3d3");
+                } else {
+                    $("#password-edit").html(result.msg);
+                }
+            });
+        }
+
     }
 
-    //查询当前管理员数
+    //查询当前管理员总数
     function selectUInfoNum() {
         var url = "selectUInfoNum";
         $.getJSON(url, function (result) {
             if (result.code == 0) {
-                $("#sysNum").html(result.data);
+                $("#sysNum").html("管理员总数:" + result.data);
             }
         });
     }
@@ -1245,14 +1254,16 @@
     //管理员搜索
     function doFindeUserInfo() {
         var url = "selectUInfoByUserId";
-        var userId = $("#userInfo").val();
-        $.post(url, param, function (result) {
-            if (result.code) {
-                setUserInfo(result.data);
-            } else {
-                alert(result.msg);
-            }
-        });
+        var userId = $("#kw").val();
+        if(!userId){
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                    setUserInfo(result.data);
+                } else {
+                    alert(result.msg);
+                }
+            });
+        }
     }
     //设置管理员表格
     function setUserInfo(result) {
