@@ -189,7 +189,7 @@ public class ClientController {
 	 * 删除所有用户及相关的指静脉
 	 * @return
 	 */
-	@RequestMapping(value = "deleteAll", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteAll", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult deleteAll() {
 		logger.info("---删除所用用户及相关静脉");
@@ -218,9 +218,9 @@ public class ClientController {
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "deleteById", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteById", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult deleteById( String userId){
+	public MessageResult deleteById(String userId){
 		//JSONObject object = JSONObject.fromObject(jsonString);
 		//String userId = (String) object.get("userId");
 
@@ -255,7 +255,7 @@ public class ClientController {
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "deleteVeinByGroupId", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteVeinByGroupId", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult deleteVeinByGroupId( String groupId){
 		//JSONObject object = JSONObject.fromObject(jsonString);
