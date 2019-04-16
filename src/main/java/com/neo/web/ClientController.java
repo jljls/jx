@@ -434,5 +434,13 @@ public class ClientController {
 		return new MessageResult(0, "操作成功"); 
 	}
 	
-	
+	//判断登陆的人
+	@RequestMapping(value = "people", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult people() {
+		HttpSession session = request.getSession();
+		String uid = session.getAttribute("userId").toString(); 
+		System.out.println(uid);
+		return new MessageResult(0, "操作成功",uid); 
+	}
 }
