@@ -94,7 +94,7 @@
 			}
 			else if(jxCapRes == -101)
 			{
-			document.getElementById("msg").innerHTML = "指静脉本地服务已断开";
+			$("#msg").html( "指静脉本地服务已断开").css("color","#d33");
 				regError(jxCapRes);
 				return;
 			}
@@ -119,7 +119,7 @@
 			}
 			else if(res == -101)
 			{
-				document.getElementById("msg").innerHTML = "指静脉本地服务已断开";
+				$("#msg").html("指静脉本地服务已断开").css("color","#d33");
 				regError(res);
 				return;
 			}
@@ -232,21 +232,21 @@
  				
  				
  				if(res == false)
- 					document.getElementById("msg").innerHTML = "指静脉验证失败";
+ 					$("#msg").html("指静脉验证失败").css("color","#d33");
  				else
- 					document.getElementById("msg").innerHTML = "指静脉验证通过";
+ 					$("#msg").html( "指静脉验证通过").css("color","#3d3");
  				window.clearInterval(capTimer);
  				return;
  			}
  			else if(jxCapRes == -101)
  			{
- 				document.getElementById("msg").innerHTML = "指静脉本地服务已断开";
+ 				$("#msg").html( "指静脉本地服务已断开").css("color","#d33");
  				capError(jxCapRes);
  				return;
  			}
  			else
  			{
- 				document.getElementById("msg").innerHTML = ERRMSG[-jxCapRes];
+ 				$("#msg").html( ERRMSG[-jxCapRes]).css("color","#d33");
  				capError(jxCapRes);
  				return;
  			}
