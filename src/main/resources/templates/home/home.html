@@ -5,6 +5,7 @@
     <title>指静脉后台管理系统</title>
     <script type="text/javascript" src="./jquery/jquery-1.7.1.js"></script>
     <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/userInfo.js"></script>
     <style>
         * {
             margin: 0px;
@@ -1186,24 +1187,6 @@
             tBody.append(tr);
 
         }
-    }
-
-    //修改密码
-    function upDatepws() {
-        var url = "upDatapws";
-        var pws = $("#new-pw").val();
-        var pwsa = $("#new-pw-agin").val();
-        if (!pws && !pws && pws == pwsa) {
-            var param = {pws: pws};
-            $.post(url, param, function (result) {
-                if (result.code == 0) {
-                    $("#password-edit").html("密码修改成功!").css("color", "#3d3");
-                } else {
-                    $("#password-edit").html(result.msg);
-                }
-            });
-        }
-
     }
 
     //查询当前管理员总数
