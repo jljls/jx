@@ -766,11 +766,11 @@
     </div>
 </div>
 <script>
-//    //防止页面后退
-//    history.pushState(null, null, document.URL);
-//    window.addEventListener('popstate', function () {
-//        history.pushState(null, null, document.URL);
-//    });
+    //防止页面后退
+    history.pushState(null, null, document.URL);
+    window.addEventListener('popstate', function () {
+        history.pushState(null, null, document.URL);
+    });
     $(document).ready(function () {
         selectUInfoNum();
         logNum();
@@ -917,7 +917,25 @@
             }
         });
     }
-
+	
+  //显示已注册用户 已注册手指
+    function veinnum() {
+        var url = "selectUAndV";
+        $.getJSON(url, function (result) {
+            $("#veinnum").html(result.data);
+        });
+    }
+    
+  //查询当前管理员总数
+    function selectUInfoNum() {
+        var url = "selectUInfoNum";
+        $.getJSON(url, function (result) {
+            if (result.code == 0) {
+                $("#sysNum").html("管理员总数:" + result.data);
+            }
+        });
+    }
+  
 </script>
 </body>
 </html>

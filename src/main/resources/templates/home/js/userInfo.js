@@ -40,15 +40,7 @@ function uifadd() {
     });
 }
 
-//查询当前管理员总数
-function selectUInfoNum() {
-    var url = "selectUInfoNum";
-    $.getJSON(url, function (result) {
-        if (result.code == 0) {
-            $("#sysNum").html("管理员总数:" + result.data);
-        }
-    });
-}
+
 
 //管理员搜索
 function doFindeUserInfo() {
