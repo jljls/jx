@@ -67,7 +67,7 @@
        from t_employee
     </select>
     <!-- 查询user 返回所有user -->
-    <select id="selectUser"  parameterType="java.lang.String"  resultType="com.jx.entity.Employee" >
+    <select id="selectUser"  parameterType="java.lang.Integer"  resultType="com.jx.entity.Employee" >
        select
        user_id as userId,group_id as groupId
        from t_employee

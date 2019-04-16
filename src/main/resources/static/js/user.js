@@ -79,24 +79,30 @@
     
     //查询用户
     function doFind() {
+    	debugger;
         var url = "selectUser";
-        $.post(url, function (result) {
+        var param = {pageCurrent:1};
+        $.post(url,param, function (result) {
             if (result.code == 0)
                 setTableBodyRows(result.data);
         });
-
+        
     }
     
   //普通用户ID查找
     function doFindUserId() {
         var url = "selectUserByuserId";
         var userId = $("#userkw").val();
-        var param = {userId: userId};
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                setTableBodyRows(result.data);
-            }
-        });
+        if(!userId){
+        	doFind();
+        }else{
+        	var param = {userId: userId};
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                    setTableBodyRows(result.data);
+                }
+            });
+        }
     }
     
   //表格数据拼接
