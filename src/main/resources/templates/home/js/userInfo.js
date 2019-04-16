@@ -38,5 +38,47 @@ function uifadd() {
             $("#admin-tip").html(result.msg);
         }
     });
+}
 
+//查询当前管理员总数
+function selectUInfoNum() {
+    var url = "selectUInfoNum";
+    $.getJSON(url, function (result) {
+        if (result.code == 0) {
+            $("#sysNum").html("管理员总数:" + result.data);
+        }
+    });
+}
+
+//管理员搜索
+function doFindeUserInfo() {
+    var url = "selectUInfoByUserId";
+    var userId = $("#kw").val();
+    if (!userId) {
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                setUserInfo(result.data);
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+}
+//设置管理员表格
+function setUserInfo(result) {
+    var tBody = $("#userInfotBody");
+    tBody.empty();
+    for (var i in result) {
+        var tr = $("<tr></tr>");
+        tr.data("id", result[i].id);
+        var tds = "";
+        /* "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
+         "<th>"+result[i].userId+"</th>"+
+         "<th>"+result[i].groupId+"</th>"+
+         "<th class='lick' onclick='del(this)'>删除</th>"; */
+        //2.4将th添加到tr对象中(一行要放多个)
+        tr.append(tds);
+        //2.5将tr追加到tbody中
+        tBody.append(tr);
+    }
 }

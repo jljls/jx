@@ -1,3 +1,11 @@
+//显示已注册用户 已注册手指
+    function veinnum() {
+        var url = "selectUAndV";
+        $.getJSON(url, function (result) {
+            $("#veinnum").html(result.data);
+        });
+    }
+
 //添加员工
     function save() {
         //获取值
