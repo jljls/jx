@@ -424,8 +424,8 @@ public class ClientController {
 		try{
 			
 				Integer count=userService.checkEmpId(userId);
-				if(count==0){
-					new MessageResult(-9, "检索失败"); 
+				if(count==1){
+					new MessageResult(0, "操作成功"); 
 				}
 			
 		}catch(Exception e){
@@ -433,7 +433,7 @@ public class ClientController {
 			return new MessageResult(-100, "未知错误");
 		}
 		
-		return new MessageResult(0, "操作成功"); 
+		return new MessageResult(-9, "检索失败"); 
 	}
 	
 	//判断登陆的人
