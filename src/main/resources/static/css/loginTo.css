@@ -1,7 +1,7 @@
 #wrap {
     height: 719px;
     width: 100;
-    background-color: #66CCCB;
+    background-color: #2C4452;
     background-repeat: no-repeat;
     background-position: center center;
     position: relative;
@@ -10,7 +10,7 @@
 #head {
     height: 120px;
     width: 100;
-    background-color: #66CCCC;
+    background-color: #2C4452;
     text-align: center;
     position: relative;
 }
@@ -47,14 +47,14 @@
     text-align: center;
 }
 .logGet .logD .p2 {
-    font-family: "ËÎÌå";
+    font-family: "ï¿½ï¿½ï¿½ï¿½";
     display: inline-block;
     font-size: 24px;
     margin-top: 30px;
     width: 86%;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Ê¹ÓÃcss3µÄtransformÀ´ÊµÏÖ */
+    transform: translate(-50%, -50%); /* Ê¹ï¿½ï¿½css3ï¿½ï¿½transformï¿½ï¿½Êµï¿½ï¿½ */
     font-size: 36px;
     height: 40px;
 }
@@ -70,7 +70,7 @@
 
 
 .logGet .lgD p {
-    color:blue;
+    color:#2C4452;
     margin: -10px auto 30px;
 }
 
@@ -103,12 +103,12 @@
 }
 
 .title {
-    font-family: "ËÎÌå";
+    font-family: "ï¿½ï¿½ï¿½ï¿½";
     color: #FFFFFF;
     position: absolute;
     top: 60%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Ê¹ÓÃcss3µÄtransformÀ´ÊµÏÖ */
+    transform: translate(-50%, -50%); /* Ê¹ï¿½ï¿½css3ï¿½ï¿½transformï¿½ï¿½Êµï¿½ï¿½ */
     font-size: 36px;
     height: 40px;
     width: 30%;
