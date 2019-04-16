@@ -421,19 +421,22 @@ public class ClientController {
 		if(userId==null){
 			return new MessageResult(-1, "参数异常");
 		}
-		try{
-			
-				Integer count=userService.checkEmpId(userId);
-				if(count==1){
-					new MessageResult(0, "操作成功"); 
-				}
+		Integer count;
+		try{	
+				count=userService.checkEmpId(userId);
+				System.out.println(count);
+				
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			return new MessageResult(-100, "未知错误");
 		}
+		if(count==1){
+			return new MessageResult(0, "操作成功"); 
+		}
+		return	new MessageResult(-9,"检索失败");
 		
-		return new MessageResult(-9, "检索失败"); 
+		
 	}
 	
 	//判断登陆的人
