@@ -14,5 +14,5 @@ public interface EmpLogMapper {
 	//删除日志
 	void deleteLog(@Param("startTime") String startTime,@Param("endTime")String endTime);
 	//根据日期查询日志
-	List<EmpLog> selectLog(@Param("startTime")String startTime,@Param("endTime")String endTime);
+	List<EmpLog> selectLog(@Param("startTime")String startTime,@Param("endTime")String endTime,@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
 }

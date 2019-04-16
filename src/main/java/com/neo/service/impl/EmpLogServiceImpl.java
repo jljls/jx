@@ -6,6 +6,7 @@ import javax.annotation.Resource;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
@@ -30,8 +31,12 @@ public class EmpLogServiceImpl implements EmpLogService{
 	}
 
 	@Override
-	public List<EmpLog> selectLog(String startTime, String endTime) {
-		List<EmpLog> list = empLogMapper.selectLog(startTime, endTime);
+	public List<EmpLog> selectLog(String startTime, String endTime,Integer pageCurrent) {
+		int pageSize = 20;
+		if(StringUtils.isEmpty(pageCurrent))
+			pageCurrent = 1;
+		int startIndex=(pageCurrent-1)*pageSize;
+		List<EmpLog> list = empLogMapper.selectLog(startTime, endTime,startIndex,pageSize);
 		return list;
 	}
 	
