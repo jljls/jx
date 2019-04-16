@@ -16,6 +16,7 @@
        select
        user_id as userId,name as name, password as password
        from user_info 
+       limit #{startIndex},#{pageSize}
     </select>
   	
     <delete id="deleteUInfoById" parameterType="java.lang.String" >

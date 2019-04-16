@@ -43,7 +43,7 @@ public interface UserService {
 	List<VeinFeat> selectVein();
 	List<VeinFeat> selectVeinByGroupId(String groupId);
 	MessageResult selectUserIdandVeinFeat(String userId,String veinFeat);
-	MessageResult selectUser();
+	MessageResult selectUser(Integer pageCurrent);
 	MessageResult selectUserByUserId(String userId);
 	MessageResult deleteByIds(String[] ids);
 	}

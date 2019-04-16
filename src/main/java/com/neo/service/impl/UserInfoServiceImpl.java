@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
@@ -45,10 +46,14 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 
 	@Override
-	public MessageResult selectUInfoAll() {
+	public MessageResult selectUInfoAll(Integer pageCurrent) {
+		int pageSize = 20;
+		if(StringUtils.isEmpty(pageCurrent))
+			pageCurrent = 1;
+		int startIndex=(pageCurrent-1)*pageSize;
 		List<UserInfo> list;
 		try{
-			  list=userInfoMapper.selectUInfoAll();
+			  list=userInfoMapper.selectUInfoAll(startIndex,pageSize);
 		 }catch(Exception e){
 			 e.printStackTrace();
 			 return new MessageResult(-1,"参数错误");

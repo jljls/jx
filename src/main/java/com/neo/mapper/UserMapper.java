@@ -47,7 +47,7 @@ public interface UserMapper {
 	void deleteGroupId(String groupId);
 
 	Integer checkEmpId(String userId);
-	List<Employee> selectUser();
+	List<Employee> selectUser(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
 	List<Employee> selectUserByUserId(String userId);
 
 }

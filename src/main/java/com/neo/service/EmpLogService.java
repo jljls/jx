@@ -9,5 +9,5 @@ public interface EmpLogService {
 	public void insertEmpLog(EmpLog empLog);
 	public MessageResult selectLogNum();
 	public void deleteLog(String startTime,String endTime);
-	public List<EmpLog> selectLog(String startTime,String endTime);
+	public List<EmpLog> selectLog(String startTime,String endTime,Integer pageCurrent);
 }

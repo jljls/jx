@@ -42,9 +42,9 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value="/selectUInfoAll", method = RequestMethod.GET)
 	@ResponseBody
-	public MessageResult selectUInfoAll() {
+	public MessageResult selectUInfoAll(Integer pageCurrent) {
 		
-		return userInfoService.selectUInfoAll();
+		return userInfoService.selectUInfoAll(pageCurrent);
 	}
 	/*
 	 * 按userId删除管理员

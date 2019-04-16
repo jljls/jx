@@ -367,8 +367,8 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectUser", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectUser() {
-		MessageResult mr = userService.selectUser();
+	public MessageResult selectUser(Integer pageCurrent) {
+		MessageResult mr = userService.selectUser(pageCurrent);
 		System.out.println(mr.toString());
 		return mr;
 	}

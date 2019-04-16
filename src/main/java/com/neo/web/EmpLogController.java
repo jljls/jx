@@ -42,11 +42,8 @@ public class EmpLogController {
 
 	@RequestMapping(value = "selectLog", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectLog(@RequestBody String jsonString) {
-		JsonObject object = JsonObject.fromJson(jsonString);
-		String startTime = (String) object.get("startTime");
-		String endTime = (String) object.get("endTime");
-		List<EmpLog> list = empLogServic.selectLog(startTime, endTime);
+	public MessageResult selectLog(String startTime,String endTime,Integer pageCurrent) {
+		List<EmpLog> list = empLogServic.selectLog(startTime, endTime,pageCurrent);
 		return new MessageResult(0, "操作成功", list);
 	}
 

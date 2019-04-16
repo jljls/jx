@@ -2,7 +2,7 @@ package com.neo.service.impl;
 
 import java.util.Arrays;
 import java.util.List;
-
+import org.springframework.util.StringUtils;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -196,10 +196,14 @@ public class UserServiceImpl  implements UserService{
 
 	
 	@Override
-	public MessageResult selectUser() {
+	public MessageResult selectUser(Integer pageCurrent) {
+		int pageSize=20;
+		if(StringUtils.isEmpty(pageCurrent))
+			pageCurrent=1;
+		int startIndex=(pageCurrent-1)*pageSize;
 		List<Employee> list;
 		try{
-			 list=userMapper.selectUser();
+			 list=userMapper.selectUser(startIndex,pageSize);
 		}catch(Exception e){
 			e.printStackTrace();
 			return new MessageResult(-100,"未知错误"); 

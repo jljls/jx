@@ -4,6 +4,7 @@
     <meta charset="UTF-8"/>
     <title>指静脉后台管理系统</title>
     <script type="text/javascript" src="./jquery/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
     <style>
         * {
             margin: 0px;
@@ -409,8 +410,8 @@
                         <thead>
                         <tr>
                             <th>勾选</th>
-                            <th>管理员ID</th>
-                            <th>管理员名</th>
+                            <th>用户(userId)</th>
+                            <th>分组(groupId)</th>
                             <th>操作</th>
                         </tr>
                         </thead>
@@ -553,7 +554,8 @@
                             <input id="end-day" type="text" maxlength="2"/>
                             <label for="end-day">日</label>
                             <button style="
-                            margin-top: -1px;
+                            float:right;
+                            margin-top: -7px;
                             width: 50px;
                             height: 30px;
                             background-image: url(./search.png);
@@ -570,7 +572,6 @@
                             <th>日志序号</th>
                             <th>时间</th>
                             <th>用户</th>
-                            <th>操作类型</th>
                             <th>影响对象</th>
                             <th>用户IP</th>
                             <th>操作</th>
@@ -587,83 +588,73 @@
                             <th class="click" onclick="deleteLog(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
+                            <th>删除</th>
+                        </tr>
+                        <tr>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>yhbgui</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
-                            <th class="click" onclick="del(this)">删除</th>
-                        </tr>
-                        <tr>
-                            <th>2018-04-12</th>
-                            <th>峰峰</th>
-                            <th>登陆后台</th>
-                            <th>东东</th>
-                            <th>163.172.35.12</th>
+                            <th>sdgvb</th>
+                            <th>rtfgbh</th>
+                            <th>rtfgn</th>
+                            <th>rtfgn</th>
                             <th class="click" onclick="del(this)">删除</th>
                         </tr>
                         </tbody>
@@ -700,9 +691,6 @@
                         <input id="new-pu" type="text" placeholder="用户ID"></input>
                         <input id="new-pg" type="text" placeholder="分组ID"></input>
                         <button onclick="save()">添加</button>
-                        <span style="color:#d33" id="user-tip">
-                            用户ID不能为空!
-                        </span>
                     </div>
                 </div>
                 <div class="body-title">管理员注册</div>
@@ -711,16 +699,13 @@
                         <input id="new-gu" type="text" placeholder="管理员账号"></input>
                         <input id="new-gg" type="text" placeholder="管理员密码"></input>
                         <button onclick="uifadd()">添加</button>
-                        <span style="color:#d33" id="admin-tip">
-                            管理员账号不能为空!
-                        </span>
                     </div>
                 </div>
                 <div class="body-title">指静脉注册</div>
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
                         <input id="uid" type="text" placeholder="用户ID"/>
-                        <span style="color: #3d3">注册指静脉数:4</span>
+                        <span style="color: #d33">该用户已注册,注册指静脉数:4</span>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
@@ -728,12 +713,11 @@
                         <button style="margin-left: 0px;" onclick="search()">检索</button>
                         <button>添加指静脉</button>
                         <button onclick="cleanvein()">清空指静脉</button>
-                        <button>指静脉注册</button>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px">
-                        <div style="padding: 0px 10px;color: #3d3">第一步</div>
+                        <div style="padding: 0px 10px;color: #d33">第一步</div>
                     </div>
                 </div>
             </div>
@@ -779,6 +763,11 @@
     </div>
 </div>
 <script>
+//    //防止页面后退
+//    history.pushState(null, null, document.URL);
+//    window.addEventListener('popstate', function () {
+//        history.pushState(null, null, document.URL);
+//    });
     $(document).ready(function () {
         selectUInfoNum();
         logNum();
@@ -794,10 +783,11 @@
         })
         //分页跳转
         $("#fy-1,#fy-2,#fy-3").on('click',
-                '.pre,.next,.first,.last', jumpToPage);
-        $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on('click', jumpToPagedetail);
+                '.pre,.next,.first,.last', jumpToPage());
+        $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on('click', jumpToPagedetail());
         //导航栏点击事件
         $(".nav-list li").click(function () {
+            console.log($(this));
             $(this).addClass("active").siblings().removeClass("active");
             if ($.trim($(this).text()) == "用户管理") {
                 $(".detail-body-1").slideDown(100).siblings().css("display", "none");
@@ -849,13 +839,14 @@
     //添加员工
     function save() {
         //获取值
+        $("#errmsg").html("");
         var userId = $("#new-pu").val();
         var groupId = $("#new-pg").val();
         //表单验证
         if (!userId) {
             $("#user-tip").html("用户ID不能为空!");
             return
-        }else{
+        } else {
             //添加
             doAdd(userId, groupId);
         }
@@ -883,6 +874,64 @@
                 $("#admin-tip").html("管理员添加成功").css("color", "#3d3");
             } else {
                 $("#admin-tip").html(result.msg);
+            }
+        });
+
+    }
+
+    //检索
+    function search() {
+        $("#errmsg").html("");
+        var userId = $("#uid").val();
+        url = "checkUser";
+        var param = {userId: userId};
+
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                alert("检索成功");
+            } else {
+                alert(result.msg);
+            }
+        });
+
+    }
+    function cleanvein() {
+        // $("#errmsg").html("");
+        var userId = $("#uid").val();
+        url = "deleteVeinByEmpId";
+        var param = {userId: userId};
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                alert("清空成功");
+            } else {
+                alert(result.msg);
+            }
+        });
+    }
+
+    //添加管理员
+    function uifadd() {
+        // $("#errmsg").html("");
+        var userId = $("#new-gu").val();
+        var password = $("#new-gg").val();
+        if (!userId) {
+            alert("管理员账号不能为空");
+            return;
+        }
+        if (!password) {
+            alert("管理员密码不能为空");
+            return;
+        }
+        url = "insertUserInfo";
+        var param = {userId: userId, name: "普通管理员", password: password};
+
+        $.post(url, param, function (result) {
+            if (result.code == 0) {
+                alert("添加管理员成功");
+                $("#new-gu").val('');
+                $("#new-gg").val('');
+            } else {
+                alert(result.msg);
             }
         });
 
@@ -1008,10 +1057,11 @@
             //2.3在th对象内容填充具体数据
             //th0.append(result[id].id);
             //....
-            var tds = "<th><input type='checkbox' name='checkId' value='" + result[i].id + "'/></th>" +
-                    "<th>" + result[i].userId + "</th>" +
-                    "<th>" + result[i].groupId + "</th>" +
-                    "<th class='lick' onclick='del(this)'>删除</th>";
+            var tds = "";
+            /* "<th><input type='checkbox' name='checkId' value='" + result[i].id + "'/></th>" +
+             "<th>" + result[i].userId + "</th>" +
+             "<th>" + result[i].groupId + "</th>" +
+             "<th class='lick' onclick='del(this)'>删除</th>"; */
             //2.4将th添加到tr对象中(一行要放多个)
             tr.append(tds);
             //2.5将tr追加到tbody中
@@ -1042,66 +1092,6 @@
         //4.在pageId对象的对象上绑定当前页面值
         $("#pageId").data("pageCurrent", pageObject.pageCurrent);
     }
-    //定义一个函数,通过此函数实现页面的跳转
-    function jumpToPage() {
-        //获得点击对象上class属性对应的值,根据此值
-        //判定具体点击的是哪个对象(例如上一页,下一页)
-        var clazz = $(this).attr("class");
-        //获得pageId对象上绑定的pageCurrent对应的值
-        var pageCurrent = $('#pageId').data("pageCurrent");
-        //获得pageId对象上绑定的pageCount对应的值
-        var pageCount = $('#pageId').data("pageCount")
-        //根据class属性的值判断点击的是否是上一页
-        if (clazz == 'pre' && pageCurrent > 1) {
-            pageCurrent--;
-        }
-        //判断点击的是否是下一页
-        if (clazz == "next" && pageCurrent < pageCount) {
-            pageCurrent++;
-        }
-        //判断点击的对象是否是首页
-        if (clazz == "first") {
-            pageCurrent = 1;
-        }
-        //判定点击的对象是否是尾页
-        if (clazz == "last") {
-            pageCurrent = pageCount;
-        }
-        //重写绑定pageCurrent的值,
-        $('#pageId').data("pageCurrent", pageCurrent);
-        //重新执行查询操作(根据pageCurrent的值)
-        doGetObjects();
-    }
-    //定义一个函数,通过此函数实现具体页面的跳转
-    function jumpToPagedetail() {
-        //获得点击对象上class属性对应的值,根据此值
-        //判定具体点击的是哪个对象(例如上一页,下一页)
-        var clazz = $(this).attr("class");
-        //获得pageId对象上绑定的pageCurrent对应的值
-        var pageCurrent = $('#pageId').data("pageCurrent");
-        //获得pageId对象上绑定的pageCount对应的值
-        var pageCount = $('#pageId').data("pageCount")
-        //根据class属性的值判断点击的是否是上一页
-        if (clazz == 'pre' && pageCurrent > 1) {
-            pageCurrent--;
-        }
-        //判断点击的是否是下一页
-        if (clazz == "next" && pageCurrent < pageCount) {
-            pageCurrent++;
-        }
-        //判断点击的对象是否是首页
-        if (clazz == "first") {
-            pageCurrent = 1;
-        }
-        //判定点击的对象是否是尾页
-        if (clazz == "last") {
-            pageCurrent = pageCount;
-        }
-        //重写绑定pageCurrent的值,
-        $('#pageId').data("pageCurrent", pageCurrent);
-        //重新执行查询操作(根据pageCurrent的值)
-        doGetObjects();
-    }
     //新增普通用户
     function doAdd(userId, groupId) {
         var url = "insertEmp";
@@ -1131,35 +1121,10 @@
     //显示已注册用户 已注册手指
     function veinnum() {
         var url = "selectUAndV";
-        var param = {};
         $.getJSON(url, function (result) {
             $("#veinnum").html(result.data);
         });
     }
-
-    /* function setTableBodyRows(result){
-     var tBody=$("#tbodyId");
-     tBody.empty();
-     for(var i in result){
-     var tr=$("<tr></tr>");
-     tr.data("id",result[i].userId);
-     //2.2构建每行th对象(一行有多个)
-     //var td0=$("<th></th>");
-     //....
-     //2.3在th对象内容填充具体数据
-     //th0.append(result[id].id);
-     //....
-     var tds="<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
-     "<th>"+result[i].userId+"</th>"+
-     "<th>"+result[i].groupId+"</th>"+
-     "<th class='lick' onclick='del(this)'>删除</th>";
-     //2.4将th添加到tr对象中(一行要放多个)
-     tr.append(tds);
-     //2.5将tr追加到tbody中
-     tBody.append(tr);
-
-     }
-     } */
 
     //日志搜索(有问题)
     function doFindLog() {
@@ -1180,7 +1145,7 @@
     function deleteLog(a) {
         var logid = $(a).prev().prev().prev().prev().prev().prev();
         var url = "deleteLog";
-        var param = {id:logid};
+        var param = {id: logid};
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 doFindLog();
@@ -1255,7 +1220,7 @@
     function doFindeUserInfo() {
         var url = "selectUInfoByUserId";
         var userId = $("#kw").val();
-        if(!userId){
+        if (!userId) {
             $.post(url, param, function (result) {
                 if (result.code == 0) {
                     setUserInfo(result.data);
