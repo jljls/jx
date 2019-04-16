@@ -198,7 +198,7 @@ public class UserServiceImpl  implements UserService{
 	@Override
 	public MessageResult selectUser(Integer pageCurrent) {
 		int pageSize=20;
-		if(StringUtils.isEmpty(pageCurrent))
+		if(pageCurrent==null)
 			pageCurrent=1;
 		int startIndex=(pageCurrent-1)*pageSize;
 		List<Employee> list;
