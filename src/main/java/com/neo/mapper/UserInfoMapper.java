@@ -36,4 +36,10 @@ public interface UserInfoMapper {
 	void deleteUInfoByIds(String[]  ids);
 	
 	List<UserInfo> check(@Param("userId") String userId, @Param("password")String password);
-	}
+	
+	Integer upDatapws(@Param("pws")String pws,@Param("userId")String userId);
+	
+	Integer selectUInfoNum();
+	
+	
+}

@@ -50,5 +50,11 @@ public class EmpLogController {
 		return new MessageResult(0, "操作成功", list);
 	}
 
+	@RequestMapping(value = "logNum", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult logNum() {
+		return empLogServic.selectLogNum();
+	}
+	
 	
 }

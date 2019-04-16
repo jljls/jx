@@ -14,5 +14,9 @@ public interface UserInfoService {
 	public MessageResult deleteUInfoByIds(String[] ids);
 
 	public MessageResult check(String userId,String password);
-
+	
+	public MessageResult upDatapws(String pws,String userId);
+	
+	public MessageResult selectUInfoNum();
+	
 }

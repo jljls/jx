@@ -2,6 +2,8 @@ package com.neo.web;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -111,9 +113,9 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectEmpByGroupId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectEmpByGroupId(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String groupId = (String) object.get("groupId");
+	public MessageResult selectEmpByGroupId( String groupId){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String groupId = (String) object.get("groupId");
 
 		logger.info("---查询分组用户数");
 
@@ -163,9 +165,9 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectVeinNumByGroupId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectVeinNumByGroupId(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String groupId = (String) object.get("groupId");
+	public MessageResult selectVeinNumByGroupId( String groupId){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String groupId = (String) object.get("groupId");
 		logger.info("---查询分组手指数");
 		Integer num = null;
 		try {
@@ -218,9 +220,9 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "deleteById", method = RequestMethod.DELETE)
 	@ResponseBody
-	public MessageResult deleteById(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String userId = (String) object.get("userId");
+	public MessageResult deleteById( String userId){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String userId = (String) object.get("userId");
 
 		logger.info("---删除某一用户及相关静脉");
 
@@ -255,9 +257,9 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "deleteVeinByGroupId", method = RequestMethod.DELETE)
 	@ResponseBody
-	public MessageResult deleteVeinByGroupId(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String groupId = (String) object.get("groupId");
+	public MessageResult deleteVeinByGroupId( String groupId){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String groupId = (String) object.get("groupId");
 
 		logger.info("---删除用户分组及相关静脉");
 
@@ -289,11 +291,10 @@ public class ClientController {
 	 * @throws IOException
 	 * @throws Exception
 	 */
-	@RequestMapping(value = "deleteVeinByEmpId", method = RequestMethod.DELETE)
+	@RequestMapping(value = "deleteVeinByEmpId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult deleteVeinByEmpId(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String userId = (String) object.get("userId");
+	public MessageResult deleteVeinByEmpId(String userId){
+		
 		logger.info("---删除某用户的所有静脉特征");
 		try {
 			if (userId == null) {
@@ -326,11 +327,11 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "insertVeinFeat", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult insertVeinFeat(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String groupId = (String) object.get("groupId");
-		String userId = (String) object.get("userId");
-		String[] veinFeat = object.get("veinFeat").toString().split(",");
+	public MessageResult insertVeinFeat( String groupId,String userId ,String veinFeats){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String groupId = (String) object.get("groupId");
+		//String userId = (String) object.get("userId");
+		String[] veinFeat = veinFeats.split(",");
 		logger.info("---存静脉特征");
 
 		try {
@@ -344,8 +345,8 @@ public class ClientController {
 				return new MessageResult(-5, "用户静脉特征已满");
 			} else {
 				
-				for (String veinFeats : veinFeat) {
-					userService.insertEmpVein(userId, veinFeats);
+				for (String vf : veinFeat) {
+					userService.insertEmpVein(userId, vf);
 					//新增一条日志
 					String uid = request.getSession().getAttribute("userId").toString();
 					String logContent = uid+"新增了"+userId+"用户的一条静脉信息";
@@ -420,20 +421,48 @@ public class ClientController {
 		if(userId==null){
 			return new MessageResult(-1, "参数异常");
 		}
-		try{
-			
-				Integer count=userService.checkEmpId(userId);
-				if(count==0){
-					new MessageResult(-9, "检索失败"); 
-				}
+		Integer count;
+		try{	
+				count=userService.checkEmpId(userId);
+				System.out.println(count);
+				
 			
 		}catch(Exception e){
 			e.printStackTrace();
 			return new MessageResult(-100, "未知错误");
 		}
+		if(count==1){
+			return new MessageResult(0, "操作成功"); 
+		}
+		return	new MessageResult(-9,"检索失败");
 		
-		return new MessageResult(0, "操作成功"); 
+		
 	}
 	
-	
+	//判断登陆的人
+	@RequestMapping(value = "people", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult people() {
+		HttpSession session = request.getSession();
+		String uid = session.getAttribute("userId").toString(); 
+		System.out.println(uid);
+		return new MessageResult(0, "操作成功",uid); 
+	}
+	/**
+	 * 查询已经注册用户和已注册手指数
+	 * @param model
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value = "selectUAndV", method = RequestMethod.GET)
+	@ResponseBody
+	public MessageResult selectUAndV(Model model, HttpSession session) {
+		logger.info("---查询手指数");
+		
+			Integer num = userService.selectVeinNum();
+			Integer b=userService.selectRegisteEmp();
+			String str = "当前已注册用户:"+b+"已注册手指数:"+num;
+		return new MessageResult(0, "操作成功", str);
+
+	}
 }

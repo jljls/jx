@@ -10,7 +10,7 @@
        	user_info
        		(user_id,name,password) 
        	VALUES
-       		(#{userId},#{name},#{password})
+       		(#{userId},'普通管理员',#{password})
     </insert>
   	<select id="selectUInfoAll" parameterType="java.lang.String" resultType="com.jx.entity.UserInfo" >
        select
@@ -40,7 +40,18 @@
 		where user_id = #{userId} and password = #{password}
 	</select>       
 
-	   
+	<!-- 修改密码 -->
+	<update id="upDatapws" parameterType="java.lang.String">
+		update user_info
+		set password = #{pws}
+		where user_id = #{userId}	
+	</update>  
+    
+    <!-- 查询管理员数 -->
+    <select id="selectUInfoNum" resultType="java.lang.Integer">
+		select count(id)
+		from user_info
+	</select> 
     
     
 

@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.jx.entity.EmpLog;
+import com.jx.entity.MessageResult;
 import com.neo.mapper.EmpLogMapper;
 import com.neo.service.EmpLogService;
 
@@ -32,5 +33,16 @@ public class EmpLogServiceImpl implements EmpLogService{
 	public List<EmpLog> selectLog(String startTime, String endTime) {
 		List<EmpLog> list = empLogMapper.selectLog(startTime, endTime);
 		return list;
+	}
+	
+	@Override
+	public MessageResult selectLogNum() {
+		try {
+			int num = empLogMapper.selectLogNum();
+			return new MessageResult(0, "操作成功", num);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageResult(-100, "未知错误");
+		}
 	}
 }
