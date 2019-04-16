@@ -8,6 +8,7 @@
     <script type="text/javascript" src="./js/userInfo.js"></script>
     <script type="text/javascript" src="./js/user.js"></script>
     <script type="text/javascript" src="./js/log.js"></script>
+    <script type="text/javascript" src="./js/jxWebSDK.js"></script>
     <style>
         * {
             margin: 0px;
@@ -251,7 +252,7 @@
                 <!-- 右边信息头部 end-->
                 <div class="body-title">
                     人员列表
-                    <div id="veinnum" style="float: right">已注册用户:124,已注册手指:198</div>
+                    <div id="veinnum" style="float: right"></div>
                 </div>
                 <div class="body-information">
                     <div class="body-operate">
@@ -749,19 +750,19 @@
                 <div class="body-information">
                     <div class="body-operate" style="padding:0px">
                         <input id="uid" type="text" placeholder="用户ID"/>
-                        <span style="color: #d33">该用户已注册,注册指静脉数:4</span>
+                        <span id="uvn" style="color: #d33"></span>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px 10px">
-                        <button style="margin-left: 0px;" onclick="search()">检索</button>
-                        <button>添加指静脉</button>
+                        <button  id="" style="margin-left: 0px;" onclick="search()">检索</button>
+                        <button onclick="startReg()">添加指静脉</button>
                         <button onclick="cleanvein()">清空指静脉</button>
                     </div>
                 </div>
                 <div class="body-information" style="border: none">
                     <div class="body-operate" style="padding:0px">
-                        <div style="padding: 0px 10px;color: #d33">第一步</div>
+                        <div id="msg" style="padding: 0px 10px;color: #d33">第一步</div>
                     </div>
                 </div>
             </div>
@@ -881,21 +882,24 @@
 
 
     //检索
-    function search() {
-        $("#errmsg").html("");
-        var userId = $("#uid").val();
-        url = "checkUser";
-        var param = {userId: userId};
-
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                alert("检索成功");
-            } else {
-                alert(result.msg);
-            }
-        });
-
-    }
+  function search() {
+    	 $("#uvn").html("");
+    	 var userId = $("#uid").val();
+    	 
+         url="checkUser";
+         var param = {userId:userId};
+ 		
+         $.post(url,param,function(result){
+ 			if(result.code==0){
+ 				$("#uvn").html(result.data).css("color", "#3d3");
+ 			}else{
+ 				
+ 				alert(result.msg);
+ 				
+ 			}
+ 		});
+         
+     }
     function cleanvein() {
         // $("#errmsg").html("");
         var userId = $("#uid").val();
@@ -903,9 +907,9 @@
         var param = {userId: userId};
         $.post(url, param, function (result) {
             if (result.code == 0) {
-                alert("清空成功");
+            	$("#msg").html("清空成功").css("color", "#3d3");
             } else {
-                alert(result.msg);
+            	document.getElementById("msg").innerHTML = "清空失败";
             }
         });
     }
