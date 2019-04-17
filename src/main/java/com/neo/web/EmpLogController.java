@@ -5,6 +5,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -58,12 +59,13 @@ public class EmpLogController {
 	@RequestMapping(value = "/deleteLogById", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult deleteLogById(Integer id) {
+		HttpSession session = request.getSession();
+		String userId = session.getAttribute("userId").toString();
+		if(!"admin".equals(userId)){
+			return new MessageResult(-2, "权限不足");
+		}
 		// 删除日志
 		MessageResult mr = empLogServic.deleteLogById(id);
-		// 新增一条操作日志
-		String userId = request.getSession().getAttribute("userId").toString();
-		EmpLog empLog = new EmpLog(userId, "删除", userId + "删除了一条日志记录");
-		empLogServic.insertEmpLog(empLog);
 		return mr;
 	}
 	

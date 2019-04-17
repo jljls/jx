@@ -60,12 +60,13 @@ public class RegisteServiceImpl implements RegisteService {
 
 				for (String veinFeat : veinFeats) {
 					registeMapper.insertEmpVein(userId, veinFeat);
-					// 新增一条日志
-					String uid = request.getSession().getAttribute("userId").toString();
-					String logContent = "新增" + userId + "用户的一条静脉信息";
-					EmpLog empLog = new EmpLog(uid,"新增",logContent);
-					empLogMapper.insertLog(empLog);
+					
 				}
+				// 新增一条日志
+				String uid = request.getSession().getAttribute("userId").toString();
+				String logContent = "新增" + userId + "用户的三枚指静脉信息";
+				EmpLog empLog = new EmpLog(uid,"新增",logContent);
+				empLogMapper.insertLog(empLog);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
