@@ -167,7 +167,7 @@
         }
 
         .body-operate .data input {
-            width: 30px;
+            width: 35px;
         }
 
         .body-table {
@@ -512,8 +512,8 @@
                         </button>
                     </div>
                 </div>
-                <div class="body-title">日志管理</div>
-                <div class="body-information">
+                <div class="body-title super">日志管理</div>
+                <div class="body-information super">
                     <div class="body-operate" style="padding:0px">
                         <div style="margin: 10px;">
                             <label for="data-setting" style="margin: 0px 10px 0px 0px">日志保存时间:</label>
@@ -542,6 +542,7 @@
         history.pushState(null, null, document.URL);
     });
     $(document).ready(function () {
+    	setTime();
         selectUInfoNum();
         logNum();
         people();
@@ -581,6 +582,16 @@
             }
         })
     })
+    //设置时间 从数据库查询定时删除的时间
+     function setTime(){
+    	 var url="selectTime";
+    	 $.post(url,function(result){
+    		if(result.code==0){
+    			$("#data-setting").val(result.data);
+    			console.log(result.data);
+    		} 
+    	 });
+     }
     //密码校验错误提示
     function proofread() {
         if ($("#new-pw").val() !== $("#new-pw-agin").val()) {
@@ -627,7 +638,7 @@
      				$(".clbu").css("display","inline");
      			}else{
      				$(".clbu").css("display","none");
-     				$("#uvn").html("检索失败").css("color", "#d33");
+     				$("#uvn").html("该用户不存在").css("color", "#d33");
      				
      				
      			}
@@ -699,6 +710,9 @@
             success: function (result) {
                 temp = result;
                 $("#people").html(temp.data);
+                if(temp.data!="admin"){
+					$(".super").css("display","none");
+                }
             }
         });
     }

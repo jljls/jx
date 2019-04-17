@@ -69,25 +69,11 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService{
 		
 	}
 
-
-
-
 	@Override
 	public MessageResult selectTime() {
 		Integer aa=scheduleTaskMapper.selectSchedule();
-		String data;
-		if(aa==30){
-			data="30天";	
-		}else if(aa==60){
-			data="60天";
-		}else if(aa==180){
-			data="半年";
-		}else if(aa==365){
-			data="一年";
-		}else{
-			data="永远";
-		}
-		return new MessageResult(0,"操作成功",data);
+		
+		return new MessageResult(0,"操作成功",aa);
 		
 	}
 	

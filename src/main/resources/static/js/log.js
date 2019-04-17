@@ -34,8 +34,16 @@ function doQueryLog(){
             if (result.code == 0) {
                 setLogBody(result.data.list);
                 setPagination("#fy-3",result.data.pageObject);
+                var data=new Date();
+            	$("#star-year,#end-year").val(data.getFullYear());
+            	$("#star-mouth,#end-mouth").val(data.getMonth());
+            	$("#star-day,#end-day").val(data.getDate());
             } else {
                 alert(result.msg);
+                var data=new Date();
+            	$("#star-year,#end-year").val(data.getFullYear());
+            	$("#star-mouth,#end-mouth").val(data.getMonth());
+            	$("#star-day,#end-day").val(data.getDate());
             }
         });
     }
