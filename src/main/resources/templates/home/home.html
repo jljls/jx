@@ -639,8 +639,6 @@
      			}else{
      				$(".clbu").css("display","none");
      				$("#uvn").html("该用户不存在").css("color", "#d33");
-     				
-     				
      			}
      		});
     		 
@@ -662,7 +660,9 @@
             	search();
             	veinnum();
             } else {
-            	document.getElementById("msg").innerHTML = "清空失败";
+            	$("#msg").html(result.msg).css("color", "#3d3");
+            	search();
+            	veinnum();
             }
         });
     }

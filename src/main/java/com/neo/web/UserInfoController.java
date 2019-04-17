@@ -73,17 +73,18 @@ public class UserInfoController {
 	 */
 	@RequestMapping(value="/deleteUInfoByIds", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult deleteUInfoByIds(String[] ids) {
+	public MessageResult deleteUInfoByIds(String ids) {
+		String[] string = ids.split(",");
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
 		if(!"admin".equals(uid)){
 			return new MessageResult(-100,"权限不足");
 		}
-		if(ids.length==0){
+		if(string.length==0){
 			return new MessageResult(-1,"参数错误");
 		}
 		
-		return userInfoService.deleteUInfoByIds(ids);
+		return userInfoService.deleteUInfoByIds(string);
 	} 
 	
 	/*

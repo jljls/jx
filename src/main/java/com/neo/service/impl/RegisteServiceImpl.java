@@ -64,7 +64,7 @@ public class RegisteServiceImpl implements RegisteService {
 				}
 				// 新增一条日志
 				String uid = request.getSession().getAttribute("userId").toString();
-				String logContent = "新增" + userId + "用户的三枚指静脉信息";
+				String logContent = uid+"给用户"+userId+"添加了一枚指静脉";
 				EmpLog empLog = new EmpLog(uid,"新增",logContent);
 				empLogMapper.insertLog(empLog);
 			}

@@ -43,7 +43,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			userInfoMapper.insertUserInfo(userId, name, password);
 			HttpSession session = request.getSession();
 			String uid = session.getAttribute("userId").toString();
-			String logContent = uid + "新增了一名管理员,userId=" + userId;
+			String logContent = uid + "新增了一名管理员" + userId;
 			EmpLog empLog = new EmpLog(uid, "新增", logContent);
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
@@ -82,7 +82,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			userInfoMapper.deleteUInfoById(userId);
 			HttpSession session = request.getSession();
 			String uid = session.getAttribute("userId").toString();
-			String logContent = uid + "删除了一名管理员,userId=" + userId;
+			String logContent = uid + "删除了"+"管理员" +userId ;
 			EmpLog empLog = new EmpLog(uid, "删除", logContent);
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
@@ -103,7 +103,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			}
 			// 新增一条日志
 			String uid = request.getSession().getAttribute("userId").toString();
-			String logContent = uid + "删除了" + ids.length + "个用户";
+			String logContent = uid + "删除了" + ids.length + "个管理员";
 			EmpLog empLog = new EmpLog(uid, "删除", logContent);
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
@@ -127,7 +127,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public MessageResult upDatapws(String pws, String userId) {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString();
-		String logContent = uid + "新增了一名管理员,userId=" + userId;
+		String logContent = uid + "新增了一名管理员" + userId;
 		EmpLog empLog = new EmpLog(uid, "新增", logContent);
 		try {
 			int i = userInfoMapper.upDatapws(pws, userId);

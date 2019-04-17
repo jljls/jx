@@ -52,7 +52,7 @@
     //批量删除
     function dellist(ind) {
     	if (ind == 1) {
-            var ids;
+            var ids = "";
         	$("#tbodyId input[name='checkId']")//迭代input对象
         	.each(function (){//each函数用于迭代一个数组
         		if($(this).prop("checked")){//判断此input对象是否被选中
@@ -79,8 +79,8 @@
             });
         }
         if (ind == 2) {
-        	debugger;
-            var ids;
+        	debugger
+            var ids = "";
         	$("#userInfotBody input[name='checkId']")//迭代input对象
         	.each(function (){//each函数用于迭代一个数组
         		if($(this).prop("checked")){//判断此input对象是否被选中
