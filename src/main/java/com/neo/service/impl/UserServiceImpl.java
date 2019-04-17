@@ -223,7 +223,7 @@ public class UserServiceImpl implements UserService {
 				// 新增一条日志
 				String uid = request.getSession().getAttribute("userId").toString();
 				String logContent = uid + "删除了" + userId + "用户";
-				EmpLog empLog = new EmpLog(uid, "delete", logContent);
+				EmpLog empLog = new EmpLog(uid, "删除", logContent);
 				empLogMapper.insertLog(empLog);
 			}
 

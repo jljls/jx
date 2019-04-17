@@ -72,7 +72,7 @@
     </select>
     
 
-	
+	<!-- 查询当前用户 -->
 	<select id="selectEmp" parameterType="java.lang.String" resultType="java.lang.Integer" >
        select
        <include refid="Emp_Column_List" />

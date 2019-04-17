@@ -22,34 +22,36 @@ import com.neo.service.UserInfoService;
 
 @Service
 @Async
-public class UserInfoServiceImpl implements UserInfoService{
+public class UserInfoServiceImpl implements UserInfoService {
 	@Resource
-	private UserInfoMapper  userInfoMapper;
-	
+	private UserInfoMapper userInfoMapper;
+
 	@Resource
 	private HttpServletRequest request;
-	
+
 	@Resource
 	private EmpLogMapper empLogMapper;
-	
+
 	@Override
 	public MessageResult insertUserInfo(String userId, String name, String password) {
-		
-		 try{
-			 userInfoMapper.insertUserInfo(userId, name, password);
-			 EmpLog empLog = new EmpLog();
-		 }catch(Exception e){
-			 e.printStackTrace();
-			 return new MessageResult(-1,"参数错误");
-		 }
-		 
-		 return new  MessageResult(0,"操作成功");
-	}
-	
 
+		try {
+			userInfoMapper.insertUserInfo(userId, name, password);
+			HttpSession session = request.getSession();
+			String uid = session.getAttribute("userId").toString();
+			String logContent = uid + "新增了一名管理员,userId=" + userId;
+			EmpLog empLog = new EmpLog(uid, "新增", logContent);
+			empLogMapper.insertLog(empLog);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return new MessageResult(-1, "参数错误");
+		}
+
+		return new MessageResult(0, "操作成功");
+	}
 
 	@Override
-	public Map<String, Object> selectUInfoAll(String userId,Integer pageCurrent) {
+	public Map<String, Object> selectUInfoAll(String userId, Integer pageCurrent) {
 		int pageSize = 1;
 		if (pageCurrent == null)
 			pageCurrent = 1;
@@ -61,53 +63,51 @@ public class UserInfoServiceImpl implements UserInfoService{
 		pageObject.setRowCount(rowCount);
 		pageObject.setStartIndex(startIndex);
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<UserInfo> list = userInfoMapper.selectUInfoAll(userId,startIndex,pageSize);
+		List<UserInfo> list = userInfoMapper.selectUInfoAll(userId, startIndex, pageSize);
 		map.put("list", list);
 		map.put("pageObject", pageObject);
 		return map;
 	}
 
-
 	@Override
 	public MessageResult deleteUInfoById(String userId) {
-		try{
+		try {
 			userInfoMapper.deleteUInfoById(userId);
-			
-		}catch(Exception e){
+			HttpSession session = request.getSession();
+			String uid = session.getAttribute("userId").toString();
+			String logContent = uid + "删除了一名管理员,userId=" + userId;
+			EmpLog empLog = new EmpLog(uid, "删除", logContent);
+			empLogMapper.insertLog(empLog);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		return new  MessageResult(0,"操作成功");
+
+		return new MessageResult(0, "操作成功");
 	}
-
-
 
 	@Override
 	public MessageResult deleteUInfoByIds(String[] ids) {
-		try{
-		for(String userId:ids){
-			userInfoMapper.deleteUInfoById(userId);
-			//新增一条日志
-			String uid = request.getSession().getAttribute("userId").toString();
-			String logContent = uid+"删除了"+userId+"用户";
-			EmpLog empLog = new EmpLog(uid,"insert",logContent);
-			empLogMapper.insertLog(empLog);
-		}
-		
-			
-		}catch(Exception e){
+		try {
+			for (String userId : ids) {
+				userInfoMapper.deleteUInfoById(userId);
+				// 新增一条日志
+				String uid = request.getSession().getAttribute("userId").toString();
+				String logContent = uid + "删除了" + userId + "用户";
+				EmpLog empLog = new EmpLog(uid, "删除", logContent);
+				empLogMapper.insertLog(empLog);
+			}
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new  MessageResult(0,"操作成功");
+		return new MessageResult(0, "操作成功");
 	}
-
-
 
 	@Override
 	public MessageResult check(String userId, String password) {
 		List<UserInfo> list = userInfoMapper.check(userId, password);
-		if(list.size()==0){
-			return new MessageResult(-11,"密码错误");
+		if (list.size() == 0) {
+			return new MessageResult(-11, "密码错误");
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userId);
@@ -115,12 +115,17 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 
 	@Override
-	public MessageResult upDatapws(String pws,String userId) {
+	public MessageResult upDatapws(String pws, String userId) {
+		HttpSession session = request.getSession();
+		String uid = session.getAttribute("userId").toString();
+		String logContent = uid + "新增了一名管理员,userId=" + userId;
+		EmpLog empLog = new EmpLog(uid, "新增", logContent);
 		try {
-			int i = userInfoMapper.upDatapws(pws,userId);
-			if(i!=0){
+			int i = userInfoMapper.upDatapws(pws, userId);
+			if (i != 0) {
+				empLogMapper.insertLog(empLog);
 				return new MessageResult(0, "操作成功!");
-			}else {
+			} else {
 				return new MessageResult(-1, "参数错误!");
 			}
 		} catch (Exception e) {
@@ -128,8 +133,6 @@ public class UserInfoServiceImpl implements UserInfoService{
 			return new MessageResult(-100, "未知错误!");
 		}
 	}
-
-
 
 	@Override
 	public MessageResult selectUInfoNum() {
@@ -140,11 +143,5 @@ public class UserInfoServiceImpl implements UserInfoService{
 			return new MessageResult(-100, "未知错误");
 		}
 	}
-
-	
-
-
-
-
 
 }

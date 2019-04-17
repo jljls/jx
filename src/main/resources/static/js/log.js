@@ -48,6 +48,7 @@ function doQueryLog(){
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 doFindLog();
+                logNum();
             }
         });
     }
