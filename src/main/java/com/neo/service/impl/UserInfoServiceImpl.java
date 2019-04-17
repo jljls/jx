@@ -56,7 +56,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 
 	@Override
 	public Map<String, Object> selectUInfoAll(String userId, Integer pageCurrent) {
-		int pageSize = 1;
+		int pageSize = 25;
 		if (pageCurrent == null)
 			pageCurrent = 1;
 		int startIndex = (pageCurrent - 1) * pageSize;

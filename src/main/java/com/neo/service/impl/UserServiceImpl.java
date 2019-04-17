@@ -198,7 +198,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Map<String, Object> selectUser(String userId, Integer pageCurrent) {
-		int pageSize = 1;
+		int pageSize = 25;
 		if (pageCurrent == null)
 			pageCurrent = 1;
 		int startIndex = (pageCurrent - 1) * pageSize;

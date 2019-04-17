@@ -36,7 +36,7 @@ public class EmpLogServiceImpl implements EmpLogService{
 	@Override
 	public Map<String, Object> selectLog(String startTime, String endTime,Integer pageCurrent) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		int pageSize = 1;
+		int pageSize = 25;
 		if (pageCurrent == null)
 			pageCurrent = 1;
 		int startIndex = (pageCurrent - 1) * pageSize;

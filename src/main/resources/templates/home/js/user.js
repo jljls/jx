@@ -23,8 +23,10 @@
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 $("#user-tip").html("注册成功!").css("color", "#3d3");
+                veinnum();
+                logNum();
             } else {
-                $("#user-tip").html(result.msg);
+                $("#user-tip").html(result.msg).css("color", "#d33");
             }
         });
     }
@@ -33,10 +35,13 @@
     function del(a) {
         if (confirm("您是否删除本条数据！！！")) {
             var url = "deleteById";
-            var param = {};
+            var userId = $(a).parent().data("id");
+            var param = {userId:userId};
             $.post(url, param, function (result) {
                 if (result.code == 0) {
-                    $(a).parent().remove();
+                	doFind();
+                	veinnum();
+                	logNum();
                 } else {
                     alert(result.msg);
                 }
@@ -46,56 +51,84 @@
 
     //批量删除
     function dellist(ind) {
-        if (ind == 1) {
-            var ids = $(".body-table-1 :checked");
+    	if (ind == 1) {
+            var ids;
+        	$("#tbodyId input[name='checkId']")//迭代input对象
+        	.each(function (){//each函数用于迭代一个数组
+        		if($(this).prop("checked")){//判断此input对象是否被选中
+        			if(ids==""){
+        				ids += $(this).val();
+        			}else{
+        				ids += ","+$(this).val();
+        			}
+        		}
+        	})
+        	if (ids.length == 0) {
+        		return;
+        	}
+        	var url = "deleteUsers";
+            var param = {ids:ids};
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                	doFind();
+                	veinnum();
+                	logNum();
+                } else {
+                    alert(result.msg);
+                }
+            });
         }
         if (ind == 2) {
-            var ids = $(".body-table-2 :checked");
+        	debugger;
+            var ids;
+        	$("#userInfotBody input[name='checkId']")//迭代input对象
+        	.each(function (){//each函数用于迭代一个数组
+        		if($(this).prop("checked")){//判断此input对象是否被选中
+        			if(ids==""){
+        				ids += $(this).val();
+        			}else{
+        				ids += ","+$(this).val();
+        			}
+        		}
+        	})
+        	if (ids.length == 0) {
+        		return;
+        	}
+        	var url = "deleteUInfoByIds";
+            var param = {ids:ids};
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                	doFindeUserInfo()
+                	selectUInfoNum();
+                	logNum();
+                } else {
+                    alert(result.msg);
+                }
+            });
         }
-        if (ids.length == 0) {
-            alert("请选择一条数据");
-        }
-
-        var userIds;
-        ids.each(function () {
-            if (userIds == "") {
-                userIds += $(this).val();
-            } else {
-                userIds += "," + $(this).val();
-            }
-        })
-        var url = "deleteUsers";
-        var param = {ids: userIds};
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                ids.each(function () {
-                    $(this).parent().parent().remove();
-                })
-            } else {
-                alert(result.msg);
-            }
-        });
+    }
+    
+    function doQuery(){
+    	//1.初始化当前页码数据
+    	$("#fy-1").data("pageCurrent",1);
+    	//2.根据条件查询数据
+    	doFind();
     }
     
     //查询用户
     function doFind() {
         var url = "selectUser";
-        $.post(url, function (result) {
-            if (result.code == 0)
-                setTableBodyRows(result.data);
-        });
-
-    }
-    
-  //普通用户ID查找
-    function doFindUserId() {
-        var url = "selectUserByuserId";
         var userId = $("#userkw").val();
-        var param = {userId: userId};
-        $.post(url, param, function (result) {
-            if (result.code == 0) {
-                setTableBodyRows(result.data);
-            }
+        var pageCurrent = $("#fy-1").data("pageCurrent");
+    	if(!pageCurrent){
+    		pageCurrent = 1;
+    	}
+        var param = {pageCurrent:pageCurrent};
+        param.userId = userId;
+        $.post(url,param, function (result) {
+            if (result.code == 0)
+                setTableBodyRows(result.data.list);
+            	setPagination("#fy-1",result.data.pageObject);
         });
     }
     
@@ -106,19 +139,11 @@
         for (var i in result) {
             var tr = $("<tr></tr>");
             tr.data("id", result[i].userId);
-            //2.2构建每行th对象(一行有多个)
-            //var td0=$("<th></th>");
-            //....
-            //2.3在th对象内容填充具体数据
-            //th0.append(result[id].id);
-            //....
-            var tds = "<th><input type='checkbox' name='checkId' value='" + result[i].id + "'/></th>" +
+            var tds = "<th><input type='checkbox' name='checkId' value='" + result[i].userId + "'/></th>" +
              "<th>" + result[i].userId + "</th>" +
              "<th>" + result[i].groupId + "</th>" +
-             "<th class='lick' onclick='del(this)'>删除</th>";
-            //2.4将th添加到tr对象中(一行要放多个)
+             "<th class='click' onclick='del(this)'>删除</th>";
             tr.append(tds);
-            //2.5将tr追加到tbody中
             tBody.append(tr);
 
         }
