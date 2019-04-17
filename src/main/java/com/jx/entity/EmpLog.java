@@ -19,6 +19,13 @@ public class EmpLog {
 	private Date createTime;
 	private String updateBy;
 	private Date updateTime;
+	private String time;
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
 	public EmpLog() {
 		// TODO Auto-generated constructor stub
 	}
@@ -82,9 +89,9 @@ public class EmpLog {
 	}
 	@Override
 	public String toString() {
-		return "EmpLog [id=" + id + ", empId=" + userId + ", type=" + type + ", logContent=" + logContent + ", createBy="
-				+ createBy + ", createTime=" + createTime + ", updateBy=" + updateBy + ", updateTime=" + updateTime
-				+ "]";
+		return "EmpLog [id=" + id + ", userId=" + userId + ", type=" + type + ", logContent=" + logContent
+				+ ", createBy=" + createBy + ", createTime=" + createTime + ", updateBy=" + updateBy + ", updateTime="
+				+ updateTime + ", time=" + time + "]";
 	}
 	
 }

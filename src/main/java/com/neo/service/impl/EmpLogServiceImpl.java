@@ -1,5 +1,6 @@
 package com.neo.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +36,7 @@ public class EmpLogServiceImpl implements EmpLogService{
 
 	@Override
 	public Map<String, Object> selectLog(String startTime, String endTime,Integer pageCurrent) {
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		Map<String, Object> map = new HashMap<String, Object>();
 		int pageSize = 25;
 		if (pageCurrent == null)
@@ -47,6 +49,10 @@ public class EmpLogServiceImpl implements EmpLogService{
 		pageObject.setRowCount(rowCount);
 		pageObject.setStartIndex(startIndex);
 		List<EmpLog> list = empLogMapper.selectLog(startTime, endTime,startIndex,pageSize);
+		for (EmpLog empLog : list) {
+			String time = sdf.format(empLog.getCreateTime());
+			empLog.setTime(time);
+		}
 		map.put("list", list);
 		map.put("pageObject", pageObject);
 		return map;
