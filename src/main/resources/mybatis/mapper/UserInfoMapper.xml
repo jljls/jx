@@ -16,6 +16,12 @@
    	from user_info
    	<include refid="whereQuery"></include>
    </select>
+   <!-- 检查userInfo -->
+  <select id="checkUserInfo" parameterType="java.lang.String" resultType="java.lang.Integer">
+   	select count(user_id) 
+		from user_info
+		where user_id = #{userId} 
+   </select>
   
    <!-- 管理员 模块-->
    <insert id="insertUserInfo" parameterType="java.lang.String" >

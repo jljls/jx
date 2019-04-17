@@ -44,5 +44,5 @@ public interface UserInfoMapper {
 	
 	Integer selectUInfoNum();
 	
-	
+	Integer checkUserInfo(String userId);
 }

@@ -280,10 +280,8 @@
 
        function startReg()
        {
-    	   if($("#uvn").html().search(/8/)){
-    		   $("#msg").html("指静脉已注册上限!").css("color","#d33");
-    		   return
-    	   }
+    	   
+    	   
     	   
  		regNum = 0;
  		regState = 0;

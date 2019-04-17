@@ -36,6 +36,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public MessageResult insertUserInfo(String userId, String name, String password) {
 
 		try {
+			Integer aa=userInfoMapper.checkUserInfo(userId);
+			if(aa==1){
+				return new MessageResult(-11, "管理员已存在");
+			}
 			userInfoMapper.insertUserInfo(userId, name, password);
 			HttpSession session = request.getSession();
 			String uid = session.getAttribute("userId").toString();
