@@ -1,31 +1,90 @@
+
 //定义一个函数,通过此函数实现页面的跳转
-    function jumpToPage() {
-        //获得点击对象上class属性对应的值,根据此值
+    function jumpToPage(a) {
+    	debugger;
+    	//获得点击对象上class属性对应的值,根据此值
         //判定具体点击的是哪个对象(例如上一页,下一页)
-        var clazz = $(this).attr("class");
-        //获得pageId对象上绑定的pageCurrent对应的值
-        var pageCurrent = $('#pageId').data("pageCurrent");
-        //获得pageId对象上绑定的pageCount对应的值
-        var pageCount = $('#pageId').data("pageCount")
-        //根据class属性的值判断点击的是否是上一页
-        if (clazz == 'pre' && pageCurrent > 1) {
-            pageCurrent--;
-        }
-        //判断点击的是否是下一页
-        if (clazz == "next" && pageCurrent < pageCount) {
-            pageCurrent++;
-        }
-        //判断点击的对象是否是首页
-        if (clazz == "first") {
-            pageCurrent = 1;
-        }
-        //判定点击的对象是否是尾页
-        if (clazz == "last") {
-            pageCurrent = pageCount;
-        }
-        //重写绑定pageCurrent的值,
-        $('#pageId').data("pageCurrent", pageCurrent);
-        //重新执行查询操作(根据pageCurrent的值)
+        var clazz = $(a).attr("class");
+    	var id = $(a).parent().attr("id");
+    	if(id=="fy-1"){
+            //获得fy-1对象上绑定的pageCurrent对应的值
+            var pageCurrent = $('#fy-1').data("pageCurrent");
+            //获得fy-1对象上绑定的pageCount对应的值
+            var pageCount = $('#fy-1').data("pageCount")
+            //根据class属性的值判断点击的是否是上一页
+            if (clazz == 'pre' && pageCurrent > 1) {
+                pageCurrent--;
+            }
+            //判断点击的是否是下一页
+            if (clazz == "next" && pageCurrent < pageCount) {
+                pageCurrent++;
+            }
+            //判断点击的对象是否是首页
+            if (clazz == "first") {
+                pageCurrent = 1;
+            }
+            //判定点击的对象是否是尾页
+            if (clazz == "last") {
+                pageCurrent = pageCount;
+            }
+            //重写绑定pageCurrent的值,
+            $('#fy-1').data("pageCurrent", pageCurrent);
+            //重新执行查询操作(根据pageCurrent的值)
+            doFind();
+    	}
+		if(id=="fy-2"){
+            //获得fy-2对象上绑定的pageCurrent对应的值
+            var pageCurrent = $('#fy-2').data("pageCurrent");
+            //获得fy-2对象上绑定的pageCount对应的值
+            var pageCount = $('#fy-2').data("pageCount")
+            //根据class属性的值判断点击的是否是上一页
+            if (clazz == 'pre' && pageCurrent > 1) {
+                pageCurrent--;
+            }
+            //判断点击的是否是下一页
+            if (clazz == "next" && pageCurrent < pageCount) {
+                pageCurrent++;
+            }
+            //判断点击的对象是否是首页
+            if (clazz == "first") {
+                pageCurrent = 1;
+            }
+            //判定点击的对象是否是尾页
+            if (clazz == "last") {
+                pageCurrent = pageCount;
+            }
+            //重写绑定pageCurrent的值,
+            $('#fy-2').data("pageCurrent", pageCurrent);
+            //重新执行查询操作(根据pageCurrent的值)
+            doFindeUserInfo()		
+		}
+		if(id=="fy-3"){
+            //获得fy-3对象上绑定的pageCurrent对应的值
+            var pageCurrent = $('#fy-3').data("pageCurrent");
+            //获得fy-3对象上绑定的pageCount对应的值
+            var pageCount = $('#fy-3').data("pageCount")
+            //根据class属性的值判断点击的是否是上一页
+            if (clazz == 'pre' && pageCurrent > 1) {
+                pageCurrent--;
+            }
+            //判断点击的是否是下一页
+            if (clazz == "next" && pageCurrent < pageCount) {
+                pageCurrent++;
+            }
+            //判断点击的对象是否是首页
+            if (clazz == "first") {
+                pageCurrent = 1;
+            }
+            //判定点击的对象是否是尾页
+            if (clazz == "last") {
+                pageCurrent = pageCount;
+            }
+            //重写绑定pageCurrent的值,
+            $('#fy-3').data("pageCurrent", pageCurrent);
+            //重新执行查询操作(根据pageCurrent的值)
+            doFindLog();
+		}
+    	
     }
     //定义一个函数,通过此函数实现具体页面的跳转
     function jumpToPagedetail() {
@@ -33,9 +92,9 @@
         //判定具体点击的是哪个对象(例如上一页,下一页)
         var clazz = $(this).attr("class");
         //获得pageId对象上绑定的pageCurrent对应的值
-        var pageCurrent = $('#pageId').data("pageCurrent");
+        var pageCurrent = $('#fy-1').data("pageCurrent");
         //获得pageId对象上绑定的pageCount对应的值
-        var pageCount = $('#pageId').data("pageCount")
+        var pageCount = $('#fy-1').data("pageCount")
         //根据class属性的值判断点击的是否是上一页
         if (clazz == 'pre' && pageCurrent > 1) {
             pageCurrent--;
@@ -53,9 +112,11 @@
             pageCurrent = pageCount;
         }
         //重写绑定pageCurrent的值,
-        $('#pageId').data("pageCurrent", pageCurrent);
+        $('#fy-1').data("pageCurrent", pageCurrent);
         //重新执行查询操作(根据pageCurrent的值)
+        doFind();
     }
+    
     
     
     //添加指静脉

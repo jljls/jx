@@ -1,5 +1,7 @@
 ﻿package com.neo.web;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -43,8 +45,8 @@ public class UserInfoController {
 	@RequestMapping(value="/selectUInfoAll", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult selectUInfoAll(String userId,Integer pageCurrent) {
-		
-		return userInfoService.selectUInfoAll(userId,pageCurrent);
+		Map<String, Object> map = userInfoService.selectUInfoAll(userId,pageCurrent);
+		return new MessageResult(0, "操作成功", map);
 	}
 	/*
 	 * 按userId删除管理员

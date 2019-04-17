@@ -1,12 +1,29 @@
+//点击菜单执行的查询
+function doQueryLog(){
+    	//1.初始化当前页码数据
+    	$("#fy-3").data("pageCurrent",1);
+    	//2.根据条件查询数据
+    	doFindLog();
+    }
+
 //日志搜索
     function doFindLog() {
+    	debugger;
         var url = "selectLog";
         var param = {};
-        param.startTime = $("#startTime").val();
-        param.endTime = $("#endTime").val();
+        var pageCurrent = $("#fy-3").data("pageCurrent");
+    	if(!pageCurrent){
+    		pageCurrent = 1;
+    	}
+    	var startTime = $("#star-year").val()+"/"+$("#star-mouth").val()+"/"+$("#star-day").val();
+    	var endTime = $("#end-year").val()+"/"+$("#end-mouth").val()+"/"+$("#end-day").val();
+    	param.pageCurrent = pageCurrent;
+        param.startTime = startTime;
+        param.endTime = endTime;
         $.post(url, param, function (result) {
             if (result.code == 0) {
-                setLogBody(result.data);
+                setLogBody(result.data.list);
+                setPagination("#fy-3",result.data.pageObject);
             } else {
                 alert(result.msg);
             }

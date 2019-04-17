@@ -100,32 +100,28 @@
         }
     }
     
-    //查询用户
-    function doFind() {
-    	debugger;
-        var url = "selectUser";
-        var param = {pageCurrent:1};
-        $.post(url,param, function (result) {
-            if (result.code == 0)
-                setTableBodyRows(result.data);
-        });
-        
+    function doQuery(){
+    	//1.初始化当前页码数据
+    	$("#fy-1").data("pageCurrent",1);
+    	//2.根据条件查询数据
+    	doFind();
     }
     
-  //普通用户ID查找
-    function doFindUserId() {
-        var url = "selectUserByuserId";
+    //查询用户
+    function doFind() {
+        var url = "selectUser";
         var userId = $("#userkw").val();
-        if(!userId){
-        	doFind();
-        }else{
-        	var param = {userId: userId};
-            $.post(url, param, function (result) {
-                if (result.code == 0) {
-                    setTableBodyRows(result.data);
-                }
-            });
-        }
+        var pageCurrent = $("#fy-1").data("pageCurrent");
+    	if(!pageCurrent){
+    		pageCurrent = 1;
+    	}
+        var param = {pageCurrent:pageCurrent};
+        param.userId = userId;
+        $.post(url,param, function (result) {
+            if (result.code == 0)
+                setTableBodyRows(result.data.list);
+            	setPagination("#fy-1",result.data.pageObject);
+        });
     }
     
   //表格数据拼接

@@ -1,6 +1,8 @@
 package com.neo.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -10,6 +12,7 @@ import org.springframework.util.StringUtils;
 
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
+import com.jx.entity.Page;
 import com.neo.mapper.EmpLogMapper;
 import com.neo.service.EmpLogService;
 
@@ -31,13 +34,22 @@ public class EmpLogServiceImpl implements EmpLogService{
 	}
 
 	@Override
-	public List<EmpLog> selectLog(String startTime, String endTime,Integer pageCurrent) {
-		int pageSize = 20;
-		if(StringUtils.isEmpty(pageCurrent))
+	public Map<String, Object> selectLog(String startTime, String endTime,Integer pageCurrent) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		int pageSize = 1;
+		if (pageCurrent == null)
 			pageCurrent = 1;
-		int startIndex=(pageCurrent-1)*pageSize;
+		int startIndex = (pageCurrent - 1) * pageSize;
+		int rowCount = empLogMapper.logRowCount(startTime,endTime);
+		Page pageObject = new Page();
+		pageObject.setPageCurrent(pageCurrent);
+		pageObject.setPageSize(pageSize);
+		pageObject.setRowCount(rowCount);
+		pageObject.setStartIndex(startIndex);
 		List<EmpLog> list = empLogMapper.selectLog(startTime, endTime,startIndex,pageSize);
-		return list;
+		map.put("list", list);
+		map.put("pageObject", pageObject);
+		return map;
 	}
 	
 	@Override

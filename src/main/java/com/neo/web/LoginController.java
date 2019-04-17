@@ -2,6 +2,7 @@ package com.neo.web;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,8 @@ import net.sf.json.JSONObject;
 @Controller
 @Async
 public class LoginController {
+	@Resource
+	private HttpServletRequest request ;
 	@Resource
 	private LoginService login;
 	@Resource 
@@ -95,8 +98,12 @@ public class LoginController {
 	 */
 	@RequestMapping("/index")
 	public String index(){
+		HttpSession session = request.getSession();
+		if(session.getAttribute("userId")==null){
+			return "/login";
+		}
+
 		return "/home/home";
 	}
-	
 	
 }

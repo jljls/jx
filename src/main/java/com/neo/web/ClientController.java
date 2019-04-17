@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -367,9 +368,9 @@ public class ClientController {
 	 */
 	@RequestMapping(value = "selectUser", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectUser(Integer pageCurrent) {
-		MessageResult mr = userService.selectUser(pageCurrent);
-		System.out.println(mr.toString());
+	public MessageResult selectUser(String userId,Integer pageCurrent) {
+		Map<String, Object> map = userService.selectUser(userId,pageCurrent);
+		MessageResult mr = new MessageResult(0,"操作成功",map);
 		return mr;
 	}
 	@RequestMapping(value = "selectUserByuserId", method = RequestMethod.POST)

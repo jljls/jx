@@ -11,6 +11,7 @@ public interface EmpLogMapper {
 	int insertLog(EmpLog empLog);
 	//查询日志数
 	int selectLogNum();
+	int logRowCount(@Param("startTime")String startTime,@Param("endTime")String endTime);
 	//删除日志
 	void deleteLog(@Param("datetime")String datetime);
 	//根据日期查询日志

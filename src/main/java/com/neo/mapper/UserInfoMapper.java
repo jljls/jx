@@ -13,6 +13,9 @@ import com.jx.entity.VeinFeat;
 
 
 public interface UserInfoMapper {
+	
+	Integer userInfoRowCount(@Param("userId")String userId);
+	
 	/**
 	 * 新增userInfo
 	 * @param userId

@@ -260,7 +260,7 @@
                         <button onclick="dellist(1)">批量删除</button>
                         <div style="float:right">
                             <input id="userkw" type="text" placeholder="输入用户ID搜索"></input>
-                            <button onclick="doFindUserId()" style="
+                            <button onclick="doFind()" style="
                                 width: 50px;
                                 height: 30px;
                                 background-image: url(./search.png);
@@ -283,11 +283,11 @@
                         <tbody id="tbodyId">
                         </tbody>
                     </table>
-                    <div id="fy-1" class="body-operate"
+                    <div id="fy-1" class="body-operate" 
                          style="padding: 20px 170px;display: flex;justify-content: space-around;align-items:center">
-                        <button class="first"
+                        <button class="first" onclick="jumpToPage(this)"
                                 style="background: url(./l-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
-                        <button class="pre"
+                        <button class="pre" onclick="jumpToPage(this)"
                                 style="background: url(./l-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div>
                             跳转至
@@ -295,9 +295,9 @@
                             页
                         </div>
                         <button class="gotopage">确定</button>
-                        <button class="next"
+                        <button class="next" onclick="jumpToPage(this)"
                                 style="background: url(./r-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
-                        <button class="last"
+                        <button class="last" onclick="jumpToPage(this)"
                                 style="background: url(./r-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div class="pageCount">总页数(1)</div>
                         <div class="pageCurrent">当前页(1)</div>
@@ -346,11 +346,11 @@
                         <tbody id="userInfotBody">
                         </tbody>
                     </table>
-                    <div id="fy-2" class="body-operate"
+                    <div id="fy-2" class="body-operate" 
                          style="padding: 20px 170px;display: flex;justify-content: space-around;align-items:center">
-                        <button class="first"
+                        <button class="first" onclick="jumpToPage(this)"
                                 style="background: url(./l-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
-                        <button class="pre"
+                        <button class="pre" onclick="jumpToPage(this)"
                                 style="background: url(./l-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div>
                             跳转至
@@ -358,9 +358,9 @@
                             页
                         </div>
                         <button class="gotopage">确定</button>
-                        <button class="next"
+                        <button class="next" onclick="jumpToPage(this)"
                                 style="background: url(./r-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
-                        <button class="last"
+                        <button class="last" onclick="jumpToPage(this)"
                                 style="background: url(./r-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div class="pageCount">总页数(1)</div>
                         <div class="pageCurrent">当前页(1)</div>
@@ -424,11 +424,11 @@
                         <tbody id="logtBody">
                         </tbody>
                     </table>
-                    <div id="fy-3" class="body-operate"
+                    <div id="fy-3" class="body-operate" 
                          style="padding: 20px 170px;display: flex;justify-content: space-around;align-items:center">
-                        <button class="first"
+                        <button class="first" onclick="jumpToPage(this)"
                                 style="background: url(./l-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
-                        <button class="pre"
+                        <button class="pre" onclick="jumpToPage(this)"
                                 style="background: url(./l-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div>
                             跳转至
@@ -436,9 +436,9 @@
                             页
                         </div>
                         <button class="gotopage">确定</button>
-                        <button class="next"
+                        <button class="next" onclick="jumpToPage(this)"
                                 style="background: url(./r-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
-                        <button class="last"
+                        <button class="last" onclick="jumpToPage(this)"
                                 style="background: url(./r-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div class="pageCount">总页数(1)</div>
                         <div class="pageCurrent">当前页(1)</div>
@@ -516,14 +516,15 @@
                     <div class="body-operate" style="padding:0px">
                         <div style="margin: 10px;">
                             <label for="data-setting" style="margin: 0px 10px 0px 0px">日志保存时间:</label>
-                            <select id="data-setting">
-                                <option>30天</option>
-                                <option>60天</option>
-                                <option>半年</option>
-                                <option>一年</option>
-                                <option>永远</option>
+                            <select id="data-setting" >
+                                <option value="30">30天</option>
+                                <option value="60">60天</option>
+                                <option value="180">半年</option>
+                                <option value="365">一年</option>
+                                <option value="1000000">永远</option>
                             </select>
-                            <button style="float: right;margin-top: -7px;">设置</button>
+                            <span id="setting-tip"></span>
+                            <button  onclick="setting()" style="float: right;margin-top: -7px;">设置</button>
                         </div>
 
                     </div>
@@ -552,24 +553,24 @@
         }, function () {
             $(this).parent().removeClass("hover");
         })
-        //分页跳转
-        $("#fy-1,#fy-2,#fy-3").on('click',
-                '.pre,.next,.first,.last', jumpToPage());
-        $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on('click', jumpToPagedetail());
+        /* //分页跳转
+        $("#fy-1").on("click",
+                ".pre,.next,.first,.last", jumpToPage()); */
+        $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on("click", jumpToPagedetail());
         //导航栏点击事件
         $(".nav-list li").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
             if ($.trim($(this).text()) == "用户管理") {
                 $(".detail-body-1").slideDown(100).siblings().css("display", "none");
-                doFind();
+                doQuery();
             }
             if ($.trim($(this).text()) == "管理人员") {
                 $(".detail-body-2").slideDown(100).siblings().css("display", "none");
-                doFindeUserInfo();
+                doQueryUserInfo();
             }
             if ($.trim($(this).text()) == "系统日志") {
                 $(".detail-body-3").slideDown(100).siblings().css("display", "none");
-                doFindLog();
+                doQueryLog();
             }
             if ($.trim($(this).text()) == "人员注册") {
                 $(".detail-body-4").slideDown(100).siblings().css("display", "none");
@@ -666,16 +667,17 @@
     }
 
     //设置分页
-    function setPagination(pageObject) {
+    function setPagination(id,pageObject) {
+    	debugger;
         //1.初始化总页数
-        $(".pageCount").html("总页数(" + pageObject.pageCount + ")");
+        $(id+" .pageCount").html("总页数(" + pageObject.pageCount + ")");
         //2.初始化当前页的页码
-        $(".pageCurrent").html("当前页(" + pageObject.pageCurrent + ")");
+        $(id+" .pageCurrent").html("当前页(" + pageObject.pageCurrent + ")");
         //3.在pageId对应的对象上绑定总页数
         //data函数用于以key/value的方式在对象上绑定数据
-        $("#pageId").data("pageCount", pageObject.pageCount);
+        $(id).data("pageCount", pageObject.pageCount);
         //4.在pageId对象的对象上绑定当前页面值
-        $("#pageId").data("pageCurrent", pageObject.pageCurrent);
+        $(id).data("pageCurrent", pageObject.pageCurrent);
     }
 
     //显示登陆的名字
@@ -711,6 +713,20 @@
         });
     }
 
+    function setting(){
+    	var data=$("#data-setting option:selected").val();
+    	var datas=$("#data-setting option:selected").text();
+    	console.log(data);
+    	console.log(datas);
+    	var url = "useSchedule";
+        var param = {time: data};
+        $.post(url, param, function (result) {
+           if(result.code==0){
+        	   $("#setting-tip").html("设置成功,设置时间"+datas).css("color","#3d3");
+           }
+        }); 
+     }
+    
 </script>
 </body>
 </html>

@@ -16,7 +16,6 @@ function doLogin(){
 	param.password = $("#password").val();
 	$.post(url,param,function(result){
 		if(result.code==0){
-			debugger;
 			window.location='/jx_CMS/index';
 			/* $.ajax({url : "index",	type : "post",	
 				contentType: 'application/json',	

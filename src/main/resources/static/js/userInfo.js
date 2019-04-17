@@ -46,15 +46,28 @@ function uifadd() {
 
 
 
+function doQueryUserInfo(){
+	//1.初始化当前页码数据
+	$("#fy-2").data("pageCurrent",1);
+	//2.根据条件查询数据
+	doFindeUserInfo();
+}
+
 //管理员搜索
 function doFindeUserInfo() {
 	debugger;
     var url = "selectUInfoAll";
     var userId = $("#kw").val();
+    var pageCurrent = $("#fy-2").data("pageCurrent");
+	if(!pageCurrent){
+		pageCurrent = 1;
+	}
     var param = {userId:userId}
+    param.pageCurrent = pageCurrent;
     $.post(url,param,function (result) {
         if (result.code == 0) {
-            setUserInfo(result.data);
+            setUserInfo(result.data.list);
+            setPagination("#fy-2",result.data.pageObject);
         } else {
             alert(result.msg);
         }

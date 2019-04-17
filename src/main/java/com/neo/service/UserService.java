@@ -1,6 +1,7 @@
 package com.neo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -43,7 +44,7 @@ public interface UserService {
 	List<VeinFeat> selectVein();
 	List<VeinFeat> selectVeinByGroupId(String groupId);
 	MessageResult selectUserIdandVeinFeat(String userId,String veinFeat);
-	MessageResult selectUser(Integer pageCurrent);
+	Map<String, Object> selectUser(String userId,Integer pageCurrent);
 	MessageResult selectUserByUserId(String userId);
 	MessageResult deleteByIds(String[] ids);
 	}

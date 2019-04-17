@@ -11,6 +11,6 @@
 		insert into schedule_task
 		(time)
 		values
-		({time})    
+		(#{time})    
     </insert>
 </mapper>

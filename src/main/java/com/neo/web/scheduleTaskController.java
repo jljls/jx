@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.jx.entity.MessageResult;
 import com.neo.service.ScheduleTaskService;
 import com.neo.service.UserInfoService;
 
@@ -19,8 +20,15 @@ public class scheduleTaskController {
 	
 	@RequestMapping(value="useSchedule",method =RequestMethod.POST)
 	@ResponseBody
-	public void addTaskTime(String time){
-		scheduleTaskService.addTaskTime(Integer.parseInt(time));
+	public MessageResult addTaskTime(String time){
+		try{
+			scheduleTaskService.addTaskTime(Integer.parseInt(time));
+			scheduleTaskService.configureTasks();
+		}catch(Exception e){
+			e.printStackTrace();
+			return new MessageResult(-100,"未知错误");
+		}
 		
+		return new MessageResult(0,"操作成功");
 	}
 }

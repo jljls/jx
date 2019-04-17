@@ -1,6 +1,7 @@
 package com.neo.web;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -43,8 +44,9 @@ public class EmpLogController {
 	@RequestMapping(value = "selectLog", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult selectLog(String startTime,String endTime,Integer pageCurrent) {
-		List<EmpLog> list = empLogServic.selectLog(startTime, endTime,pageCurrent);
-		return new MessageResult(0, "操作成功", list);
+		
+		Map<String, Object> map= empLogServic.selectLog(startTime, endTime,pageCurrent);
+		return new MessageResult(0, "操作成功", map);
 	}
 
 	@RequestMapping(value = "logNum", method = RequestMethod.GET)

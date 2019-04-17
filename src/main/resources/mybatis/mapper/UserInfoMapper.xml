@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.neo.mapper.UserInfoMapper" >
-
+	
    <sql id="whereQuery">
 		<where>
 			<if test="userId!=null and userId!=''">
@@ -9,6 +9,13 @@
 			</if>
 		</where>   
    </sql>
+   
+   <!-- 查询管理员总数 -->
+   <select id="userInfoRowCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+   	select count(id)
+   	from user_info
+   	<include refid="whereQuery"></include>
+   </select>
   
    <!-- 管理员 模块-->
    <insert id="insertUserInfo" parameterType="java.lang.String" >

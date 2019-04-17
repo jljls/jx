@@ -10,7 +10,7 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 /**springmvc 在将日期对象转换为字符串时,
  * 一般默认会转换为长整型,假如我们需要自己
- * 定义格式,通常会写一个类继承JsonSerializer,\
+ * 定义格式,通常会写一个类继承JsonSerializer,
  * 假如在对象中需要将日期转换为我们需要的格式
  * 可以在对应的实体对象的get方法中使用
  * @JsonSerializer(using=

@@ -1,6 +1,8 @@
 package com.neo.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.util.StringUtils;
 
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
+import com.jx.entity.Page;
 import com.jx.entity.UserInfo;
 import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.UserInfoMapper;
@@ -46,20 +49,22 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 
 	@Override
-	public MessageResult selectUInfoAll(String userId,Integer pageCurrent) {
-		int pageSize = 20;
-		if(StringUtils.isEmpty(pageCurrent))
+	public Map<String, Object> selectUInfoAll(String userId,Integer pageCurrent) {
+		int pageSize = 1;
+		if (pageCurrent == null)
 			pageCurrent = 1;
-		int startIndex=(pageCurrent-1)*pageSize;
-		List<UserInfo> list;
-		try{
-			  list=userInfoMapper.selectUInfoAll(userId,startIndex,pageSize);
-		 }catch(Exception e){
-			 e.printStackTrace();
-			 return new MessageResult(-1,"参数错误");
-		 }
-		 
-		 return new  MessageResult(0,"操作成功",list);
+		int startIndex = (pageCurrent - 1) * pageSize;
+		int rowCount = userInfoMapper.userInfoRowCount(userId);
+		Page pageObject = new Page();
+		pageObject.setPageCurrent(pageCurrent);
+		pageObject.setPageSize(pageSize);
+		pageObject.setRowCount(rowCount);
+		pageObject.setStartIndex(startIndex);
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<UserInfo> list = userInfoMapper.selectUInfoAll(userId,startIndex,pageSize);
+		map.put("list", list);
+		map.put("pageObject", pageObject);
+		return map;
 	}
 
 

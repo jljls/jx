@@ -16,7 +16,13 @@
 		</association>   
 </resultMap>
    
-  
+  	<sql id="whereQuery">
+		<where>
+			<if test="userId!=null and userId!=''">
+				user_id = #{userId}
+			</if>
+		</where>   
+   </sql>
    
     
     <sql id="Base_Column_List" >
@@ -53,6 +59,12 @@
 	   FROM t_veinFeat
     </select>
     
+    <select id="empRowCount" parameterType="java.lang.String" resultType="java.lang.Integer">
+    	select count(id)
+    	from t_employee
+    	<include refid="whereQuery"></include>
+    </select>
+    
     <select id="getFingerNumber" resultType="java.lang.Integer"  >
        SELECT 
        <include refid="Finger_Number_Column_List" />
@@ -67,10 +79,11 @@
        from t_employee
     </select>
     <!-- 查询user 返回所有user -->
-    <select id="selectUser"  parameterType="java.lang.Integer"  resultType="com.jx.entity.Employee" >
+    <select id="selectUser" resultType="com.jx.entity.Employee" >
        select
        user_id as userId,group_id as groupId
        from t_employee
+       <include refid="whereQuery"></include>
        limit #{startIndex},#{pageSize}
     </select>
     <select id="selectIdBYGroupId" parameterType="java.lang.String" resultType="java.lang.String" >

@@ -11,6 +11,13 @@
 			</if>
 		</where>   
    </sql>
+   <!-- 查询日志数，用于设置分页 -->
+   <select id="logRowCount" resultType="java.lang.Integer">
+   	select count(id)
+   	from emp_log
+   	<include refid="whereQuery"></include>
+   </select>
+   
     <insert id="insertLog" parameterType="empLog" >
 	insert into emp_log
 	(user_id,type,log_content,create_by,create_time,update_by,update_time)

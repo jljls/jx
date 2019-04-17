@@ -10,6 +10,7 @@ import com.jx.entity.Employee;
 public interface UserMapper {
 	
 	Integer selectEmp();
+	Integer empRowCount(@Param("userId")String userId);
 	void insertEmpBYGroupId(@Param("userId")String userId,@Param("groupId")String groupId,@Param("uid")String uid);
 	void insertEmp();
 	
@@ -47,7 +48,7 @@ public interface UserMapper {
 	void deleteGroupId(String groupId);
 
 	Integer checkEmpId(String userId);
-	List<Employee> selectUser(@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
+	List<Employee> selectUser(@Param("userId")String userId,@Param("startIndex")Integer startIndex,@Param("pageSize")Integer pageSize);
 	List<Employee> selectUserByUserId(String userId);
 
 }
