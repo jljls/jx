@@ -82,10 +82,7 @@ public class LoginController {
 	 */
 	@RequestMapping(value="/login1",method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult login(@RequestBody String jsonString, HttpServletRequest request){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String userId = (String) object.get("userId");
-		String jxCapFeat = (String) object.get("jxCapFeat");
+	public MessageResult login( String userId,String jxCapFeat, HttpServletRequest request){
 		if(userId==null||jxCapFeat==null){
 			return new MessageResult(-1, "参数错误");
 		}

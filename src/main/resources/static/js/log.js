@@ -75,8 +75,9 @@ function doQueryLog(){
             //2.3在th对象内容填充具体数据
             //th0.append(result[id].id);
             //....
-            var tds = "<th><input type='checkbox' name='checkId' value='"+result[i].id+"'/></th>"+
-             "<th>"+result[i].createTime+"</th>"+
+            
+            var tds =  "<th>"+result[i].createTime+"</th>"+
+             "<th>"+result[i].time+"</th>"+
              "<th>"+result[i].userId+"</th>"+
              "<th>"+result[i].type+"</th>"+
              "<th>"+result[i].logContent+"</th>"+

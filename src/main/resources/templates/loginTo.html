@@ -35,19 +35,19 @@ function capImg()
 			var url = "login1";
 			var userId = $("#userId").val();
 			debugger;
-			console.log(jxCapFeat);
-			var params = JSON.stringify({{userId:userId,jxCapFeat}});
-			$.ajax({url : "login1",	type : "post",	
+			 console.log(jxCapFeat);
+			var params = {userId:userId,jxCapFeat:jxCapFeat};
+			/*$.ajax({url : "login1",	type : "post",	
 					contentType: 'application/json',	
-					data: params,});
-			/* $.post(url,params,function(result){
+					data: params,}); */	
+		$.post(url,params,function(result){
 				if(result.code==2){//异步请求成功了
 					 alert(result.msg);//ok
 					 console.log(jxCapFeat);
 				 }else{//请求过程出现异常
 					 alert(result.msg);
 				 }
-			},json) */
+			}) 
 			window.clearInterval(capTimer);
 			return;
 		}
