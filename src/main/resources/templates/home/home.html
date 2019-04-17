@@ -408,7 +408,7 @@
                             background-repeat: no-repeat;
                             vertical-align: bottom;
                             background-position: 50% top;"
-                                    onclick="doFindLog()"></button>
+                                    onclick="doFindLog(2)"></button>
                         </div>
                     </div>
                     <table class="body-table">
@@ -687,7 +687,6 @@
 
     //设置分页
     function setPagination(id,pageObject) {
-    	debugger;
         //1.初始化总页数
         $(id+" .pageCount").html("总页数(" + pageObject.pageCount + ")");
         //2.初始化当前页的页码

@@ -3,19 +3,61 @@ function doQueryLog(){
     	//1.初始化当前页码数据
     	$("#fy-3").data("pageCurrent",1);
     	//2.根据条件查询数据
-    	doFindLog();
+    	doFindLog(1);
     }
 
 //日志搜索
-    function doFindLog() {
-    	debugger;
+    function doFindLog(ind) {
         var url = "selectLog";
         var param = {};
         var pageCurrent = $("#fy-3").data("pageCurrent");
     	if(!pageCurrent){
     		pageCurrent = 1;
     	}
-    	var starYear =  $("#star-year").val();
+    	if(ind==1){
+    		$.post(url, param, function (result) {
+                if (result.code == 0) {
+                    setLogBody(result.data.list);
+                    setPagination("#fy-3",result.data.pageObject);
+                    var data=new Date();
+                	$("#star-year,#end-year").val(data.getFullYear());
+                	$("#star-mouth,#end-mouth").val(data.getMonth());
+                	$("#star-day,#end-day").val(data.getDate());
+                } else {
+                    alert(result.msg);
+                    var data=new Date();
+                	$("#star-year,#end-year").val(data.getFullYear());
+                	$("#star-mouth,#end-mouth").val(data.getMonth());
+                	$("#star-day,#end-day").val(data.getDate());
+                }
+            });
+    	}
+    	if(ind==2){
+    		var starYear =  $("#star-year").val();
+        	var starMouth = $("#star-mouth").val();
+        	var starDay = $("#star-day").val()
+        	if(starYear && starMouth && starDay){
+        		var startTime = starYear+"/"+starMouth+"/"+starDay;
+        		param.startTime = startTime;
+        	}
+    		var endYear =  $("#end-year").val();
+        	var endMouth = $("#end-mouth").val();
+        	var endDay = $("#end-day").val();
+        	if(endYear && endMouth && endDay){
+        		var endTime = endYear+"/"+endMouth+"/"+endDay;
+        		param.endTime = endTime;
+        	}
+        	param.pageCurrent = pageCurrent;
+            $.post(url, param, function (result) {
+                if (result.code == 0) {
+                    setLogBody(result.data.list);
+                    setPagination("#fy-3",result.data.pageObject);
+                } else {
+                    alert(result.msg);
+                }
+            });
+    	}
+    	/*var starYear =  $("#star-year").val();
     	var starMouth = $("#star-mouth").val();
     	var starDay = $("#star-day").val()
     	if(starYear && starMouth && starDay){
@@ -45,7 +87,7 @@ function doQueryLog(){
             	$("#star-mouth,#end-mouth").val(data.getMonth());
             	$("#star-day,#end-day").val(data.getDate());
             }
-        });
+        });*/
     }
 
     //删除日志
@@ -55,7 +97,7 @@ function doQueryLog(){
         var param = {id: logid};
         $.post(url, param, function (result) {
             if (result.code == 0) {
-                doFindLog();
+                doFindLog(1);
                 logNum();
             }
         });
