@@ -407,7 +407,7 @@ public class ClientController {
 		}
 		//新增一条日志
 		String uid = request.getSession().getAttribute("userId").toString();
-		String logContent = uid+"删除了"+ids+"用户";
+		String logContent = uid+"删除了"+ids.length()+"个用户";
 		EmpLog empLog = new EmpLog(uid,"删除",logContent);
 		empLogMapper.insertLog(empLog);
 		return new MessageResult(0, "操作成功"); 

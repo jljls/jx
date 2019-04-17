@@ -31,8 +31,8 @@
 		   update_time as updateTime
 	from emp_log 
 	<include refid="whereQuery"></include>
+	order by create_time desc 
 	limit #{startIndex},#{pageSize}
-	Order by create_time desc 
 	</select>
 	<delete parameterType="java.lang.String" id="deleteLog">
 	delete from emp_log where create_time &lt;  #{datetime} 

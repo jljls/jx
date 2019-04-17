@@ -27,6 +27,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import com.jx.entity.MessageResult;
 import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.ScheduleTaskMapper;
 
@@ -65,6 +66,28 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService{
 	public void addTaskTime(Integer time) {
 		
 		scheduleTaskMapper.addTaskTime(time);
+		
+	}
+
+
+
+
+	@Override
+	public MessageResult selectTime() {
+		Integer aa=scheduleTaskMapper.selectSchedule();
+		String data;
+		if(aa==30){
+			data="30天";	
+		}else if(aa==60){
+			data="60天";
+		}else if(aa==180){
+			data="半年";
+		}else if(aa==365){
+			data="一年";
+		}else{
+			data="永远";
+		}
+		return new MessageResult(0,"操作成功",data);
 		
 	}
 	

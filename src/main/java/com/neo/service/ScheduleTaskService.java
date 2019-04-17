@@ -2,6 +2,8 @@ package com.neo.service;
 
 import org.springframework.stereotype.Service;
 
+import com.jx.entity.MessageResult;
+
 @Service
 public interface ScheduleTaskService {
 	/**
@@ -13,4 +15,6 @@ public interface ScheduleTaskService {
 	public void configureTasks();
 	
 	public void addTaskTime(Integer time);
+
+	public MessageResult selectTime();
 }

@@ -94,13 +94,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 		try {
 			for (String userId : ids) {
 				userInfoMapper.deleteUInfoById(userId);
-				// 新增一条日志
-				String uid = request.getSession().getAttribute("userId").toString();
-				String logContent = uid + "删除了" + userId + "用户";
-				EmpLog empLog = new EmpLog(uid, "删除", logContent);
-				empLogMapper.insertLog(empLog);
 			}
-
+			// 新增一条日志
+			String uid = request.getSession().getAttribute("userId").toString();
+			String logContent = uid + "删除了" + ids.length + "个用户";
+			EmpLog empLog = new EmpLog(uid, "删除", logContent);
+			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

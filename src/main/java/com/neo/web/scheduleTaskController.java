@@ -31,4 +31,11 @@ public class scheduleTaskController {
 		
 		return new MessageResult(0,"操作成功");
 	}
+	
+	@RequestMapping(value="selectTime",method =RequestMethod.POST)
+	@ResponseBody
+	public MessageResult selectTime(){
+	
+		return scheduleTaskService.selectTime();
+	}
 }
