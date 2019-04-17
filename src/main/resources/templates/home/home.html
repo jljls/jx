@@ -616,20 +616,27 @@
     	 $("#uvn").html("");
     	 var userId = $("#uid").val();
     	 
-         url="checkUser";
-         var param = {userId:userId};
- 		
-         $.post(url,param,function(result){
- 			if(result.code==0){
- 				$("#uvn").html(result.data).css("color", "#3d3");
- 				$(".clbu").css("display","inline");
- 			}else{
- 				$(".clbu").css("display","none");
- 				$("#uvn").html("检索失败").css("color", "#d33");
- 				
- 				
- 			}
- 		});
+    	 if(userId){
+    		 url="checkUser";
+             var param = {userId:userId};
+     		
+             $.post(url,param,function(result){
+     			if(result.code==0){
+     				$("#uvn").html(result.data).css("color", "#3d3");
+     				$(".clbu").css("display","inline");
+     			}else{
+     				$(".clbu").css("display","none");
+     				$("#uvn").html("检索失败").css("color", "#d33");
+     				
+     				
+     			}
+     		});
+    		 
+    		return 
+    	 }
+    	 $("#uvn").html("请填写要检索的用户ID").css("color", "#d33");
+		 $(".clbu").css("display","none");
+        
          
      }
     function cleanvein() {
