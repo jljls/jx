@@ -21,7 +21,7 @@ function capImg()
 	var res = jxCapRes;
   if(capState == 0)
 	{
-		alert("请放入手指!");
+		$("#demo-tip").html("请放入手指!").css("color","#3d3");
 		jxCapVeinFeat();
 		capState = 1;
 		return;
@@ -42,47 +42,46 @@ function capImg()
 					data: params,}); */	
 		$.post(url,params,function(result){
 				if(result.code==2){//异步请求成功了
-					 alert(result.msg);//ok
-					 console.log(jxCapFeat);
+					 $("#demo-tip").html(result.msg).css("color","#3d3");
 				 }else{//请求过程出现异常
-					 alert(result.msg);
+					 $("#demo-tip").html(result.msg).css("color","#d33");
 				 }
 			}) 
 			window.clearInterval(capTimer);
 			return;
 		}
 		else if(res==-2){
-			alert("设备打开出错");
+			$("#demo-tip").html("设备打开出错").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}else
 		if(res==-3){
-			alert("用户30秒内未放置，操作超时");
+			$("#demo-tip").html("用户30秒内未放置，操作超时").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}else
 		if(res==-5){
-			alert("检测手指出错");
+			$("#demo-tip").html("检测手指出错").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}else
 		if(res==-6){
-			alert("图像采集失败");
+			$("#demo-tip").html("图像采集失败").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}else
 		if(res==-7){
-			alert("手指过早离开，采集失败");
+			$("#demo-tip").html("手指过早离开，采集失败").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}else
 		if(res==-8){
-			alert("图像质量低");
+			$("#demo-tip").html("图像质量低").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}else
 		if(res==-101){
-			alert("指静脉服务连接异常");
+			$("#demo-tip").html("指静脉服务连接异常").css("color","#d33");
 			window.clearInterval(capTimer);
 			return;
 		}
@@ -91,20 +90,24 @@ function capImg()
 
 function doLogin(){
 	//检查插件是否启动
+	if(!$("#userId").val()){
+		$("#demo-tip").html("请输入用户ID").css("color","#d33");
+		return
+	}
 	var exsit = jxIsServerExsit();
 	if(exsit==-101){
-		alert("指静脉插件未启动");
+		$("#demo-tip").html("指静脉插件未启动").css("color","#d33");
 		return;
 	}
 	
 	//检测设备连接
 	var connected = jxIsFVDConnected();
 	if(connected==0){
-		alert("指静脉设备未连接");
+		$("#demo-tip").html("指静脉设备未连接").css("color","#d33");
 		return;
 	}
 	if(connected==-101){
-		alert("指静脉服务连接异常");
+		$("#demo-tip").html("指静脉服务连接异常").css("color","#d33");
 		return;
 	}
 	//检测手指
@@ -136,6 +139,7 @@ function doLogin(){
 			<div class="logC">
 				<button onclick="doLogin()">静脉登录</button>
 			</div>
+			<div id="demo-tip" style="margin: 20px;"></div>
 		</div>
 	</div>
 	</body>

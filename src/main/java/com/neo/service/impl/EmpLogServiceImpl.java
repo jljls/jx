@@ -36,6 +36,7 @@ public class EmpLogServiceImpl implements EmpLogService{
 
 	@Override
 	public Map<String, Object> selectLog(String startTime, String endTime,Integer pageCurrent) {
+		String ends = endTime;
 		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
 		Map<String, Object> map = new HashMap<String, Object>();
 		int pageSize = 25;

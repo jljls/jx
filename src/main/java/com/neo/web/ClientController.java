@@ -407,7 +407,7 @@ public class ClientController {
 		}
 		//新增一条日志
 		String uid = request.getSession().getAttribute("userId").toString();
-		String logContent = uid+"删除了"+ids.length()+"个用户";
+		String logContent = uid+"删除了"+userIds.length+"个用户";
 		EmpLog empLog = new EmpLog(uid,"删除",logContent);
 		empLogMapper.insertLog(empLog);
 		return new MessageResult(0, "操作成功"); 
@@ -467,7 +467,7 @@ public class ClientController {
 		
 			Integer num = userService.selectVeinNum();
 			Integer b=userService.selectEmp();
-			String str = "当前已注册用户:"+b+"已注册手指数:"+num;
+			String str = "当前已注册用户:"+b+"人    已注册手指数:"+num;
 		return new MessageResult(0, "操作成功", str);
 
 	}

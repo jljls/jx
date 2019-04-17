@@ -45,8 +45,11 @@ public class EmpLogController {
 	@RequestMapping(value = "selectLog", method = RequestMethod.POST)
 	@ResponseBody
 	public MessageResult selectLog(String startTime,String endTime,Integer pageCurrent) {
-		
-		Map<String, Object> map= empLogServic.selectLog(startTime, endTime,pageCurrent);
+		String endtime="";
+		if(endTime!=null){
+		   endtime = endTime+" 23:59:59";
+		}
+		Map<String, Object> map= empLogServic.selectLog(startTime, endtime,pageCurrent);
 		return new MessageResult(0, "操作成功", map);
 	}
 

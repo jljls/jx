@@ -63,7 +63,7 @@ public class UserInfoController {
 			return new MessageResult(-1,"参数错误");
 		}
 		if("admin".equals(userId)){
-			return new MessageResult(-1,"超级管员不可删除");
+			return new MessageResult(-1,"超级管理员不可删除");
 		}
 		return userInfoService.deleteUInfoById(userId);
 	}

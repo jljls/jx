@@ -21,13 +21,13 @@ function doQueryLog(){
                     setPagination("#fy-3",result.data.pageObject);
                     var data=new Date();
                 	$("#star-year,#end-year").val(data.getFullYear());
-                	$("#star-mouth,#end-mouth").val(data.getMonth());
+                	$("#star-mouth,#end-mouth").val(data.getMonth()+1);
                 	$("#star-day,#end-day").val(data.getDate());
                 } else {
                     alert(result.msg);
                     var data=new Date();
                 	$("#star-year,#end-year").val(data.getFullYear());
-                	$("#star-mouth,#end-mouth").val(data.getMonth());
+                	$("#star-mouth,#end-mouth").val(data.getMonth()+1);
                 	$("#star-day,#end-day").val(data.getDate());
                 }
             });
@@ -99,6 +99,8 @@ function doQueryLog(){
             if (result.code == 0) {
                 doFindLog(1);
                 logNum();
+            }else{
+            	alert(result.msg);
             }
         });
     }

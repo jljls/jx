@@ -76,6 +76,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public MessageResult deleteUInfoById(String userId) {
 		try {
+			if("admin".equals(userId)){
+				return new MessageResult(-2, "超级管理员不允许删除!");
+			}
 			userInfoMapper.deleteUInfoById(userId);
 			HttpSession session = request.getSession();
 			String uid = session.getAttribute("userId").toString();
@@ -93,6 +96,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public MessageResult deleteUInfoByIds(String[] ids) {
 		try {
 			for (String userId : ids) {
+				if("admin".equals(userId)){
+					continue;
+				}
 				userInfoMapper.deleteUInfoById(userId);
 			}
 			// 新增一条日志

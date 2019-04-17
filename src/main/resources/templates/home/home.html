@@ -285,7 +285,7 @@
                         </tbody>
                     </table>
                     <div id="fy-1" class="body-operate" 
-                         style="padding: 20px 350px;display: flex;justify-content: space-around;align-items:center">
+                         style="padding: 20px 220px;display: flex;justify-content: space-around;align-items:center">
                         <button class="first" onclick="jumpToPage(this)"
                                 style="background: url(./l-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <button class="pre" onclick="jumpToPage(this)"
@@ -348,7 +348,7 @@
                         </tbody>
                     </table>
                     <div id="fy-2" class="body-operate" 
-                         style="padding: 20px 350px;display: flex;justify-content: space-around;align-items:center">
+                         style="padding: 20px 220px;display: flex;justify-content: space-around;align-items:center">
                         <button class="first" onclick="jumpToPage(this)"
                                 style="background: url(./l-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <button class="pre" onclick="jumpToPage(this)"
@@ -426,7 +426,7 @@
                         </tbody>
                     </table>
                     <div id="fy-3" class="body-operate" 
-                         style="padding: 20px 350px;display: flex;justify-content: space-around;align-items:center">
+                         style="padding: 20px 220px;display: flex;justify-content: space-around;align-items:center">
                         <button class="first" onclick="jumpToPage(this)"
                                 style="background: url(./l-d-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <button class="pre" onclick="jumpToPage(this)"
@@ -660,6 +660,7 @@
             if (result.code == 0) {
             	$("#msg").html("清空成功").css("color", "#3d3");
             	search();
+            	veinnum();
             } else {
             	document.getElementById("msg").innerHTML = "清空失败";
             }

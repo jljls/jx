@@ -9,7 +9,7 @@
 			<if test="endTime!=null and endTime!=''">
 				and create_time &lt;= #{endTime}
 			</if>
-		</where>   
+		</where>  
    </sql>
    <!-- 查询日志数，用于设置分页 -->
    <select id="logRowCount" resultType="java.lang.Integer">
