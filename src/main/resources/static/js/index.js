@@ -1,7 +1,6 @@
 
 //定义一个函数,通过此函数实现页面的跳转
     function jumpToPage(a) {
-    	debugger;
     	//获得点击对象上class属性对应的值,根据此值
         //判定具体点击的是哪个对象(例如上一页,下一页)
         var clazz = $(a).attr("class");
@@ -56,7 +55,7 @@
             //重写绑定pageCurrent的值,
             $('#fy-2').data("pageCurrent", pageCurrent);
             //重新执行查询操作(根据pageCurrent的值)
-            doFindeUserInfo()		
+            doFindeUserInfo();		
 		}
 		if(id=="fy-3"){
             //获得fy-3对象上绑定的pageCurrent对应的值
@@ -86,35 +85,66 @@
 		}
     	
     }
+    
+    
     //定义一个函数,通过此函数实现具体页面的跳转
-    function jumpToPagedetail() {
-        //获得点击对象上class属性对应的值,根据此值
+    function jumpToPagedetail(a) {
+    	debugger;
         //判定具体点击的是哪个对象(例如上一页,下一页)
-        var clazz = $(this).attr("class");
-        //获得pageId对象上绑定的pageCurrent对应的值
-        var pageCurrent = $('#fy-1').data("pageCurrent");
-        //获得pageId对象上绑定的pageCount对应的值
-        var pageCount = $('#fy-1').data("pageCount")
-        //根据class属性的值判断点击的是否是上一页
-        if (clazz == 'pre' && pageCurrent > 1) {
-            pageCurrent--;
-        }
-        //判断点击的是否是下一页
-        if (clazz == "next" && pageCurrent < pageCount) {
-            pageCurrent++;
-        }
-        //判断点击的对象是否是首页
-        if (clazz == "first") {
-            pageCurrent = 1;
-        }
-        //判定点击的对象是否是尾页
-        if (clazz == "last") {
-            pageCurrent = pageCount;
-        }
-        //重写绑定pageCurrent的值,
-        $('#fy-1').data("pageCurrent", pageCurrent);
-        //重新执行查询操作(根据pageCurrent的值)
-        doFind();
+    	var id = $(a).parent().attr("id");
+    	if(id=="fy-1"){
+    		//获得用户输入的值，设置为当前页
+    		var pageCurrent = $("#page1").val();
+            var pageCount = $('#fy-1').data("pageCount")
+            //判断当前页是否大于总页数,大于的话，则当前页等于总页数
+            if(pageCurrent > pageCount){
+            	pageCurrent = pageCount;
+            }
+            //判断当前页是否小于等于1,小于的话，则当前页等于1
+            if(pageCurrent <= 1){
+            	pageCurrent = 1;
+            }
+            
+            //重写绑定pageCurrent的值,
+            $('#fy-1').data("pageCurrent", pageCurrent);
+            //重新执行查询操作(根据pageCurrent的值)
+            doFind();
+    	}
+    	if(id=="fy-2"){
+    		//获得用户输入的值，设置为当前页
+    		var pageCurrent = $("#page2").val();
+            var pageCount = $('#fy-2').data("pageCount")
+            //判断当前页是否大于总页数,大于的话，则当前页等于总页数
+            if(pageCurrent > pageCount){
+            	pageCurrent = pageCount;
+            }
+            //判断当前页是否小于等于1,小于的话，则当前页等于1
+            if(pageCurrent <= 1){
+            	pageCurrent = 1;
+            }
+            //重写绑定pageCurrent的值,
+            $('#fy-2').data("pageCurrent", pageCurrent);
+            //重新执行查询操作(根据pageCurrent的值)
+            doFindeUserInfo();
+    	}
+    	if(id=="fy-3"){
+    		//获得用户输入的值，设置为当前页
+    		var pageCurrent = $("#page3").val();
+    		
+            var pageCount = $('#fy-3').data("pageCount")
+            //判断当前页是否大于总页数,大于的话，则当前页等于总页数
+            if(pageCurrent > pageCount){
+            	pageCurrent = pageCount;
+            }
+            //判断当前页是否小于等于1,小于的话，则当前页等于1
+            if(pageCurrent <= 1){
+            	pageCurrent = 1;
+            }
+            //重写绑定pageCurrent的值,
+            $('#fy-3').data("pageCurrent", pageCurrent);
+            //重新执行查询操作(根据pageCurrent的值)
+            doFindLog();
+    	}
     }
     
     

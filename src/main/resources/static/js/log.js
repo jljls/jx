@@ -15,11 +15,21 @@ function doQueryLog(){
     	if(!pageCurrent){
     		pageCurrent = 1;
     	}
-    	var startTime = $("#star-year").val()+"/"+$("#star-mouth").val()+"/"+$("#star-day").val();
-    	var endTime = $("#end-year").val()+"/"+$("#end-mouth").val()+"/"+$("#end-day").val();
+    	var starYear =  $("#star-year").val();
+    	var starMouth = $("#star-mouth").val();
+    	var starDay = $("#star-day").val()
+    	if(starYear && starMouth && starDay){
+    		var startTime = starYear+"/"+starMouth+"/"+starDay;
+    		param.startTime = startTime;
+    	}
+		var endYear =  $("#end-year").val();
+    	var endMouth = $("#end-mouth").val();
+    	var endDay = $("#end-day").val();
+    	if(endYear && endMouth && endDay){
+    		var endTime = endYear+"/"+endMouth+"/"+endDay;
+    		param.endTime = endTime;
+    	}
     	param.pageCurrent = pageCurrent;
-        param.startTime = startTime;
-        param.endTime = endTime;
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 setLogBody(result.data.list);

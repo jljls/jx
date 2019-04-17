@@ -291,10 +291,10 @@
                                 style="background: url(./l-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div>
                             跳转至
-                            <input type="text" style="width:28px"/>
+                            <input id="page1" type="text" style="width:28px"/>
                             页
                         </div>
-                        <button class="gotopage">确定</button>
+                        <button class="gotopage" onclick="jumpToPagedetail(this)">确定</button>
                         <button class="next" onclick="jumpToPage(this)"
                                 style="background: url(./r-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <button class="last" onclick="jumpToPage(this)"
@@ -354,10 +354,10 @@
                                 style="background: url(./l-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div>
                             跳转至
-                            <input type="text" style="width:28px"/>
+                            <input id="page2" type="text" style="width:28px"/>
                             页
                         </div>
-                        <button class="gotopage">确定</button>
+                        <button class="gotopage" onclick="jumpToPagedetail(this)">确定</button>
                         <button class="next" onclick="jumpToPage(this)"
                                 style="background: url(./r-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <button class="last" onclick="jumpToPage(this)"
@@ -432,10 +432,10 @@
                                 style="background: url(./l-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <div>
                             跳转至
-                            <input type="text" style="width:28px"/>
+                            <input id="page3" type="text" style="width:28px"/>
                             页
                         </div>
-                        <button class="gotopage">确定</button>
+                        <button class="gotopage" onclick="jumpToPagedetail(this)">确定</button>
                         <button class="next" onclick="jumpToPage(this)"
                                 style="background: url(./r-s.png) 50% 50% no-repeat;background-size: 30px 20px;background-color: gainsboro;"></button>
                         <button class="last" onclick="jumpToPage(this)"
@@ -556,7 +556,7 @@
         /* //分页跳转
         $("#fy-1").on("click",
                 ".pre,.next,.first,.last", jumpToPage()); */
-        $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on("click", jumpToPagedetail());
+        /* $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on("click", jumpToPagedetail()); */
         //导航栏点击事件
         $(".nav-list li").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
