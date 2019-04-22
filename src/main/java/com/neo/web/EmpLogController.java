@@ -39,7 +39,7 @@ public class EmpLogController {
 		String userId = request.getSession().getAttribute("userId").toString();
 		EmpLog empLog = new EmpLog(userId, "insert", userId + "删除了" + startTime + "到" + endTime + "的日志记录");
 		empLogServic.insertEmpLog(empLog);
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 
 	@RequestMapping(value = "selectLog", method = RequestMethod.POST)
@@ -50,7 +50,7 @@ public class EmpLogController {
 		   endtime = endTime+" 23:59:59";
 		}
 		Map<String, Object> map= empLogServic.selectLog(startTime, endtime,pageCurrent);
-		return new MessageResult(0, "操作成功", map);
+		return MessageResult.getInstance(0, "操作成功", map);
 	}
 
 	@RequestMapping(value = "logNum", method = RequestMethod.GET)
@@ -65,7 +65,7 @@ public class EmpLogController {
 		HttpSession session = request.getSession();
 		String userId = session.getAttribute("userId").toString();
 		if(!"admin".equals(userId)){
-			return new MessageResult(-2, "权限不足");
+			return MessageResult.getInstance(-2, "权限不足",null);
 		}
 		// 删除日志
 		MessageResult mr = empLogServic.deleteLogById(id);

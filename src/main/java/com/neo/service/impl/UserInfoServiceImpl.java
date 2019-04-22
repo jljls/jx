@@ -38,7 +38,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 		try {
 			Integer aa=userInfoMapper.checkUserInfo(userId);
 			if(aa==1){
-				return new MessageResult(-11, "管理员已存在");
+				return MessageResult.getInstance(-11, "管理员已存在",null);
 			}
 			userInfoMapper.insertUserInfo(userId, name, password);
 			HttpSession session = request.getSession();
@@ -48,10 +48,10 @@ public class UserInfoServiceImpl implements UserInfoService {
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-1, "参数错误");
+			return MessageResult.getInstance(-1, "参数错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 
 	@Override
@@ -77,7 +77,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public MessageResult deleteUInfoById(String userId) {
 		try {
 			if("admin".equals(userId)){
-				return new MessageResult(-2, "超级管理员不允许删除!");
+				return MessageResult.getInstance(-2, "超级管理员不允许删除!",null);
 			}
 			userInfoMapper.deleteUInfoById(userId);
 			HttpSession session = request.getSession();
@@ -89,7 +89,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 			e.printStackTrace();
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 
 	@Override
@@ -109,18 +109,18 @@ public class UserInfoServiceImpl implements UserInfoService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 
 	@Override
 	public MessageResult check(String userId, String password) {
 		List<UserInfo> list = userInfoMapper.check(userId, password);
 		if (list.size() == 0) {
-			return new MessageResult(-11, "密码错误");
+			return MessageResult.getInstance(-11, "密码错误",null);
 		}
 		HttpSession session = request.getSession();
 		session.setAttribute("userId", userId);
-		return new MessageResult(0, "登录成功");
+		return MessageResult.getInstance(0, "登录成功",null);
 	}
 
 	@Override
@@ -133,13 +133,13 @@ public class UserInfoServiceImpl implements UserInfoService {
 			int i = userInfoMapper.upDatapws(pws, userId);
 			if (i != 0) {
 				empLogMapper.insertLog(empLog);
-				return new MessageResult(0, "操作成功!");
+				return MessageResult.getInstance(0, "操作成功!",null);
 			} else {
-				return new MessageResult(-1, "参数错误!");
+				return MessageResult.getInstance(-1, "参数错误!",null);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误!");
+			return MessageResult.getInstance(-100, "未知错误!",null);
 		}
 	}
 
@@ -147,9 +147,9 @@ public class UserInfoServiceImpl implements UserInfoService {
 	public MessageResult selectUInfoNum() {
 		try {
 			Integer num = userInfoMapper.selectUInfoNum();
-			return new MessageResult(0, "操作成功", num);
+			return MessageResult.getInstance(0, "操作成功", num);
 		} catch (Exception e) {
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 	}
 

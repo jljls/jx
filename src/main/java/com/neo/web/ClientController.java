@@ -52,16 +52,16 @@ public class ClientController {
 	@ResponseBody
 	public MessageResult insertEmp(String userId,String groupId) {
 		if(groupId==null||userId==null){
-			return new MessageResult(-1, "参数错误");
+			return MessageResult.getInstance(-1, "参数错误",null);
 		}
 		logger.info("---添加用户");
 
 		try {
 			if (userService.selectEmp() >= 10000) {
-				return new MessageResult(-6, "用户数量已满");
+				return MessageResult.getInstance(-6, "用户数量已满",null);
 			}
 			if (userService.checkEmpId(userId) == 1) {
-				return new MessageResult(-3, "用户已存在");
+				return MessageResult.getInstance(-3, "用户已存在",null);
 			}
 			String uid = request.getSession().getAttribute("userId").toString();
 			userService.insertEmpBYGroupId(userId, groupId,uid);
@@ -71,10 +71,10 @@ public class ClientController {
 			empLogMapper.insertLog(empLog);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 
 	}
 	
@@ -97,10 +97,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功", a);
+		return MessageResult.getInstance(0, "操作成功", a);
 
 	}
 	
@@ -123,15 +123,15 @@ public class ClientController {
 		Integer num = null;
 		try {
 			if (groupId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				num = userService.selectEmpByGroupId(groupId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
-		return new MessageResult(0, "操作成功", num);
+		return MessageResult.getInstance(0, "操作成功", num);
 	}
 	
 	/**
@@ -149,10 +149,10 @@ public class ClientController {
 			num = userService.selectVeinNum();
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功", num);
+		return MessageResult.getInstance(0, "操作成功", num);
 
 	}
 	
@@ -173,16 +173,16 @@ public class ClientController {
 		Integer num = null;
 		try {
 			if (groupId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				num = userService.selectVeinNumByGroupId(groupId);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功", num);
+		return MessageResult.getInstance(0, "操作成功", num);
 
 	}
 	
@@ -204,10 +204,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 
 	}
 	
@@ -229,7 +229,7 @@ public class ClientController {
 
 		try {
 			if (userId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				userService.deleteById(userId);
 				//新增一条日志
@@ -241,10 +241,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 
 	}
 	
@@ -266,7 +266,7 @@ public class ClientController {
 
 		try {
 			if (groupId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				userService.deleteVeinByGroupId(groupId);
 				//新增一条日志
@@ -277,10 +277,10 @@ public class ClientController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 
 	}
 	
@@ -299,11 +299,11 @@ public class ClientController {
 		logger.info("---删除某用户的所有静脉特征");
 		try {
 			if (userId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				int i =userService.checkEmpId(userId);
 				if(i==0){
-					return new MessageResult(-4, "用户不存在");
+					return MessageResult.getInstance(-4, "用户不存在",null);
 				}
 				userService.deleteVeinByEmpId(userId);
 				//新增一条日志
@@ -315,10 +315,10 @@ public class ClientController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 
 	}
 	
@@ -341,13 +341,13 @@ public class ClientController {
 
 		try {
 			if (userId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			}
 			if (userService.checkEmpId(userId) == 0) {
-				return new MessageResult(-4, "用户不存在");
+				return MessageResult.getInstance(-4, "用户不存在",null);
 			}
 			if (userService.selectEmpVeinEum(userId) >= 8) {
-				return new MessageResult(-5, "用户静脉特征已满");
+				return MessageResult.getInstance(-5, "用户静脉特征已满",null);
 			} else {
 				
 				for (String vf : veinFeat) {
@@ -361,10 +361,10 @@ public class ClientController {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 	/**
 	 * 查询所有用户 返回所有用户
@@ -374,7 +374,7 @@ public class ClientController {
 	@ResponseBody
 	public MessageResult selectUser(String userId,Integer pageCurrent) {
 		Map<String, Object> map = userService.selectUser(userId,pageCurrent);
-		MessageResult mr = new MessageResult(0,"操作成功",map);
+		MessageResult mr = MessageResult.getInstance(0,"操作成功",map);
 		return mr;
 	}
 	@RequestMapping(value = "selectUserByuserId", method = RequestMethod.POST)
@@ -397,7 +397,7 @@ public class ClientController {
 	@ResponseBody
 	public MessageResult deleteUsers(String ids) {
 		if(StringUtils.isEmpty(ids)){
-			return new MessageResult(-1, "参数异常");
+			return MessageResult.getInstance(-1, "参数异常",null);
 		}
 		System.out.println("ids:"+ids);
 		String[] userIds = ids.split(",");
@@ -407,14 +407,14 @@ public class ClientController {
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 		//新增一条日志
 		String uid = request.getSession().getAttribute("userId").toString();
 		String logContent = uid+"删除了"+userIds.length+"个用户";
 		EmpLog empLog = new EmpLog(uid,"删除",logContent);
 		empLogMapper.insertLog(empLog);
-		return new MessageResult(0, "操作成功"); 
+		return MessageResult.getInstance(0, "操作成功",null); 
 	}
 	/**
 	 * 检索指定用户
@@ -424,7 +424,7 @@ public class ClientController {
 	@ResponseBody
 	public MessageResult checkUser(String userId) {
 		if(userId==null){
-			return new MessageResult(-1, "参数异常");
+			return MessageResult.getInstance(-1, "参数异常",null);
 		}
 		Integer count;
 		try{	
@@ -434,17 +434,17 @@ public class ClientController {
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 		if(count==1){
 			//查询某一个人的注册的静态特征
 			Integer num=userService.selectEmpVeinEum(userId);
 			String s="该用户已经注册,注册指静脉数："+num;
-			return new MessageResult(0, "操作成功",s);
+			return MessageResult.getInstance(0, "操作成功",s);
 			
 			
 		}
-		return	new MessageResult(-9,"检索失败");
+		return	MessageResult.getInstance(-9,"检索失败",null);
 		
 		
 	}
@@ -456,7 +456,7 @@ public class ClientController {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
 		System.out.println(uid);
-		return new MessageResult(0, "操作成功",uid); 
+		return MessageResult.getInstance(0, "操作成功",uid); 
 	}
 	/**
 	 * 查询已经注册用户和已注册手指数
@@ -472,7 +472,7 @@ public class ClientController {
 			Integer num = userService.selectVeinNum();
 			Integer b=userService.selectEmp();
 			String str = "当前已注册用户:"+b+"人    已注册手指数:"+num;
-		return new MessageResult(0, "操作成功", str);
+		return MessageResult.getInstance(0, "操作成功", str);
 
 	}
 }

@@ -6,9 +6,7 @@ public class JXVeinJavaSDK_T910 {
 	
 	public static final float veinMisrateThresh = 0.33f;
 	
-	static {
-		System.loadLibrary("JXVeinJavaSDK_T910");
-	}
+
 
 
 	private native int CheckVeinSampleQuality(byte[] sample_buf);

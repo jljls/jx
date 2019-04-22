@@ -56,7 +56,7 @@ public class VeinController {
 		String veinFeat = (String) object.get("veinFeat");
 		System.out.println(userId + " " + veinFeat);
 		if(userId==null||veinFeat==null){ 
-			return new MessageResult(-1,"参数错误");
+			return MessageResult.getInstance(-1,"参数错误",null);
 		}
 		MessageResult mr = userService.selectUserIdandVeinFeat(userId, veinFeat);
 		return mr;
@@ -80,13 +80,13 @@ public class VeinController {
 		int ref;
 		logger.info("---全局1:N验证");
 		if (veinFeat == null) {
-			return new MessageResult(-1, "参数错误");
+			return MessageResult.getInstance(-1, "参数错误",null);
 		} else {
 			try {
 				List<VeinFeat> vein = userService.selectVein();
 				System.out.println(vein);
 				if (vein.isEmpty()) {
-					return new MessageResult(-7, "没有用户注册");
+					return MessageResult.getInstance(-7, "没有用户注册",null);
 
 				}else{
 					for (VeinFeat s : vein) {
@@ -100,17 +100,17 @@ public class VeinController {
 							String userId=s.getUserId();
 							 Map<String,String> map =new HashMap<String,String>();
 							map.put("userId", userId);
-							return new MessageResult(2, "静脉指纹通过",map);
+							return MessageResult.getInstance(2, "静脉指纹通过",map);
 						}
 					}
 	
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new MessageResult(-100, "未知错误");
+				return MessageResult.getInstance(-100, "未知错误",null);
 			}
 
-			return new MessageResult(1, "静脉指纹失败");
+			return MessageResult.getInstance(1, "静脉指纹失败",null);
 		}
 
 	}
@@ -134,12 +134,12 @@ public class VeinController {
 		String b = "";
 		logger.info("---分组1:N验证");
 		if (groupId == null || veinFeat == null) {
-			return new MessageResult(-1, "参数错误");
+			return MessageResult.getInstance(-1, "参数错误",null);
 		} else {
 			try {
 				List<VeinFeat> vein = userService.selectVeinByGroupId(groupId);
 				if (vein == null) {
-					return new MessageResult(-10, "该分组下没有用户没有注册");
+					return MessageResult.getInstance(-10, "该分组下没有用户没有注册",null);
 				}
 				for (VeinFeat s : vein) {
 					System.out.println(s);
@@ -152,15 +152,15 @@ public class VeinController {
 						Map<String,String> map =new HashMap<String,String>();
 						map.put("userId", userId);
 			
-						return new MessageResult(2, "静脉指纹通过",map);
+						return MessageResult.getInstance(2, "静脉指纹通过",map);
 					}
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
-				return new MessageResult(-100, "未知错误");
+				return MessageResult.getInstance(-100, "未知错误",null);
 			}
 
-			return new MessageResult(1, "静脉指纹失败");
+			return MessageResult.getInstance(1, "静脉指纹失败",null);
 		}
 
 	}

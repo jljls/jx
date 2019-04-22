@@ -73,7 +73,7 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService{
 	public MessageResult selectTime() {
 		Integer aa=scheduleTaskMapper.selectSchedule();
 		
-		return new MessageResult(0,"操作成功",aa);
+		return MessageResult.getInstance(0,"操作成功",aa);
 		
 	}
 	

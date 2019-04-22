@@ -34,7 +34,7 @@ public class UserInfoController {
 			return new  MessageResult(-100,"权限不足");
 		}
 		if(userId==null||name==null||password==null){
-			return new MessageResult(-1,"参数错误");
+			return MessageResult.getInstance(-1,"参数错误",null);
 		}
 		
 		return userInfoService.insertUserInfo(userId, name, password);
@@ -46,7 +46,7 @@ public class UserInfoController {
 	@ResponseBody
 	public MessageResult selectUInfoAll(String userId,Integer pageCurrent) {
 		Map<String, Object> map = userInfoService.selectUInfoAll(userId,pageCurrent);
-		return new MessageResult(0, "操作成功", map);
+		return MessageResult.getInstance(0, "操作成功", map);
 	}
 	/*
 	 * 按userId删除管理员
@@ -57,13 +57,13 @@ public class UserInfoController {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
 		if(!"admin".equals(uid)){
-			return new MessageResult(-100,"权限不足");
+			return MessageResult.getInstance(-100,"权限不足",null);
 		}
 		if(userId==null){
-			return new MessageResult(-1,"参数错误");
+			return MessageResult.getInstance(-1,"参数错误",null);
 		}
 		if("admin".equals(userId)){
-			return new MessageResult(-1,"超级管理员不可删除");
+			return MessageResult.getInstance(-1,"超级管理员不可删除",null);
 		}
 		return userInfoService.deleteUInfoById(userId);
 	}
@@ -78,10 +78,10 @@ public class UserInfoController {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
 		if(!"admin".equals(uid)){
-			return new MessageResult(-100,"权限不足");
+			return MessageResult.getInstance(-100,"权限不足",null);
 		}
 		if(string.length==0){
-			return new MessageResult(-1,"参数错误");
+			return MessageResult.getInstance(-1,"参数错误",null);
 		}
 		
 		return userInfoService.deleteUInfoByIds(string);
@@ -102,7 +102,7 @@ public class UserInfoController {
 	public MessageResult upDatapws(String pws) {
 		String userId = request.getSession().getAttribute("userId").toString();
 		if(pws==null){
-			return new MessageResult(-1,"参数错误");
+			return MessageResult.getInstance(-1,"参数错误",null);
 		}
 		return userInfoService.upDatapws(pws,userId);
 	} 

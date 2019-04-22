@@ -23,6 +23,7 @@ import net.sf.json.JSONObject;
 @Controller
 @Async
 public class LoginController {
+	
 	@Resource
 	private HttpServletRequest request ;
 	@Resource
@@ -31,6 +32,8 @@ public class LoginController {
 	private UserService userService;
 	@Resource 
 	private UserInfoService userInfoService;
+	
+	
 	/**
 	 * 跳转到管理员登录页面
 	 * @return
@@ -50,7 +53,8 @@ public class LoginController {
 	@ResponseBody
 	public MessageResult loginIndex(String userId,String password){
 		if(userId==null||password==null){
-			return new MessageResult(-1,"参数错误");
+			
+			return MessageResult.getInstance(-1,"参数错误", null);
 		}
 		MessageResult mr = userInfoService.check(userId, password);
 		return mr;
@@ -84,7 +88,7 @@ public class LoginController {
 	@ResponseBody
 	public MessageResult login( String userId,String jxCapFeat, HttpServletRequest request){
 		if(userId==null||jxCapFeat==null){
-			return new MessageResult(-1, "参数错误");
+			return MessageResult.getInstance(-1,"参数错误", null);
 		}
 		return userService.selectUserIdandVeinFeat(userId,jxCapFeat);
 	}

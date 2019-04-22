@@ -171,7 +171,7 @@ public class UserServiceImpl implements UserService {
 			List<VeinFeat> vein = loginMapper.selectVeinByUserId(userId);
 			for (VeinFeat s : vein) {
 				if (s.getVeinFeat() == null) {
-					return new MessageResult(-7, "该用户未注册");
+					return MessageResult.getInstance(-7, "该用户未注册",null);
 				} else {
 					feat = s.getVeinFeat();
 					// 将当前的指静脉特征转为byte
@@ -184,16 +184,16 @@ public class UserServiceImpl implements UserService {
 						HttpSession session = request.getSession();
 						session.setAttribute("userId", userId);
 						System.out.println(session.getAttribute("userId").toString());
-						return new MessageResult(2, "静脉指纹通过");
+						return MessageResult.getInstance(2, "静脉指纹通过",null);
 					}
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			// 捕获异常
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
-		return new MessageResult(1, "静脉指纹失败");
+		return MessageResult.getInstance(1, "静脉指纹失败",null);
 	}
 
 	@Override
@@ -229,7 +229,7 @@ public class UserServiceImpl implements UserService {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 
 	@Override
@@ -239,9 +239,9 @@ public class UserServiceImpl implements UserService {
 			list = userMapper.selectUserByUserId(userId);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
-		return new MessageResult(0, "操作成功", list);
+		return MessageResult.getInstance(0, "操作成功", list);
 	}
 
 }

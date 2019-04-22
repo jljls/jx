@@ -63,10 +63,11 @@ public class EmpLogServiceImpl implements EmpLogService{
 	public MessageResult selectLogNum() {
 		try {
 			int num = empLogMapper.selectLogNum();
-			return new MessageResult(0, "操作成功", num);
+			return MessageResult.getInstance(0, "操作成功", num);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 	}
 
@@ -74,10 +75,10 @@ public class EmpLogServiceImpl implements EmpLogService{
 	public MessageResult deleteLogById(Integer id) {
 		try {
 			empLogMapper.deleteLogById(id);
-			return new MessageResult(0, "操作成功");
+			return MessageResult.getInstance(0, "操作成功",null);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 	}
 }

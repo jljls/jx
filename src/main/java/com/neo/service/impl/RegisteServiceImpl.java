@@ -41,20 +41,20 @@ public class RegisteServiceImpl implements RegisteService {
 
 		try {
 			if (userId == null) {
-				return new MessageResult(-1, "参数错误");
+				return MessageResult.getInstance(-1, "参数错误",null);
 			}
 			if (!(groupId == null)) {
 				int count = registeMapper.checkEmpByGroupId(groupId, userId);
 				System.out.println(count);
 				if (count == 0) {
-					return new MessageResult(-8, "该分组下没有该用户");
+					return MessageResult.getInstance(-8, "该分组下没有该用户",null);
 				}
 			}
 			if (registeMapper.checkEmpId(userId) == 0) {
-				return new MessageResult(-4, "用户不存在");
+				return MessageResult.getInstance(-4, "用户不存在",null);
 			}
 			if (registeMapper.selectEmpVeinEum(userId) >= 8) {
-				return new MessageResult(-5, "用户静脉特征已满");
+				return MessageResult.getInstance(-5, "用户静脉特征已满",null);
 			} else {
 				System.out.println(veinFeats);
 
@@ -70,10 +70,10 @@ public class RegisteServiceImpl implements RegisteService {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new MessageResult(-100, "未知错误");
+			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return new MessageResult(0, "操作成功");
+		return MessageResult.getInstance(0, "操作成功",null);
 	}
 
 }

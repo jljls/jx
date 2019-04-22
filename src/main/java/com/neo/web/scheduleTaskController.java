@@ -26,10 +26,10 @@ public class scheduleTaskController {
 			scheduleTaskService.configureTasks();
 		}catch(Exception e){
 			e.printStackTrace();
-			return new MessageResult(-100,"未知错误");
+			return MessageResult.getInstance(-100,"未知错误",null);
 		}
 		
-		return new MessageResult(0,"操作成功");
+		return MessageResult.getInstance(0,"操作成功",null);
 	}
 	
 	@RequestMapping(value="selectTime",method =RequestMethod.POST)

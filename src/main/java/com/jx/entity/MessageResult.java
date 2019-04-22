@@ -5,15 +5,22 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_EMPTY)
 public class MessageResult {
 	
+	
+	
 	/**对应状态的消息*/
-	private String msg;
+	private static String msg;
 	
 	/**具体数据*/
-	private Object data;
+	private static Object data;
 	
 	/**状态码*/
-	private int code;
+	private static int code;
 	
+	private static MessageResult instance=new MessageResult();
+	
+	public MessageResult(){
+		super();
+	}
 	public MessageResult(int code,String msg){
 		super();
 		this.code=code;
@@ -60,6 +67,12 @@ public class MessageResult {
 
 	public void setCode(int code) {
 		this.code = code;
+	}
+	public static MessageResult getInstance(int code,String msg,Object data){
+		instance.setCode(code);
+		instance.setMsg(msg);
+		instance.setData(data);
+		return instance;
 	}
 
 }
