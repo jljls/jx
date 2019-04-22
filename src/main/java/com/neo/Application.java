@@ -33,7 +33,7 @@ public class Application extends TomcatEmbeddedServletContainerFactory {
         super.customizeConnector(connector);  
         Http11NioProtocol protocol = (Http11NioProtocol)connector.getProtocolHandler();  
         //设置最大连接数  
-        protocol.setMaxConnections(3000);  
+        protocol.setMaxConnections(10000);  
         //设置最大线程数  
         protocol.setMaxThreads(3000);  
         protocol.setConnectionTimeout(30000);  
