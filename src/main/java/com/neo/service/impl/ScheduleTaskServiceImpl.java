@@ -25,6 +25,7 @@ import org.springframework.scheduling.config.TriggerTask;
 import org.springframework.scheduling.support.CronTrigger;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jx.entity.MessageResult;
@@ -32,6 +33,7 @@ import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.ScheduleTaskMapper;
 
 import com.neo.service.ScheduleTaskService;
+
 
 @Service
 @Configuration 

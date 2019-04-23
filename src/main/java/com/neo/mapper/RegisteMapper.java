@@ -2,10 +2,11 @@ package com.neo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.jx.entity.VeinFeat;
-
+@Mapper
 public interface RegisteMapper {
 /*
  * 检查有没有该用户

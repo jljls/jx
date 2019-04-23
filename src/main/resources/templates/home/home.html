@@ -195,7 +195,7 @@
     <div class="navigation">
         <div class="admin-information">
             <div style="position: absolute;height: 40px;top: 0;left: 0;right: 0;bottom: 0;margin: auto;">
-                <div id="people" style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;"></div>
+                <div id="show_people" style="color: #DFE4ED;width: 110px;overflow: hidden;margin: auto;"></div>
                 <div class="click" style="color: #8095a8;font-size: 14px" onclick="loginOut()">退出</div>
             </div>
         </div>
@@ -542,10 +542,10 @@
         history.pushState(null, null, document.URL);
     });
     $(document).ready(function () {
+    	people();
     	setTime();
         selectUInfoNum();
         logNum();
-        people();
         veinnum();
         //删除操作下划线
         $(".body-table tbody th:last-child").css("text-decoration", "underline");
@@ -588,7 +588,6 @@
     	 $.post(url,function(result){
     		if(result.code==0){
     			$("#data-setting").val(result.data);
-    			console.log(result.data);
     		} 
     	 });
      }
@@ -700,16 +699,17 @@
     }
 
     //显示登陆的名字
-    var temp;
+    
     function people() {
+    	debugger;
+    	$("#show_people").html("");
         var url = "people";
         $.ajax({
             url: "people", dataType: 'json',
             contentType: "application/json;charset=utf-8",
             //async : true,
             success: function (result) {
-                temp = result;
-                $("#people").html(temp.data);
+                $("#show_people").html(result.data);
                 if(temp.data!="admin"){
 					$(".super").css("display","none");
                 }
@@ -738,13 +738,12 @@
     function setting(){
     	var data=$("#data-setting option:selected").val();
     	var datas=$("#data-setting option:selected").text();
-    	console.log(data);
-    	console.log(datas);
     	var url = "useSchedule";
         var param = {time: data};
         $.post(url, param, function (result) {
            if(result.code==0){
         	   $("#setting-tip").html("设置成功,设置时间"+datas).css("color","#3d3");
+        	 
            }
         }); 
      }

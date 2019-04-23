@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
@@ -15,6 +16,7 @@ import com.neo.mapper.RegisteMapper;
 import com.neo.service.RegisteService;
 import com.neo.web.ClientController;
 
+@Transactional
 @Service
 @Async
 public class RegisteServiceImpl implements RegisteService {

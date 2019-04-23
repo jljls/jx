@@ -2,10 +2,12 @@ package com.neo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.jx.entity.EmpLog;
 
+@Mapper
 public interface EmpLogMapper {
 	//添加管理员
 	int insertLog(EmpLog empLog);

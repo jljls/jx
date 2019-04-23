@@ -5,10 +5,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.neo.mapper.LoginMapper;
 import com.neo.service.LoginService;
 
+@Transactional
 @Service
 @Async
 public class LoginServiceImpl implements LoginService{

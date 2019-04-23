@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jx.entity.EmpLog;
@@ -20,6 +21,7 @@ import com.neo.mapper.EmpLogMapper;
 import com.neo.mapper.UserInfoMapper;
 import com.neo.service.UserInfoService;
 
+@Transactional
 @Service
 @Async
 public class UserInfoServiceImpl implements UserInfoService {

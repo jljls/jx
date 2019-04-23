@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import com.jx.entity.EmpLog;
@@ -18,6 +19,7 @@ import com.neo.mapper.EmpLogMapper;
 import com.neo.service.EmpLogService;
 
 
+@Transactional
 @Service
 @Async
 public class EmpLogServiceImpl implements EmpLogService{

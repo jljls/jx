@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.arjuna.ats.internal.jdbc.drivers.modifiers.list;
 import com.jx.entity.Base64ToByte;
@@ -26,6 +27,7 @@ import com.neo.service.UserService;
 
 import jx.vein.javajar.JXVeinJavaSDK_T910;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 	@Resource

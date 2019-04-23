@@ -11,7 +11,7 @@ import com.jx.entity.Employee;
 import com.jx.entity.UserInfo;
 import com.jx.entity.VeinFeat;
 
-
+@Mapper
 public interface UserInfoMapper {
 	
 	Integer userInfoRowCount(@Param("userId")String userId);
