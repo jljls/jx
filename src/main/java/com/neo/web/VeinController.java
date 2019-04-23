@@ -2,6 +2,8 @@ package com.neo.web;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -72,12 +74,17 @@ public class VeinController {
 	 */
 	@RequestMapping(value = "checkAllToN", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult checkAllToN(@RequestBody String jsonString){
+	public MessageResult checkAllToN( String veinFeat){
 		
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String veinFeat = (String) object.get("veinFeat");
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String veinFeat = (String) object.get("veinFeat");
 		String b = "";
-		int ref;
+		float score;
+		boolean flag=false;
+		float score1= -0.1f;
+		String userId=null;
+		 List<Map<String,Object>> list =new ArrayList<Map<String,Object>>();
+		 
 		logger.info("---全局1:N验证");
 		if (veinFeat == null) {
 			return MessageResult.getInstance(-1, "参数错误",null);
@@ -94,15 +101,31 @@ public class VeinController {
 						
 						byte[] a = btb.baseStringToByte(veinFeat);
 						byte[] date = btb.baseStringToByte(b);
-						ref = jx.jxVericateTwoVeinFeature(a, date);
-						if (ref == 1) {
-						
-							String userId=s.getUserId();
-							 Map<String,String> map =new HashMap<String,String>();
-							map.put("userId", userId);
-							return MessageResult.getInstance(2, "静脉指纹通过",map);
+						score = jx.jxCalcFeatMisrate(a, date);
+						if (score < 0.333) {
+							//System.out.println(score);
+							flag=true;
+							if(score1==-0.1F){
+								score1=score;
+								userId=s.getUserId();
+							}
+							else if(score<score1){
+								score1=score;
+								userId=s.getUserId();
+							}
 						}
+						
 					}
+					if(flag==false){
+						return MessageResult.getInstance(1, "静脉指纹未通过",null);
+	
+					}
+					Map<String,Object> map =new HashMap<String,Object>();
+					map.put("userId", userId);
+					return MessageResult.getInstance(2, "静脉指纹通过",map);
+
+				
+					
 	
 				}
 			} catch (Exception e) {
@@ -110,7 +133,7 @@ public class VeinController {
 				return MessageResult.getInstance(-100, "未知错误",null);
 			}
 
-			return MessageResult.getInstance(1, "静脉指纹失败",null);
+			
 		}
 
 	}
@@ -125,13 +148,18 @@ public class VeinController {
 	 */
 	@RequestMapping(value = "checkToNByGroupId", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult checkToNByGroupId(@RequestBody String jsonString){
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String groupId = (String) object.get("groupId");
-		String veinFeat = (String) object.get("veinFeat");
+	public MessageResult checkToNByGroupId( String groupId,String veinFeat){
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String groupId = (String) object.get("groupId");
+		//String veinFeat = (String) object.get("veinFeat");
 
 		int ref;
 		String b = "";
+		float score;
+		boolean flag=false;
+		float score1= -0.1f;
+		String userId=null;
+
 		logger.info("---分组1:N验证");
 		if (groupId == null || veinFeat == null) {
 			return MessageResult.getInstance(-1, "参数错误",null);
@@ -142,27 +170,42 @@ public class VeinController {
 					return MessageResult.getInstance(-10, "该分组下没有用户没有注册",null);
 				}
 				for (VeinFeat s : vein) {
-					System.out.println(s);
+					//System.out.println(s);
 					b = s.getVeinFeat();
 					byte[] a = btb.baseStringToByte(veinFeat);
 					byte[] date = btb.baseStringToByte(b);
-					ref = jx.jxVericateTwoVeinFeature(a, date);
-					if (ref == 1) {
-					String	userId=s.getUserId();
-						Map<String,String> map =new HashMap<String,String>();
-						map.put("userId", userId);
-			
-						return MessageResult.getInstance(2, "静脉指纹通过",map);
+					score = jx.jxCalcFeatMisrate(a, date);
+					if (score < 0.333) {
+						System.out.println(score);
+						flag=true;
+						if(score1==-0.1F){
+							score1=score;
+							userId=s.getUserId();
+						}
+						else if(score<score1){
+							score1=score;
+							userId=s.getUserId();
+							System.out.println(userId);
+						}
 					}
+					
 				}
+				if(flag==false){
+					return MessageResult.getInstance(1, "静脉指纹未通过",null);
+
+				}
+				Map<String,Object> map =new HashMap<String,Object>();
+				map.put("userId", userId);
+				return MessageResult.getInstance(2, "静脉指纹通过",map);
+			
 			} catch (Exception e) {
 				e.printStackTrace();
 				return MessageResult.getInstance(-100, "未知错误",null);
-			}
+			//}
 
-			return MessageResult.getInstance(1, "静脉指纹失败",null);
+			//return MessageResult.getInstance(1, "静脉指纹失败",null);
 		}
 
+		}
 	}
-
 }
