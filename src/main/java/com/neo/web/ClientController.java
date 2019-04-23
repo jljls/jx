@@ -3,6 +3,7 @@ package com.neo.web;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -92,15 +93,19 @@ public class ClientController {
 		logger.info("---查询已经注册的用户");
 		//已注册的用户数
 		Integer a;
+		Map <String,Object> map =new HashMap<String, Object>();
 		try {
-			a = userService.selectRegisteEmp();
+			a =  userService.selectEmp();
+			
+			map.put("num", a);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MessageResult.getInstance(-100, "未知错误",null);
+			
 		}
 
-		return MessageResult.getInstance(0, "操作成功", a);
+		return MessageResult.getInstance(0, "操作成功", map);
 
 	}
 	
@@ -119,19 +124,20 @@ public class ClientController {
 		//String groupId = (String) object.get("groupId");
 
 		logger.info("---查询分组用户数");
-
+		Map<String,Object> map=new HashMap<String,Object>();
 		Integer num = null;
 		try {
 			if (groupId == null) {
 				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				num = userService.selectEmpByGroupId(groupId);
+				map.put("num", num);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MessageResult.getInstance(-100, "未知错误",null);
 		}
-		return MessageResult.getInstance(0, "操作成功", num);
+		return MessageResult.getInstance(0, "操作成功", map);
 	}
 	
 	/**
@@ -145,14 +151,16 @@ public class ClientController {
 	public MessageResult selectVeinNum(Model model, HttpSession session) {
 		logger.info("---查询手指数");
 		Integer num;
+		Map<String,Object> map =new HashMap<String,Object>();
 		try {
 			num = userService.selectVeinNum();
+			map.put("num", num);
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return MessageResult.getInstance(0, "操作成功", num);
+		return MessageResult.getInstance(0, "操作成功", map);
 
 	}
 	
@@ -170,19 +178,21 @@ public class ClientController {
 		//JSONObject object = JSONObject.fromObject(jsonString);
 		//String groupId = (String) object.get("groupId");
 		logger.info("---查询分组手指数");
+		Map<String,Object> map =new HashMap<String,Object>();
 		Integer num = null;
 		try {
 			if (groupId == null) {
 				return MessageResult.getInstance(-1, "参数错误",null);
 			} else {
 				num = userService.selectVeinNumByGroupId(groupId);
+				map.put("num", num);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			return MessageResult.getInstance(-100, "未知错误",null);
 		}
 
-		return MessageResult.getInstance(0, "操作成功", num);
+		return MessageResult.getInstance(0, "操作成功", map);
 
 	}
 	

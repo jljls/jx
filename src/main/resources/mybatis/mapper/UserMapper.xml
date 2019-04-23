@@ -123,8 +123,8 @@
       select
        <include refid="V_Finger_Number_Column_List" />
        from t_employee e
-       left join t_veinfeat v on v.user_id=e.id  
-       where group_id=#{groupId}
+       left join t_veinfeat v on v.user_id=e.user_id  
+       where e.group_id=#{groupId}
     </select>
     <select id="checkEmpId" parameterType="java.lang.String" resultType="java.lang.Integer"  >
       select

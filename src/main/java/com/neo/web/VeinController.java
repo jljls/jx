@@ -51,12 +51,12 @@ public class VeinController {
 	 */
 	@RequestMapping(value = "check", method = RequestMethod.POST)
 	@ResponseBody
-	public MessageResult check(@RequestBody String jsonString){
+	public MessageResult check( String userId,String veinFeat){
 		//从参数中获取userId和veinFeat
-		JSONObject object = JSONObject.fromObject(jsonString);
-		String userId = (String) object.get("userId");
-		String veinFeat = (String) object.get("veinFeat");
-		System.out.println(userId + " " + veinFeat);
+		//JSONObject object = JSONObject.fromObject(jsonString);
+		//String userId = (String) object.get("userId");
+		//String veinFeat = (String) object.get("veinFeat");
+		//System.out.println(userId + " " + veinFeat);
 		if(userId==null||veinFeat==null){ 
 			return MessageResult.getInstance(-1,"参数错误",null);
 		}
