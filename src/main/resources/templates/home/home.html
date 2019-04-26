@@ -408,7 +408,7 @@
                             background-repeat: no-repeat;
                             vertical-align: bottom;
                             background-position: 50% top;"
-                                    onclick="doFindLog(2)"></button>
+                                    onclick="doFindLogs()"></button>
                         </div>
                     </div>
                     <table class="body-table">
@@ -555,10 +555,7 @@
         }, function () {
             $(this).parent().removeClass("hover");
         })
-        /* //分页跳转
-        $("#fy-1").on("click",
-                ".pre,.next,.first,.last", jumpToPage()); */
-        /* $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on("click", jumpToPagedetail()); */
+        
         //导航栏点击事件
         $(".nav-list li").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
@@ -701,7 +698,6 @@
     //显示登陆的名字
     
     function people() {
-    	debugger;
     	$("#show_people").html("");
         var url = "people";
         $.ajax({
@@ -710,7 +706,7 @@
             //async : true,
             success: function (result) {
                 $("#show_people").html(result.data);
-                if(temp.data!="admin"){
+                if(result.data!="admin"){
 					$(".super").css("display","none");
                 }
             }

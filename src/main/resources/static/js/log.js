@@ -1,20 +1,27 @@
+var pageStatus = false;
 //点击菜单执行的查询
 function doQueryLog(){
+		pageStatus = false;
     	//1.初始化当前页码数据
     	$("#fy-3").data("pageCurrent",1);
     	//2.根据条件查询数据
-    	doFindLog(1);
+    	doFindLog();
     }
+function doFindLogs(){
+	pageStatus = true;
+	doFindLog();
+}
 
-//日志搜索
-    function doFindLog(ind) {
+	//日志搜索
+    function doFindLog() {
         var url = "selectLog";
         var param = {};
         var pageCurrent = $("#fy-3").data("pageCurrent");
     	if(!pageCurrent){
     		pageCurrent = 1;
     	}
-    	if(ind==1){
+    	if(!pageStatus){
+    		param.pageCurrent = pageCurrent;
     		$.post(url, param, function (result) {
                 if (result.code == 0) {
                     setLogBody(result.data.list);
@@ -32,7 +39,7 @@ function doQueryLog(){
                 }
             });
     	}
-    	if(ind==2){
+    	if(pageStatus){
     		var starYear =  $("#star-year").val();
         	var starMouth = $("#star-mouth").val();
         	var starDay = $("#star-day").val()
