@@ -146,12 +146,12 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	@Override
-	public MessageResult selectUInfoNum() {
+	public Integer selectUInfoNum() {
 		try {
 			Integer num = userInfoMapper.selectUInfoNum();
-			return MessageResult.getInstance(0, "操作成功", num);
+			return num;
 		} catch (Exception e) {
-			return MessageResult.getInstance(-100, "未知错误",null);
+			return null;
 		}
 	}
 

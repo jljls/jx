@@ -16,5 +16,5 @@ public interface ScheduleTaskService {
 	
 	public void addTaskTime(Integer time);
 
-	public MessageResult selectTime();
+	public Integer selectTime();
 }

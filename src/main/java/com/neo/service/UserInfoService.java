@@ -19,6 +19,6 @@ public interface UserInfoService {
 	
 	public MessageResult upDatapws(String pws,String userId);
 	
-	public MessageResult selectUInfoNum();
+	public Integer selectUInfoNum();
 	
 }

@@ -316,7 +316,7 @@
                 <!-- 右边信息头部 end-->
                 <div class="body-title">
                     管理员列表
-                    <div style="float: right" id="sysNum">管理员总数:64</div>
+                    <div style="float: right" id="sysNum"></div>
                 </div>
                 <div class="body-information" style="height:80%;overflow:auto;">
                     <div class="body-operate">
@@ -379,7 +379,7 @@
                 <!-- 右边信息头部 end-->
                 <div class="body-title">
                     系统日志
-                    <div style="float: right" id="logNum">日志总数:3596</div>
+                    <div style="float: right" id="logNum"></div>
                 </div>
                 <div class="body-information" style="height:80%;overflow:auto;">
                     <div class="body-operate">
@@ -543,10 +543,10 @@
     });
     $(document).ready(function () {
     	people();
-    	setTime();
-        selectUInfoNum();
-        logNum();
-        veinnum();
+    	//setTime();
+        //selectUInfoNum();
+        //logNum();
+        //veinnum();
         //删除操作下划线
         $(".body-table tbody th:last-child").css("text-decoration", "underline");
         //表单隔行变色
@@ -555,7 +555,10 @@
         }, function () {
             $(this).parent().removeClass("hover");
         })
-        
+        /* //分页跳转
+        $("#fy-1").on("click",
+                ".pre,.next,.first,.last", jumpToPage()); */
+        /* $("#fy-1 .gotopage,#fy-2 .gotopage,#fy-3 .gotopage").on("click", jumpToPagedetail()); */
         //导航栏点击事件
         $(".nav-list li").click(function () {
             $(this).addClass("active").siblings().removeClass("active");
@@ -580,14 +583,14 @@
         })
     })
     //设置时间 从数据库查询定时删除的时间
-     function setTime(){
+   /*   function setTime(){
     	 var url="selectTime";
     	 $.post(url,function(result){
     		if(result.code==0){
     			$("#data-setting").val(result.data);
     		} 
     	 });
-     }
+     } */
     //密码校验错误提示
     function proofread() {
         if ($("#new-pw").val() !== $("#new-pw-agin").val()) {
@@ -654,11 +657,11 @@
             if (result.code == 0) {
             	$("#msg").html("清空成功").css("color", "#3d3");
             	search();
-            	veinnum();
+            	people();
             } else {
             	$("#msg").html(result.msg).css("color", "#3d3");
             	search();
-            	veinnum();
+            	people();
             }
         });
     }
@@ -698,39 +701,50 @@
     //显示登陆的名字
     
     function people() {
+    	debugger;
     	$("#show_people").html("");
-        var url = "people";
+       // var url = "people";
         $.ajax({
             url: "people", dataType: 'json',
             contentType: "application/json;charset=utf-8",
             //async : true,
+            
             success: function (result) {
-                $("#show_people").html(result.data);
-                if(result.data!="admin"){
+                $("#show_people").html(result.data.name);
+                $("#veinnum").html(result.data.user);
+                $("#data-setting").val(result.data.time);
+                $("#logNum").html("日志总数:" + result.data.log);
+                $("#sysNum").html("管理员总数:" + result.data.info);
+                
+                if(result.data.name!="admin"){
 					$(".super").css("display","none");
                 }
+               // selectUInfoNum(); 
             }
         });
+        
+     
     }
 
-    //显示已注册用户 已注册手指
+  /*   显示已注册用户 已注册手指
     function veinnum() {
         var url = "selectUAndV";
         $.getJSON(url, function (result) {
             $("#veinnum").html(result.data);
         });
     }
-
+ */
     //查询当前管理员总数
-    function selectUInfoNum() {
+/*     function selectUInfoNum() {
         var url = "selectUInfoNum";
         $.getJSON(url, function (result) {
             if (result.code == 0) {
                 $("#sysNum").html("管理员总数:" + result.data);
             }
+            logNum();
         });
     }
-
+ */
     function setting(){
     	var data=$("#data-setting option:selected").val();
     	var datas=$("#data-setting option:selected").text();

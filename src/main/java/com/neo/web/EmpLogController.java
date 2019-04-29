@@ -53,11 +53,11 @@ public class EmpLogController {
 		return MessageResult.getInstance(0, "操作成功", map);
 	}
 
-	@RequestMapping(value = "logNum", method = RequestMethod.GET)
-	@ResponseBody
-	public MessageResult logNum() {
-		return empLogServic.selectLogNum();
-	}
+//	@RequestMapping(value = "logNum", method = RequestMethod.GET)
+//	@ResponseBody
+//	public MessageResult logNum() {
+//		return empLogServic.selectLogNum();
+//	}
 	
 	@RequestMapping(value = "/deleteLogById", method = RequestMethod.POST)
 	@ResponseBody

@@ -38,8 +38,7 @@ function uifadd() {
     $.post(url, param, function (result) {
         if (result.code == 0) {
             $("#admin-tip").html("管理员添加成功").css("color", "#3d3");
-            selectUInfoNum();
-            logNum();
+            people();
         } else {
             $("#admin-tip").html(result.msg).css("color", "#d33");
         }
@@ -103,8 +102,7 @@ function dell(a) {
         $.post(url, param, function (result) {
             if (result.code == 0) {
             	doFindeUserInfo();
-            	selectUInfoNum();
-            	logNum();
+            	people();
             } else {
                 alert(result.msg);
             }

@@ -72,10 +72,10 @@ public class ScheduleTaskServiceImpl implements ScheduleTaskService{
 	}
 
 	@Override
-	public MessageResult selectTime() {
+	public Integer selectTime() {
 		Integer aa=scheduleTaskMapper.selectSchedule();
 		
-		return MessageResult.getInstance(0,"操作成功",aa);
+		return aa;
 		
 	}
 	

@@ -1,18 +1,17 @@
 var pageStatus = false;
 //点击菜单执行的查询
 function doQueryLog(){
-		pageStatus = false;
+	pageStatus = false;
     	//1.初始化当前页码数据
     	$("#fy-3").data("pageCurrent",1);
     	//2.根据条件查询数据
-    	doFindLog();
+    	doFindLog(1);
     }
 function doFindLogs(){
 	pageStatus = true;
 	doFindLog();
 }
-
-	//日志搜索
+//日志搜索
     function doFindLog() {
         var url = "selectLog";
         var param = {};
@@ -105,7 +104,7 @@ function doFindLogs(){
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 doFindLog(1);
-                logNum();
+                people();
             }else{
             	alert(result.msg);
             }
@@ -113,14 +112,14 @@ function doFindLogs(){
     }
 
     //显示当前日志数
-    function logNum() {
+   /* function logNum() {
         var url = "logNum";
         $.getJSON(url, function (result) {
             if (result.code == 0) {
                 $("#logNum").html("日志总数:" + result.data);
             }
         });
-    }
+    }*/
     //设置日志表格
     function setLogBody(result) {
         var tBody = $("#logtBody");

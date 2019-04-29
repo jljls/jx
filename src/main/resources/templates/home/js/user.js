@@ -23,8 +23,7 @@
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 $("#user-tip").html("注册成功!").css("color", "#3d3");
-                veinnum();
-                logNum();
+                people();
             } else {
                 $("#user-tip").html(result.msg).css("color", "#d33");
             }
@@ -40,8 +39,7 @@
             $.post(url, param, function (result) {
                 if (result.code == 0) {
                 	doFind();
-                	veinnum();
-                	logNum();
+                	people();
                 } else {
                     alert(result.msg);
                 }
@@ -52,7 +50,7 @@
     //批量删除
     function dellist(ind) {
     	if (ind == 1) {
-            var ids;
+            var ids = "";
         	$("#tbodyId input[name='checkId']")//迭代input对象
         	.each(function (){//each函数用于迭代一个数组
         		if($(this).prop("checked")){//判断此input对象是否被选中
@@ -71,16 +69,15 @@
             $.post(url, param, function (result) {
                 if (result.code == 0) {
                 	doFind();
-                	veinnum();
-                	logNum();
+                	people();
                 } else {
                     alert(result.msg);
                 }
             });
         }
         if (ind == 2) {
-        	debugger;
-            var ids;
+        	debugger
+            var ids = "";
         	$("#userInfotBody input[name='checkId']")//迭代input对象
         	.each(function (){//each函数用于迭代一个数组
         		if($(this).prop("checked")){//判断此input对象是否被选中
@@ -98,9 +95,8 @@
             var param = {ids:ids};
             $.post(url, param, function (result) {
                 if (result.code == 0) {
-                	doFindeUserInfo()
-                	selectUInfoNum();
-                	logNum();
+                	doFindeUserInfo();
+                	people();
                 } else {
                     alert(result.msg);
                 }

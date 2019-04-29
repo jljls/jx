@@ -34,7 +34,7 @@ public class scheduleTaskController {
 	
 	@RequestMapping(value="selectTime",method =RequestMethod.POST)
 	@ResponseBody
-	public MessageResult selectTime(){
+	public Integer selectTime(){
 	
 		return scheduleTaskService.selectTime();
 	}

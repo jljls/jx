@@ -62,14 +62,14 @@ public class EmpLogServiceImpl implements EmpLogService{
 	}
 	
 	@Override
-	public MessageResult selectLogNum() {
+	public Integer selectLogNum() {
 		try {
 			int num = empLogMapper.selectLogNum();
-			return MessageResult.getInstance(0, "操作成功", num);
+			return num;
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			return MessageResult.getInstance(-100, "未知错误",null);
+			return null;
 		}
 	}
 

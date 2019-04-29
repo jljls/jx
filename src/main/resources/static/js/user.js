@@ -23,8 +23,7 @@
         $.post(url, param, function (result) {
             if (result.code == 0) {
                 $("#user-tip").html("注册成功!").css("color", "#3d3");
-                veinnum();
-                logNum();
+                people();
             } else {
                 $("#user-tip").html(result.msg).css("color", "#d33");
             }
@@ -40,8 +39,7 @@
             $.post(url, param, function (result) {
                 if (result.code == 0) {
                 	doFind();
-                	veinnum();
-                	logNum();
+                	people();
                 } else {
                     alert(result.msg);
                 }
@@ -71,8 +69,7 @@
             $.post(url, param, function (result) {
                 if (result.code == 0) {
                 	doFind();
-                	veinnum();
-                	logNum();
+                	people();
                 } else {
                     alert(result.msg);
                 }
@@ -98,9 +95,8 @@
             var param = {ids:ids};
             $.post(url, param, function (result) {
                 if (result.code == 0) {
-                	doFindeUserInfo()
-                	selectUInfoNum();
-                	logNum();
+                	doFindeUserInfo();
+                	people();
                 } else {
                     alert(result.msg);
                 }

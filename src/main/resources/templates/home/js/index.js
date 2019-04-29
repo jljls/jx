@@ -234,8 +234,7 @@
 			if(createUser()){
 				$("#msg").html( "指静脉注册成功").css("color", "#3d3");
 				search();
-				veinnum();
-				logNum();
+				people();
 			}else{
 				$("#msg").html( "指静脉注册失败").css("color", "#d33");
  			}

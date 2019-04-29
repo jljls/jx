@@ -25,6 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.jx.entity.EmpLog;
 import com.jx.entity.MessageResult;
 import com.neo.mapper.EmpLogMapper;
+import com.neo.service.EmpLogService;
+import com.neo.service.ScheduleTaskService;
+import com.neo.service.UserInfoService;
 import com.neo.service.UserService;
 
 import net.sf.json.JSONObject;
@@ -42,6 +45,12 @@ public class ClientController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private UserInfoService userInfoService;
+	@Autowired
+	private EmpLogService empLogServic;
+	@Autowired
+	private ScheduleTaskService scheduleTaskService;
 	
 	/**
 	 * 新增用户
@@ -466,7 +475,19 @@ public class ClientController {
 		HttpSession session = request.getSession();
 		String uid = session.getAttribute("userId").toString(); 
 		System.out.println(uid);
-		return MessageResult.getInstance(0, "操作成功",uid); 
+		Integer num = userService.selectVeinNum();
+		Integer b=userService.selectEmp();
+		String str = "当前已注册用户:"+b+"人    已注册手指数:"+num;
+		Integer infonum = userInfoService.selectUInfoNum();
+		Integer lognum = empLogServic.selectLogNum();
+		Integer time=scheduleTaskService.selectTime();
+		Map<String,Object > map = new HashMap<>();
+		map.put("name", uid);
+		map.put("user", str);
+		map.put("info", infonum);
+		map.put("log", lognum);
+		map.put("time", time);
+		return MessageResult.getInstance(0, "操作成功",map); 
 	}
 	/**
 	 * 查询已经注册用户和已注册手指数

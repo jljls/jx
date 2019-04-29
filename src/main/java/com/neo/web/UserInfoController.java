@@ -1,4 +1,4 @@
-﻿package com.neo.web;
+package com.neo.web;
 
 import java.util.Map;
 
@@ -87,14 +87,14 @@ public class UserInfoController {
 		return userInfoService.deleteUInfoByIds(string);
 	} 
 	
-	/*
-	 * 查询当前管理员数
-	 */
-	@RequestMapping(value="/selectUInfoNum", method = RequestMethod.GET)
-	@ResponseBody
-	public MessageResult selectUInfoNum() {
-		return userInfoService.selectUInfoNum();
-	}
+//	/*
+//	 * 查询当前管理员数
+//	 */
+//	@RequestMapping(value="/selectUInfoNum", method = RequestMethod.GET)
+//	@ResponseBody
+//	public MessageResult selectUInfoNum() {
+//		return userInfoService.selectUInfoNum();
+//	}
 	
 	//修改管理员密码
 	@RequestMapping(value="/upDatapws", method = RequestMethod.POST)
