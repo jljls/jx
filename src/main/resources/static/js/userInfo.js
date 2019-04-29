@@ -12,7 +12,7 @@ function upDatepws() {
 	                $("#new-pw").val("");
 	                $("#new-pw-agin").val("");
 	            } else {
-	                $("#password-edit").html(result.msg);
+	                $("#password-edit").html(result.msg).css("color", "#d33");
 	            }
 	        });
 	    }

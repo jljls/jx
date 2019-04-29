@@ -594,7 +594,7 @@
     //密码校验错误提示
     function proofread() {
         if ($("#new-pw").val() !== $("#new-pw-agin").val()) {
-            $("#password-edit").html("两次密码输入不一致");
+            $("#password-edit").html("两次密码输入不一致").css("color","#d33");
         } else {
             $("#password-edit").html("");
         }
