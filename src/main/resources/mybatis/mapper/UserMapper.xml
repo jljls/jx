@@ -129,7 +129,7 @@
     <select id="checkEmpId" parameterType="java.lang.String" resultType="java.lang.Integer"  >
       select
        <include refid="Emp_Column_List" />
-       from t_employee e
+       from t_employee
        where user_id=#{userId}
     </select>
     

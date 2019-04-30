@@ -11,7 +11,7 @@
     <select id="selectEmpVeinEum" parameterType="java.lang.String" resultType="java.lang.Integer">
     select
        cast((count(distinct id)/3) as Integer)
-       from t_veinFeat 
+       from t_veinfeat 
        where user_id=#{userId}
     </select>
    
@@ -24,7 +24,7 @@
 
     <insert id="insertEmpVein" parameterType="java.lang.String" >
      	INSERT INTO 
-       		t_veinFeat
+       		t_veinfeat
        		(user_id,vein_feat) 
        	VALUES
        		(#{userId}, #{veinFeat})
